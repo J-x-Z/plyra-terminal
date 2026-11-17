@@ -10,14 +10,14 @@
 
 <p align="center">
   <a href="https://github.com/J-x-Z/plyra-terminal/releases">Releases</a> ·
-  <a href="https://github.com/J-x-Z/plyra-terminal/actions/workflows/build.yml">Development builds</a> ·
+  <a href="https://github.com/J-x-Z/plyra-terminal/actions/workflows/build.yml">Build runs</a> ·
   <a href="docs/RELEASE_VERIFICATION.md">Verify a release</a> ·
   <a href="docs/ARCHITECTURE.md">Architecture</a> ·
   <a href="apps/android/README.md">Android build guide</a> ·
   <a href="LICENSE">License</a>
 </p>
 
-The GitHub release is a **signed source beta**. GitHub Actions builds separate development packages for macOS, Linux, Windows, and Android. Each workflow run lists its downloadable artifacts and the exact source revision. Platform installers are pending verification of corresponding source and licenses.
+Download the **beta development packages** for macOS, Linux, Windows, and Android from GitHub Releases. The release also includes the corresponding source and FileVeil evidence for verifying the source and binary downloads.
 
 <p align="center">
   <img src="assets/app-icon/settings-preview.png" alt="Appearance settings showing glass material, opacity, and window and panel corners" width="768">
