@@ -1,0 +1,8 @@
+.godot/
+*.uid
+*.import
+__pycache__/
+*.pyc
+.DS_Store
+exports/
+target/

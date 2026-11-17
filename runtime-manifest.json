@@ -1,0 +1,238 @@
+{
+  "schema": "plyra.terminal.runtime",
+  "version": 1,
+  "api_version": 1,
+  "origin": {
+    "project": "plyra-mobile",
+    "commit": "55ef8efc0914845124daf539db5daec64c2582b2"
+  },
+  "files": [
+    {
+      "path": "assets/terminal/LICENSE.compiler-rt",
+      "sha256": "6c9c603e4b06f8c32e0a1f8854b32610803e7bda64b019e7cd97e0a67fbb0027",
+      "bytes": 17966
+    },
+    {
+      "path": "assets/terminal/LICENSE.libvterm",
+      "sha256": "66c627cf44f0c59daf81ba442e62e9b3d3cd1091a41e116de5ea9058a57bbba7",
+      "bytes": 1098
+    },
+    {
+      "path": "assets/terminal/LICENSE.musl",
+      "sha256": "f9bc4423732350eb0b3f7ed7e91d530298476f8fec0c6c427a1c04ade22655af",
+      "bytes": 6204
+    },
+    {
+      "path": "assets/terminal/bin/plyra-terminal-linux-arm64",
+      "sha256": "4095b6cc40b6bc05e66c06bac04f04ef52267b789c589fd819992cf33de235b3",
+      "bytes": 148816
+    },
+    {
+      "path": "assets/terminal/bin/plyra-terminal-macos-arm64",
+      "sha256": "d73346a121a1fb0932ebb0791373b2b2f74d9aa67bbebd6e57afb2afc498afd9",
+      "bytes": 125848
+    },
+    {
+      "path": "assets/terminal/manifest.json",
+      "sha256": "b64d9b97fc9cfbfba4654dae38886a372f76242c74d1a33a0913cea63a3c20b1",
+      "bytes": 5419
+    },
+    {
+      "path": "assets/terminal-fonts/DejaVuSansMono.ttf",
+      "sha256": "b4a6c3e4faab8773f4ff761d56451646409f29abedd68f05d38c2df667d3c582",
+      "bytes": 340712
+    },
+    {
+      "path": "assets/terminal-fonts/LICENSE.txt",
+      "sha256": "7a083b136e64d064794c3419751e5c7dd10d2f64c108fe5ba161eae5e5958a93",
+      "bytes": 8816
+    },
+    {
+      "path": "assets/terminal-fonts/SOURCE.json",
+      "sha256": "c3cdfa386be0f67e884b8fa50bae61913c7db73d72828bf4af3112694b371fc2",
+      "bytes": 1391
+    },
+    {
+      "path": "scripts/terminal/terminal_canvas.gd",
+      "sha256": "0b40622569f4192c8b9482f2c5854e6edf697fbadd924617eb180dc156695a8f",
+      "bytes": 13584
+    },
+    {
+      "path": "scripts/terminal/terminal_input.gd",
+      "sha256": "8a2873beef59ec3cb911aab47197a82feec16e6821cb22110192292de28be2d0",
+      "bytes": 3096
+    },
+    {
+      "path": "scripts/terminal/terminal_screen.gd",
+      "sha256": "fd73335d90c872813928eb446dad9500ae2831debd1c4ba08fef0a7e99c4709a",
+      "bytes": 8175
+    },
+    {
+      "path": "scripts/terminal/terminal_session.gd",
+      "sha256": "3cd9b1a5f16eedf65bc4f818fcc0243e4a1a3008e5860d45c91db388d167cb6a",
+      "bytes": 22972
+    },
+    {
+      "path": "scripts/terminal/terminal_style.gd",
+      "sha256": "7c85cee3109650793a9ed0525600c9198230aae9a2d0908c4cec651fdbf58d5f",
+      "bytes": 5817
+    },
+    {
+      "path": "scripts/terminal/terminal_view.gd",
+      "sha256": "839f4d542d4db9737bbdc4ae057adf9e24c41cc1082350ef843857e584d47d87",
+      "bytes": 13376
+    },
+    {
+      "path": "shaders/terminal/acrylic.gdshader",
+      "sha256": "209e77cdca13a84887c2add9e9936f27c39bfdde2ca994b05b222f9e51f43a79",
+      "bytes": 2996
+    }
+  ],
+  "source_files": [
+    {
+      "path": "tools/mobile/terminal/README.md",
+      "sha256": "1dbd0f4b0939884c529ff21c39e92d19613bc60fd5e545760b96760bf3ba5d08",
+      "bytes": 7682
+    },
+    {
+      "path": "tools/mobile/terminal/build.py",
+      "sha256": "c6bf36831dbd0715b71e2459a98bf6a3014658fab83d366ad05aedf724d8ad55",
+      "bytes": 6556
+    },
+    {
+      "path": "tools/mobile/terminal/plyra_terminal.c",
+      "sha256": "e1b0d5b1d3f5e199ed87fa09e515754ff24fe0ed7448fb1802c15c3a60ae615b",
+      "bytes": 33110
+    },
+    {
+      "path": "tools/mobile/terminal/test_backend.py",
+      "sha256": "eab3ec2c76d7eec5b25f349164034f1cc2bb773e1257fa4648ff0fec2318db6a",
+      "bytes": 14832
+    },
+    {
+      "path": "tools/mobile/terminal/vendor/PROVENANCE.json",
+      "sha256": "6310cfc943910e6eb86eeee98dbd6b4687c851a6584ab2fcad5dc8aeecfe74f3",
+      "bytes": 3350
+    },
+    {
+      "path": "tools/mobile/terminal/vendor/libvterm/LICENSE",
+      "sha256": "66c627cf44f0c59daf81ba442e62e9b3d3cd1091a41e116de5ea9058a57bbba7",
+      "bytes": 1098
+    },
+    {
+      "path": "tools/mobile/terminal/vendor/libvterm/include/vterm.h",
+      "sha256": "53ddfaaf21f8fcb031e62e8ad4a403337b9de29604a7a6599b49e065412f3a03",
+      "bytes": 21540
+    },
+    {
+      "path": "tools/mobile/terminal/vendor/libvterm/include/vterm_keycodes.h",
+      "sha256": "2a8a667b8f820d9c824b79e7bc4add4acab79b9712fd5b162715f59e11e15fc6",
+      "bytes": 1106
+    },
+    {
+      "path": "tools/mobile/terminal/vendor/libvterm/src/encoding/DECdrawing.inc",
+      "sha256": "d8c25047d5f4b6cea81904fb9efb640307298dbe945d1b71623fcb741a6449ee",
+      "bytes": 757
+    },
+    {
+      "path": "tools/mobile/terminal/vendor/libvterm/src/encoding/uk.inc",
+      "sha256": "9dad74b7ced668b4ed495791c59d3006d858593e4b5fe5e01cb5bfa7a5e24ebb",
+      "bytes": 119
+    },
+    {
+      "path": "tools/mobile/terminal/vendor/libvterm/src/encoding.c",
+      "sha256": "f5a91b627ee06c3c3cd8ba0abef7258e889d0ed6a484728a0dc51c7e99a7cf99",
+      "bytes": 5752
+    },
+    {
+      "path": "tools/mobile/terminal/vendor/libvterm/src/fullwidth.inc",
+      "sha256": "41c4b4a0722cd8d269e66225c04e922454039405903fefb2c8b07c9de0cf57f1",
+      "bytes": 2544
+    },
+    {
+      "path": "tools/mobile/terminal/vendor/libvterm/src/keyboard.c",
+      "sha256": "3d0f3ac0c46af4d9463dedf8fd28dfad07dd11a851f22f60cba5ea70a6133cde",
+      "bytes": 6159
+    },
+    {
+      "path": "tools/mobile/terminal/vendor/libvterm/src/mouse.c",
+      "sha256": "2824a884d4ac64ee147febe8c4a470679351d0c040c0171d7ac8f4f4165b0f7e",
+      "bytes": 2507
+    },
+    {
+      "path": "tools/mobile/terminal/vendor/libvterm/src/parser.c",
+      "sha256": "237220e912ab95795f78c013d6734b88080b00595010dab87d11980c24d025af",
+      "bytes": 10837
+    },
+    {
+      "path": "tools/mobile/terminal/vendor/libvterm/src/pen.c",
+      "sha256": "f97dde69a6e7e7f9c3a6fdb7575e965ef9a17077bf196609759f9f181982ca2b",
+      "bytes": 17535
+    },
+    {
+      "path": "tools/mobile/terminal/vendor/libvterm/src/rect.h",
+      "sha256": "8ac51df5e5c7e092b5c3feedc930a5238327f204da50febd3ae635788ba1de06",
+      "bytes": 2022
+    },
+    {
+      "path": "tools/mobile/terminal/vendor/libvterm/src/screen.c",
+      "sha256": "af234b141ad0a0439dc0b474f9619b27552712509e16533aa284ac2b03c38517",
+      "bytes": 35987
+    },
+    {
+      "path": "tools/mobile/terminal/vendor/libvterm/src/state.c",
+      "sha256": "66a7911483a20c9d609ff1f6bd292e80a9fa211bce9dea4d742e13c70ddca2c1",
+      "bytes": 63253
+    },
+    {
+      "path": "tools/mobile/terminal/vendor/libvterm/src/unicode.c",
+      "sha256": "a3905a313d8825aa95b4e26a8cb72a06c5c88a80c665cdf093ebaa8b874d7026",
+      "bytes": 14254
+    },
+    {
+      "path": "tools/mobile/terminal/vendor/libvterm/src/utf8.h",
+      "sha256": "2a1c6ffd176d2750e077debbd8bc43f9d7b8bd451eb37b7bbe7e7b60ed29a974",
+      "bytes": 1040
+    },
+    {
+      "path": "tools/mobile/terminal/vendor/libvterm/src/vterm.c",
+      "sha256": "f8620e99da940d9c49c8d58dccd161aeaad45c5c6c3950f5289e6e4f77be85ac",
+      "bytes": 10703
+    },
+    {
+      "path": "tools/mobile/terminal/vendor/libvterm/src/vterm_internal.h",
+      "sha256": "a27df4e1ec762b5eccaaad06984e151998c0efcf6c122783ed9cb933288cbdc1",
+      "bytes": 7293
+    },
+    {
+      "path": "tools/mobile/terminal/vendor/runtime-licenses/LICENSE.compiler-rt",
+      "sha256": "6c9c603e4b06f8c32e0a1f8854b32610803e7bda64b019e7cd97e0a67fbb0027",
+      "bytes": 17966
+    },
+    {
+      "path": "tools/mobile/terminal/vendor/runtime-licenses/LICENSE.llvm-compiler-rt",
+      "sha256": "1a8f1058753f1ba890de984e48f0242a3a5c29a6a8f2ed9fd813f36985387e8d",
+      "bytes": 16708
+    },
+    {
+      "path": "tools/mobile/terminal/vendor/runtime-licenses/LICENSE.llvm-compiler-rt-8",
+      "sha256": "dd27f8c290bcdc8368549cd7cd98710a9dbdc34122f2e096a1edb97824ed4148",
+      "bytes": 4289
+    },
+    {
+      "path": "tools/mobile/terminal/vendor/runtime-licenses/LICENSE.musl",
+      "sha256": "f9bc4423732350eb0b3f7ed7e91d530298476f8fec0c6c427a1c04ade22655af",
+      "bytes": 6204
+    },
+    {
+      "path": "tools/mobile/terminal/vendor/runtime-licenses/LICENSE.zig",
+      "sha256": "5c537d6853e005298a285d508cff9ac7192cea23576c840d485b2b586a7ff177",
+      "bytes": 1080
+    },
+    {
+      "path": "tools/mobile/terminal/vendor/runtime-licenses/PROVENANCE.json",
+      "sha256": "f972a3f42f55639ce010efc3028f2a37f53f524d7e73aff84e6c1ea19576e647",
+      "bytes": 3696
+    }
+  ]
+}

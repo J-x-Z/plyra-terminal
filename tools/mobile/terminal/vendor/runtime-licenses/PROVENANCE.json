@@ -1,0 +1,73 @@
+{
+  "schema": "plyra.terminal.runtime-license-provenance",
+  "version": 1,
+  "toolchain": "local Zig 0.17.0",
+  "files": {
+    "LICENSE.musl": {
+      "origin": "/opt/homebrew/Cellar/zig/0.17.0/lib/zig/libc/musl/COPYRIGHT",
+      "license": "musl MIT plus included third-party notices",
+      "modified": false,
+      "bytes": 6204,
+      "sha256": "f9bc4423732350eb0b3f7ed7e91d530298476f8fec0c6c427a1c04ade22655af"
+    },
+    "LICENSE.zig": {
+      "origin": "/opt/homebrew/Cellar/zig/0.17.0/LICENSE",
+      "license": "MIT",
+      "modified": false,
+      "bytes": 1080,
+      "sha256": "5c537d6853e005298a285d508cff9ac7192cea23576c840d485b2b586a7ff177"
+    },
+    "LICENSE.llvm-compiler-rt": {
+      "origin": "https://raw.githubusercontent.com/llvm/llvm-project/llvmorg-21.1.0/compiler-rt/LICENSE.TXT",
+      "license": "Apache-2.0 WITH LLVM-exception plus upstream legacy MIT/UIUC texts",
+      "modified": false,
+      "bytes": 16708,
+      "sha256": "1a8f1058753f1ba890de984e48f0242a3a5c29a6a8f2ed9fd813f36985387e8d"
+    },
+    "LICENSE.llvm-compiler-rt-8": {
+      "origin": "https://raw.githubusercontent.com/llvm/llvm-project/llvmorg-8.0.0/compiler-rt/LICENSE.TXT",
+      "license": "legacy compiler_rt dual MIT/UIUC reference cited by Zig emutls source",
+      "modified": false,
+      "bytes": 4289,
+      "sha256": "dd27f8c290bcdc8368549cd7cd98710a9dbdc34122f2e096a1edb97824ed4148"
+    },
+    "LICENSE.compiler-rt": {
+      "origin": "concatenation of LICENSE.zig and LICENSE.llvm-compiler-rt with section labels",
+      "license": "all original component texts retained",
+      "modified": "section labels only; component license text unchanged",
+      "bytes": 17966,
+      "sha256": "6c9c603e4b06f8c32e0a1f8854b32610803e7bda64b019e7cd97e0a67fbb0027"
+    }
+  },
+  "evidence": [
+    "Linux build target aarch64-linux-musl -static; no PT_INTERP",
+    "Local Zig global cache contains libc.a and libcompiler_rt.a",
+    "Local musl libc.a undefined symbols include __addtf3, __divtf3, __multf3 resolved by compiler_rt",
+    "Zig compiler_rt/emutls.zig explicitly cites LLVM release8 MIT; current compiler-rt license retains legacy MIT/UIUC text",
+    "Zig compiler_rt/mulf3.zig cites LLVM source algorithm",
+    "Release-mode link-only reconstruction from the exact cached C objects reproduced the packaged Linux binary byte-for-byte (SHA256 7fd1d15639c23ec4f23f8caf2e8efb1b4699b8d96a85b4c4eb10c5f316228206)",
+    "Matching -O2 linker trace includes musl crt1.o/libc.a and Zig libzigc.a/libcompiler_rt.a; no libc++, libunwind or ubsan runtime. See external license-audit-r1/LINK-RELEASE-RESULT.json and link-release.stderr."
+  ],
+  "scope": "Not a claim that every function/archive member is present in final stripped executable. Runtime notices are shipped conservatively for the statically linked toolchain runtime. No compiler executable, libc++ or libunwind redistribution is introduced.",
+  "verified_release_link": {
+    "artifact_sha256": "7fd1d15639c23ec4f23f8caf2e8efb1b4699b8d96a85b4c4eb10c5f316228206",
+    "byte_identical": true,
+    "link_only_no_C_recompilation": true,
+    "external_receipt": "LINK-RELEASE-RESULT.json",
+    "receipt_sha256": "ae64fbec3bcf1cee2b656c3e49d684ce80404747b29a0e9f268eb155e356f9e2",
+    "archive_files": {
+      "libc.a": {
+        "bytes": 2439988,
+        "sha256": "ff0529e28c84fa3fabad1fe36702960e51ae38ccceaa5f1ccd1c135c49121c9d"
+      },
+      "libzigc.a": {
+        "bytes": 143918,
+        "sha256": "d86dc8bb2dd0abb39d6b4d507a53f4b5aac2f1e00fc0e93968b06aafa1c09321"
+      },
+      "libcompiler_rt.a": {
+        "bytes": 399896,
+        "sha256": "fde05e6da9d26addd4b77f53d6cfd453ec94e5aefe229abc64fa9955247bc8c8"
+      }
+    }
+  }
+}

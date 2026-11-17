@@ -1,0 +1,143 @@
+[
+  {
+    "name": "primary",
+    "events": [
+      {
+        "type": "scrollback",
+        "dropped": 2,
+        "lines": [
+          {
+            "runs": [
+              {"text":"old","width":3,"fg":"#bbbbbb","bg":"#000000","fg_default":true,"fg_index":null,"bg_index":null,"bg_default":true,"bold":false,"italic":false,"underline":false,"inverse":false,"strike":false,"hyperlink":null}
+            ]
+          }
+        ]
+      },
+      {
+        "type": "screen",
+        "full": true,
+        "cols": 10,
+        "rows": 4,
+        "cursor": {
+          "row": 1,
+          "col": 3,
+          "visible": true
+        },
+        "alternate": false,
+        "title": "golden",
+        "mouse_mode": 2,
+        "focus_report": true,
+        "lines": [
+          {
+            "row": 0,
+            "runs": [
+              {"text":"A","width":1,"fg":"#bb0000","bg":"#000000","fg_default":false,"fg_index":1,"bg_index":null,"bg_default":true,"bold":true,"italic":false,"underline":false,"inverse":false,"strike":false,"hyperlink":null},
+              {"text":"中","width":2,"fg":"#bbbbbb","bg":"#000000","fg_default":true,"fg_index":null,"bg_index":null,"bg_default":true,"bold":false,"italic":false,"underline":false,"inverse":false,"strike":false,"hyperlink":null},
+              {"text":"é","width":1,"fg":"#bbbbbb","bg":"#000000","fg_default":true,"fg_index":null,"bg_index":null,"bg_default":true,"bold":false,"italic":true,"underline":true,"inverse":false,"strike":false,"hyperlink":null},
+              {"text":"R","width":1,"fg":"#0c2238","bg":"#804020","fg_default":false,"fg_index":null,"bg_index":null,"bg_default":false,"bold":false,"italic":false,"underline":false,"inverse":true,"strike":true,"hyperlink":"https://example.com/golden"}
+            ]
+          },
+          {
+            "row": 1,
+            "runs": [
+              {"text":"ready","width":5,"fg":"#bbbbbb","bg":"#000000","fg_default":true,"fg_index":null,"bg_index":null,"bg_default":true,"bold":false,"italic":false,"underline":false,"inverse":false,"strike":false,"hyperlink":null}
+            ]
+          },
+          {
+            "row": 2,
+            "runs": []
+          },
+          {
+            "row": 3,
+            "runs": []
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "alternate",
+    "events": [
+      {
+        "type": "screen",
+        "full": true,
+        "cols": 10,
+        "rows": 4,
+        "cursor": {
+          "row": 0,
+          "col": 1,
+          "visible": false
+        },
+        "alternate": true,
+        "title": "golden-alt",
+        "mouse_mode": 0,
+        "focus_report": false,
+        "lines": [
+          {
+            "row": 0,
+            "runs": [
+              {"text":"Z","width":1,"fg":"#0000bb","bg":"#000000","fg_default":false,"fg_index":4,"bg_index":null,"bg_default":true,"bold":false,"italic":false,"underline":true,"inverse":false,"strike":false,"hyperlink":null}
+            ]
+          },
+          {
+            "row": 1,
+            "runs": []
+          },
+          {
+            "row": 2,
+            "runs": []
+          },
+          {
+            "row": 3,
+            "runs": []
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "restored",
+    "events": [
+      {
+        "type": "screen",
+        "full": true,
+        "cols": 10,
+        "rows": 4,
+        "cursor": {
+          "row": 1,
+          "col": 3,
+          "visible": true
+        },
+        "alternate": false,
+        "title": "golden",
+        "mouse_mode": 2,
+        "focus_report": true,
+        "lines": [
+          {
+            "row": 0,
+            "runs": [
+              {"text":"A","width":1,"fg":"#bb0000","bg":"#000000","fg_default":false,"fg_index":1,"bg_index":null,"bg_default":true,"bold":true,"italic":false,"underline":false,"inverse":false,"strike":false,"hyperlink":null},
+              {"text":"中","width":2,"fg":"#bbbbbb","bg":"#000000","fg_default":true,"fg_index":null,"bg_index":null,"bg_default":true,"bold":false,"italic":false,"underline":false,"inverse":false,"strike":false,"hyperlink":null},
+              {"text":"é","width":1,"fg":"#bbbbbb","bg":"#000000","fg_default":true,"fg_index":null,"bg_index":null,"bg_default":true,"bold":false,"italic":true,"underline":true,"inverse":false,"strike":false,"hyperlink":null},
+              {"text":"R","width":1,"fg":"#0c2238","bg":"#804020","fg_default":false,"fg_index":null,"bg_index":null,"bg_default":false,"bold":false,"italic":false,"underline":false,"inverse":true,"strike":true,"hyperlink":"https://example.com/golden"}
+            ]
+          },
+          {
+            "row": 1,
+            "runs": [
+              {"text":"ready","width":5,"fg":"#bbbbbb","bg":"#000000","fg_default":true,"fg_index":null,"bg_index":null,"bg_default":true,"bold":false,"italic":false,"underline":false,"inverse":false,"strike":false,"hyperlink":null}
+            ]
+          },
+          {
+            "row": 2,
+            "runs": []
+          },
+          {
+            "row": 3,
+            "runs": []
+          }
+        ]
+      }
+    ]
+  }
+]

@@ -1,0 +1,30 @@
+[workspace]
+members = ["crates/terminal-core", "crates/session-manager", "crates/terminal-render", "crates/system-api", "crates/mcp-client", "crates/privilege-policy", "crates/privilege-broker", "apps/desktop", "apps/android"]
+exclude = ["vendor/block", "vendor/vt100", "vendor/wgpu-hal"]
+resolver = "2"
+
+[workspace.package]
+version = "0.1.0-beta.1"
+edition = "2021"
+license = "GPL-3.0-only"
+
+[workspace.dependencies]
+anyhow = "1.0"
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+winit = "=0.30.13"
+
+[patch.crates-io]
+block = { path = "vendor/block" }
+vt100 = { path = "vendor/vt100" }
+wgpu-hal = { path = "vendor/wgpu-hal" }
+
+[profile.dev]
+debug = 0
+incremental = false
+
+[profile.release]
+lto = "thin"
+strip = true
+
+# FVPROV1 739 W3siYm9keSI6eyJhY3Rvcl9rZXlfaWQiOiI5ZjAwOTVhYmY4ODEwZGQwY2Y4NTdlZDBlNDI0ODg0NmRlMmFkMDc2ZmZhYTY2MWIzNmM5Yzc3YWFjOGVlOWMzIiwiYWxnb3JpdGhtIjoiRWQyNTUxOSIsImF1dGhvciI6IkoteC0gWiIsImNvbnRlbnRfc2hhMjU2IjoiODFjOTRkNjY3YTU2ZjUyZjEzOTdlYzllODZkNDE2Yzk1ODQ0NTJmNWIwNGFiY2U2Y2QwNjgxMTllZjg5MzUzYyIsImNvcHlfaWQiOiJ2MC4xLjAtYmV0YS4xIiwiY3JlYXRlZF9hdCI6IjIwMjYtMTEtMTgiLCJlZGl0aW9uIjoiYmV0YSIsImlzc3Vlcl9wb2xpY3kiOm51bGwsImtpbmQiOiJjcmVhdGUiLCJtb2RlIjoic2VsZl9zaWduIiwicGFyZW50X3ZlcnNpb24iOm51bGwsInByZXZpb3VzX3JlY29yZF9zaGEyNTYiOm51bGwsInNjaGVtYSI6ImZpbGV2ZWlsLnByb3ZlbmFuY2Uuc2lnbmF0dXJlLnYyIiwic2VxdWVuY2UiOjAsInRyYW5zZmVyX3RvX2tleV9pZCI6bnVsbCwidmVyc2lvbiI6InYwLjEuMC1iZXRhLjEiLCJ3b3JrX2lkIjoib3JnLnBseXJhLnRlcm1pbmFsIn0sInNpZ25hdHVyZXMiOlt7ImtleV9pZCI6IjlmMDA5NWFiZjg4MTBkZDBjZjg1N2VkMGU0MjQ4ODQ2ZGUyYWQwNzZmZmFhNjYxYjM2YzljNzdhYWM4ZWU5YzMiLCJwdWJsaWNfa2V5X2hleCI6ImMzZTkyZDhkZDNkZWM4NTliODdlOTY4MjIyYjI4OWJhNzg5M2NjOGM4NWZjOTE2MjI2YjZiNjI5NjFiOTU5ZDciLCJzaWduYXR1cmVfaGV4IjoiNTA4MDZkNzI2ZDdjODRlM2ExZGUzNmJmM2JjOWIyMmExYWIyNjNlZmFkODU5ODMwMDU0MTkyYTQ0OTI3ZGFjNTM2ZGIwNmVkNGZlYTU5YzliNTk2OThiM2ExNzI4NDQxNjQxNzg0ZWY4ODA0ODljZDU1YzUzMjA1YzY1YTE2MDIifV19XQ== FVPROV1-END

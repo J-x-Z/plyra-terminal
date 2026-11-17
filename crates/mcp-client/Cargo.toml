@@ -1,0 +1,39 @@
+[package]
+name = "mcp-client"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+
+[dependencies]
+anyhow.workspace = true
+serde.workspace = true
+serde_json.workspace = true
+rmcp = { version = "=3.9.0", default-features = false, features = ["client", "transport-child-process", "transport-async-rw", "transport-streamable-http-client-reqwest"] }
+tokio = { version = "1", features = ["rt-multi-thread", "time", "process", "io-util", "sync", "net"] }
+tokio-util = { version = "0.7", features = ["rt"] }
+getrandom = "0.3"
+url = "2"
+process-wrap = { version = "10", features = ["tokio1"] }
+axum = { version = "0.8", optional = true }
+
+[target.'cfg(not(target_os = "android"))'.dependencies]
+rmcp = { version = "=3.9.0", default-features = false, features = ["reqwest-native-tls"] }
+
+[target.'cfg(target_os = "android")'.dependencies]
+rmcp = { version = "=3.9.0", default-features = false, features = ["reqwest-tls-no-provider"] }
+reqwest = { version = "=0.13.5", default-features = false, features = ["rustls-no-provider"] }
+rustls = { version = "=0.23.41", default-features = false, features = ["ring", "std", "tls12"] }
+webpki-roots = { version = "=1.0.12", default-features = false }
+
+[target.'cfg(unix)'.dependencies]
+libc = "0.2"
+
+[features]
+owned-fixture = ["rmcp/server", "rmcp/transport-io", "rmcp/transport-streamable-http-server", "dep:axum"]
+
+[[bin]]
+name = "glass-owned-mcp-fixture"
+path = "src/bin/owned_fixture.rs"
+required-features = ["owned-fixture"]
+
+# FVPROV1 1485 W3siYm9keSI6eyJhY3Rvcl9rZXlfaWQiOiI5ZjAwOTVhYmY4ODEwZGQwY2Y4NTdlZDBlNDI0ODg0NmRlMmFkMDc2ZmZhYTY2MWIzNmM5Yzc3YWFjOGVlOWMzIiwiYWxnb3JpdGhtIjoiRWQyNTUxOSIsImF1dGhvciI6IkoteC0gWiIsImNvbnRlbnRfc2hhMjU2IjoiYmQ2ODQzYjg4ZmFkNTNiMjZkNDdhYmQ5YzdiZWM5YTUyZjg2YjhkMzJmOWYwMTc1YjgwODcyOWQwMDc3MTc0ZiIsImNvcHlfaWQiOiJ2MC4xLjAtYmV0YS4xIiwiY3JlYXRlZF9hdCI6IjIwMjYtMTEtMTgiLCJlZGl0aW9uIjoiYmV0YSIsImlzc3Vlcl9wb2xpY3kiOm51bGwsImtpbmQiOiJjcmVhdGUiLCJtb2RlIjoic2VsZl9zaWduIiwicGFyZW50X3ZlcnNpb24iOm51bGwsInByZXZpb3VzX3JlY29yZF9zaGEyNTYiOm51bGwsInNjaGVtYSI6ImZpbGV2ZWlsLnByb3ZlbmFuY2Uuc2lnbmF0dXJlLnYyIiwic2VxdWVuY2UiOjAsInRyYW5zZmVyX3RvX2tleV9pZCI6bnVsbCwidmVyc2lvbiI6InYwLjEuMC1iZXRhLjEiLCJ3b3JrX2lkIjoib3JnLnBseXJhLnRlcm1pbmFsIn0sInNpZ25hdHVyZXMiOlt7ImtleV9pZCI6IjlmMDA5NWFiZjg4MTBkZDBjZjg1N2VkMGU0MjQ4ODQ2ZGUyYWQwNzZmZmFhNjYxYjM2YzljNzdhYWM4ZWU5YzMiLCJwdWJsaWNfa2V5X2hleCI6ImMzZTkyZDhkZDNkZWM4NTliODdlOTY4MjIyYjI4OWJhNzg5M2NjOGM4NWZjOTE2MjI2YjZiNjI5NjFiOTU5ZDciLCJzaWduYXR1cmVfaGV4IjoiMWRjZmJmNTZlZjFkMzFkMDk2OTNmN2VkMmY5ZDdiODIwODVjNDQ4YWJhNTEzMTA3NmZiMTIyNjMxZDRkMjkzMzgzNjcxMTEwODRhNGRiYTNlOWE4NzFiOTU2N2I4MDQ1ZjMzMjA2MDVkMDljNWVmYWUwYmI5MjRlOTcxZGZlMDEifV19XQ== FVPROV1-END

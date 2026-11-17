@@ -1,0 +1,89 @@
+{
+  "schema": "plyra.mobile.terminal-helper",
+  "version": 1,
+  "protocol": 1,
+  "runtime_files": {
+    "macos_arm64": {
+      "path": "bin/plyra-terminal-macos-arm64",
+      "sha256": "d73346a121a1fb0932ebb0791373b2b2f74d9aa67bbebd6e57afb2afc498afd9",
+      "bytes": 125848,
+      "format": "Mach-O"
+    },
+    "linux_arm64": {
+      "path": "bin/plyra-terminal-linux-arm64",
+      "sha256": "4095b6cc40b6bc05e66c06bac04f04ef52267b789c589fd819992cf33de235b3",
+      "bytes": 148816,
+      "format": "ELF-static-musl"
+    }
+  },
+  "license_sha256": "66c627cf44f0c59daf81ba442e62e9b3d3cd1091a41e116de5ea9058a57bbba7",
+  "runtime_licenses": {
+    "musl": {
+      "path": "LICENSE.musl",
+      "sha256": "f9bc4423732350eb0b3f7ed7e91d530298476f8fec0c6c427a1c04ade22655af",
+      "bytes": 6204
+    },
+    "compiler_rt": {
+      "path": "LICENSE.compiler-rt",
+      "sha256": "6c9c603e4b06f8c32e0a1f8854b32610803e7bda64b019e7cd97e0a67fbb0027",
+      "bytes": 17966
+    }
+  },
+  "library": {
+    "name": "libvterm",
+    "version": "0.3.3",
+    "archive_sha256": "09156f43dd2128bd347cbeebe50d9a571d32c64e0cf18d211197946aff7226e0",
+    "source_url": "https://www.leonerd.org.uk/code/libvterm/libvterm-0.3.3.tar.gz",
+    "license": "MIT"
+  },
+  "build_source_files": {
+    "tools/mobile/terminal/test_backend.py": "d7d720a3b4470d487d0aa951f66731cb50cf9a02b47db808089ac1b9cfbacc70",
+    "tools/mobile/terminal/build.py": "766d133d4668e6547dbb8578119b7b961755a3e7aadbd91aac98aa6bc2a18413",
+    "tools/mobile/terminal/plyra_terminal.c": "567494c7a948f7c3a49d84b049741a04230378c543e17b3926598d4352c65940",
+    "tools/mobile/terminal/README.md": "700fc421e0cb849041829b794ce2d95325ec8c10f3140c9e9563bc91a8ae86f3",
+    "tools/mobile/terminal/vendor/PROVENANCE.json": "826e1087622fdfa9a52db781db3428dcf2288713d5665f4c43d05d56776b8de5",
+    "tools/mobile/terminal/vendor/runtime-licenses/LICENSE.llvm-compiler-rt-8": "dd27f8c290bcdc8368549cd7cd98710a9dbdc34122f2e096a1edb97824ed4148",
+    "tools/mobile/terminal/vendor/runtime-licenses/LICENSE.zig": "5c537d6853e005298a285d508cff9ac7192cea23576c840d485b2b586a7ff177",
+    "tools/mobile/terminal/vendor/runtime-licenses/PROVENANCE.json": "dc11f3f8518c9eb61234e522fe5ff270d57479dc2eabe1afb170aedb97fdd9c9",
+    "tools/mobile/terminal/vendor/runtime-licenses/LICENSE.llvm-compiler-rt": "1a8f1058753f1ba890de984e48f0242a3a5c29a6a8f2ed9fd813f36985387e8d",
+    "tools/mobile/terminal/vendor/runtime-licenses/LICENSE.musl": "f9bc4423732350eb0b3f7ed7e91d530298476f8fec0c6c427a1c04ade22655af",
+    "tools/mobile/terminal/vendor/runtime-licenses/LICENSE.compiler-rt": "6c9c603e4b06f8c32e0a1f8854b32610803e7bda64b019e7cd97e0a67fbb0027",
+    "tools/mobile/terminal/vendor/libvterm/LICENSE": "66c627cf44f0c59daf81ba442e62e9b3d3cd1091a41e116de5ea9058a57bbba7",
+    "tools/mobile/terminal/vendor/libvterm/include/vterm_keycodes.h": "2a8a667b8f820d9c824b79e7bc4add4acab79b9712fd5b162715f59e11e15fc6",
+    "tools/mobile/terminal/vendor/libvterm/include/vterm.h": "07f78f27bc043e3791ede1fb61891400f06fd64c5c7cf38a92a02712fb18fe6b",
+    "tools/mobile/terminal/vendor/libvterm/src/unicode.c": "a3905a313d8825aa95b4e26a8cb72a06c5c88a80c665cdf093ebaa8b874d7026",
+    "tools/mobile/terminal/vendor/libvterm/src/mouse.c": "2824a884d4ac64ee147febe8c4a470679351d0c040c0171d7ac8f4f4165b0f7e",
+    "tools/mobile/terminal/vendor/libvterm/src/vterm_internal.h": "d283425a4bc343d351f858dfd32840320f25701fbbca06eb44d0d2040bf6e7e9",
+    "tools/mobile/terminal/vendor/libvterm/src/keyboard.c": "3d0f3ac0c46af4d9463dedf8fd28dfad07dd11a851f22f60cba5ea70a6133cde",
+    "tools/mobile/terminal/vendor/libvterm/src/state.c": "8f6504f091a91194fa4e972a142d586fb96bd8e7a15b6d26747323f1fe48ff38",
+    "tools/mobile/terminal/vendor/libvterm/src/screen.c": "d37cc2977595c9766dd85d20ce86e3a7838271a7df9c28f9ff1ac4a8ff1bb59a",
+    "tools/mobile/terminal/vendor/libvterm/src/vterm.c": "f8620e99da940d9c49c8d58dccd161aeaad45c5c6c3950f5289e6e4f77be85ac",
+    "tools/mobile/terminal/vendor/libvterm/src/rect.h": "8ac51df5e5c7e092b5c3feedc930a5238327f204da50febd3ae635788ba1de06",
+    "tools/mobile/terminal/vendor/libvterm/src/pen.c": "f97dde69a6e7e7f9c3a6fdb7575e965ef9a17077bf196609759f9f181982ca2b",
+    "tools/mobile/terminal/vendor/libvterm/src/parser.c": "237220e912ab95795f78c013d6734b88080b00595010dab87d11980c24d025af",
+    "tools/mobile/terminal/vendor/libvterm/src/fullwidth.inc": "41c4b4a0722cd8d269e66225c04e922454039405903fefb2c8b07c9de0cf57f1",
+    "tools/mobile/terminal/vendor/libvterm/src/utf8.h": "2a1c6ffd176d2750e077debbd8bc43f9d7b8bd451eb37b7bbe7e7b60ed29a974",
+    "tools/mobile/terminal/vendor/libvterm/src/encoding.c": "f5a91b627ee06c3c3cd8ba0abef7258e889d0ed6a484728a0dc51c7e99a7cf99",
+    "tools/mobile/terminal/vendor/libvterm/src/encoding/DECdrawing.inc": "d8c25047d5f4b6cea81904fb9efb640307298dbe945d1b71623fcb741a6449ee",
+    "tools/mobile/terminal/vendor/libvterm/src/encoding/uk.inc": "9dad74b7ced668b4ed495791c59d3006d858593e4b5fe5e01cb5bfa7a5e24ebb"
+  },
+  "limits": {
+    "cols": [
+      10,
+      240
+    ],
+    "rows": [
+      4,
+      100
+    ],
+    "input_chunk_bytes": 65536,
+    "jsonl_event_bytes": 1048576,
+    "pending_output_bytes": 8388608,
+    "pending_input_bytes": 262144,
+    "pending_scrollback_rows": 128
+  },
+  "platform_acceptance": {
+    "macos_arm64": "build only; see backend-test RESULT for runtime",
+    "linux_arm64": "cross-built ELF only; no physical device acceptance"
+  }
+}

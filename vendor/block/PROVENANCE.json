@@ -1,0 +1,27 @@
+{
+  "schema": "glass.vendored-crate.v1",
+  "package": "block",
+  "version": "0.1.6",
+  "published_crate": "https://crates.io/crates/block/0.1.6",
+  "repository": "https://github.com/SSheldon/rust-block",
+  "published_archive_sha256": "0d8c1fef690941d3e7788d328517591fecc684c084084702d6ff1641e993699a",
+  "declared_license": "MIT",
+  "upstream_notice_status": "The published package and inspected upstream repository contain no standalone license or copyright notice file. The MIT declaration is preserved from upstream Cargo.toml.",
+  "upstream_files_sha256": {
+    "Cargo.toml": "24df2f33b48c9e756a4f864f882c1ab07a159b6c2b790f45af2e8162499b6719",
+    "README.md": "01c56329fa14f48ea1c9c7986c3660c41beeff2477f61c2d36bd8e666b9fc562",
+    "src/lib.rs": "eb31678adf63b53109d9b94eba23699fd5f9ebfdb950f6e1a57ad51bb6a146fa",
+    "src/test_utils.rs": "271bd579b67e2440134227cf8ee52c1b8c22854eb0c7923b46306b51810c2cf1"
+  },
+  "changes": [
+    "Declare the address-only _NSConcreteStackBlock symbol as inhabited c_void and obtain its raw address before casting to the existing private Class pointer. Public block APIs and pointer layout remain unchanged.",
+    "The upstream manifest references an Objective-C unit-test fixture omitted from the published crate. Disable that unavailable library test target and provide an independent Rust block call/copy/drop integration regression without extra dependencies.",
+    "Spell the existing C ABI explicitly on all extern declarations and function-pointer types, and record the existing 2015 edition. This removes missing_abi deprecation diagnostics without changing calling conventions."
+  ],
+  "references": [
+    "https://github.com/SSheldon/rust-block/issues/21",
+    "https://github.com/rust-lang/rust/issues/74840",
+    "https://github.com/llvm/llvm-project/blob/main/compiler-rt/lib/BlocksRuntime/data.c"
+  ],
+  "removal_condition": "Remove this patch when the selected graphics dependency chain supports a maintained compatible block implementation. Revalidate native Metal presentation and block copy/drop behavior."
+}

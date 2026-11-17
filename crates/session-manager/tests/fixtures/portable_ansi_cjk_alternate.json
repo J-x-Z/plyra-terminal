@@ -1,0 +1,163 @@
+{
+  "steps": [
+    {
+      "name": "primary",
+      "input": "\u001b[31;1mA\u001b[0m中é\u001b[41mR\u001b[0m\r\nready\u001b[2;4H"
+    },
+    {
+      "name": "alternate",
+      "input": "\u001b[?1049h\u001b[H\u001b[2J\u001b[34;4mZ\u001b[0m"
+    },
+    {
+      "name": "primary",
+      "input": "\u001b[?1049l"
+    }
+  ],
+  "screens": {
+    "primary": {
+      "cols": 10,
+      "rows": 4,
+      "lines": [
+        {
+          "runs": [
+            {"text":"A","width":1,"fg":[187,0,0],"bg":[0,0,0],"fg_default":false,"fg_index":1,"bg_index":null,"bg_default":true,"bold":true,"italic":false,"underline":false,"inverse":false,"strike":false,"hyperlink":null},
+            {"text":"中","width":2,"fg":[187,187,187],"bg":[0,0,0],"fg_default":true,"fg_index":null,"bg_index":null,"bg_default":true,"bold":false,"italic":false,"underline":false,"inverse":false,"strike":false,"hyperlink":null},
+            {"text":"é","width":1,"fg":[187,187,187],"bg":[0,0,0],"fg_default":true,"fg_index":null,"bg_index":null,"bg_default":true,"bold":false,"italic":false,"underline":false,"inverse":false,"strike":false,"hyperlink":null},
+            {"text":"R","width":1,"fg":[187,187,187],"bg":[187,0,0],"fg_default":true,"fg_index":null,"bg_index":1,"bg_default":false,"bold":false,"italic":false,"underline":false,"inverse":false,"strike":false,"hyperlink":null},
+            {"text":" ","width":1,"fg":[187,187,187],"bg":[0,0,0],"fg_default":true,"fg_index":null,"bg_index":null,"bg_default":true,"bold":false,"italic":false,"underline":false,"inverse":false,"strike":false,"hyperlink":null},
+            {"text":" ","width":1,"fg":[187,187,187],"bg":[0,0,0],"fg_default":true,"fg_index":null,"bg_index":null,"bg_default":true,"bold":false,"italic":false,"underline":false,"inverse":false,"strike":false,"hyperlink":null},
+            {"text":" ","width":1,"fg":[187,187,187],"bg":[0,0,0],"fg_default":true,"fg_index":null,"bg_index":null,"bg_default":true,"bold":false,"italic":false,"underline":false,"inverse":false,"strike":false,"hyperlink":null},
+            {"text":" ","width":1,"fg":[187,187,187],"bg":[0,0,0],"fg_default":true,"fg_index":null,"bg_index":null,"bg_default":true,"bold":false,"italic":false,"underline":false,"inverse":false,"strike":false,"hyperlink":null},
+            {"text":" ","width":1,"fg":[187,187,187],"bg":[0,0,0],"fg_default":true,"fg_index":null,"bg_index":null,"bg_default":true,"bold":false,"italic":false,"underline":false,"inverse":false,"strike":false,"hyperlink":null}
+          ]
+        },
+        {
+          "runs": [
+            {"text":"r","width":1,"fg":[187,187,187],"bg":[0,0,0],"fg_default":true,"fg_index":null,"bg_index":null,"bg_default":true,"bold":false,"italic":false,"underline":false,"inverse":false,"strike":false,"hyperlink":null},
+            {"text":"e","width":1,"fg":[187,187,187],"bg":[0,0,0],"fg_default":true,"fg_index":null,"bg_index":null,"bg_default":true,"bold":false,"italic":false,"underline":false,"inverse":false,"strike":false,"hyperlink":null},
+            {"text":"a","width":1,"fg":[187,187,187],"bg":[0,0,0],"fg_default":true,"fg_index":null,"bg_index":null,"bg_default":true,"bold":false,"italic":false,"underline":false,"inverse":false,"strike":false,"hyperlink":null},
+            {"text":"d","width":1,"fg":[187,187,187],"bg":[0,0,0],"fg_default":true,"fg_index":null,"bg_index":null,"bg_default":true,"bold":false,"italic":false,"underline":false,"inverse":false,"strike":false,"hyperlink":null},
+            {"text":"y","width":1,"fg":[187,187,187],"bg":[0,0,0],"fg_default":true,"fg_index":null,"bg_index":null,"bg_default":true,"bold":false,"italic":false,"underline":false,"inverse":false,"strike":false,"hyperlink":null},
+            {"text":" ","width":1,"fg":[187,187,187],"bg":[0,0,0],"fg_default":true,"fg_index":null,"bg_index":null,"bg_default":true,"bold":false,"italic":false,"underline":false,"inverse":false,"strike":false,"hyperlink":null},
+            {"text":" ","width":1,"fg":[187,187,187],"bg":[0,0,0],"fg_default":true,"fg_index":null,"bg_index":null,"bg_default":true,"bold":false,"italic":false,"underline":false,"inverse":false,"strike":false,"hyperlink":null},
+            {"text":" ","width":1,"fg":[187,187,187],"bg":[0,0,0],"fg_default":true,"fg_index":null,"bg_index":null,"bg_default":true,"bold":false,"italic":false,"underline":false,"inverse":false,"strike":false,"hyperlink":null},
+            {"text":" ","width":1,"fg":[187,187,187],"bg":[0,0,0],"fg_default":true,"fg_index":null,"bg_index":null,"bg_default":true,"bold":false,"italic":false,"underline":false,"inverse":false,"strike":false,"hyperlink":null},
+            {"text":" ","width":1,"fg":[187,187,187],"bg":[0,0,0],"fg_default":true,"fg_index":null,"bg_index":null,"bg_default":true,"bold":false,"italic":false,"underline":false,"inverse":false,"strike":false,"hyperlink":null}
+          ]
+        },
+        {
+          "runs": [
+            {"text":" ","width":1,"fg":[187,187,187],"bg":[0,0,0],"fg_default":true,"fg_index":null,"bg_index":null,"bg_default":true,"bold":false,"italic":false,"underline":false,"inverse":false,"strike":false,"hyperlink":null},
+            {"text":" ","width":1,"fg":[187,187,187],"bg":[0,0,0],"fg_default":true,"fg_index":null,"bg_index":null,"bg_default":true,"bold":false,"italic":false,"underline":false,"inverse":false,"strike":false,"hyperlink":null},
+            {"text":" ","width":1,"fg":[187,187,187],"bg":[0,0,0],"fg_default":true,"fg_index":null,"bg_index":null,"bg_default":true,"bold":false,"italic":false,"underline":false,"inverse":false,"strike":false,"hyperlink":null},
+            {"text":" ","width":1,"fg":[187,187,187],"bg":[0,0,0],"fg_default":true,"fg_index":null,"bg_index":null,"bg_default":true,"bold":false,"italic":false,"underline":false,"inverse":false,"strike":false,"hyperlink":null},
+            {"text":" ","width":1,"fg":[187,187,187],"bg":[0,0,0],"fg_default":true,"fg_index":null,"bg_index":null,"bg_default":true,"bold":false,"italic":false,"underline":false,"inverse":false,"strike":false,"hyperlink":null},
+            {"text":" ","width":1,"fg":[187,187,187],"bg":[0,0,0],"fg_default":true,"fg_index":null,"bg_index":null,"bg_default":true,"bold":false,"italic":false,"underline":false,"inverse":false,"strike":false,"hyperlink":null},
+            {"text":" ","width":1,"fg":[187,187,187],"bg":[0,0,0],"fg_default":true,"fg_index":null,"bg_index":null,"bg_default":true,"bold":false,"italic":false,"underline":false,"inverse":false,"strike":false,"hyperlink":null},
+            {"text":" ","width":1,"fg":[187,187,187],"bg":[0,0,0],"fg_default":true,"fg_index":null,"bg_index":null,"bg_default":true,"bold":false,"italic":false,"underline":false,"inverse":false,"strike":false,"hyperlink":null},
+            {"text":" ","width":1,"fg":[187,187,187],"bg":[0,0,0],"fg_default":true,"fg_index":null,"bg_index":null,"bg_default":true,"bold":false,"italic":false,"underline":false,"inverse":false,"strike":false,"hyperlink":null},
+            {"text":" ","width":1,"fg":[187,187,187],"bg":[0,0,0],"fg_default":true,"fg_index":null,"bg_index":null,"bg_default":true,"bold":false,"italic":false,"underline":false,"inverse":false,"strike":false,"hyperlink":null}
+          ]
+        },
+        {
+          "runs": [
+            {"text":" ","width":1,"fg":[187,187,187],"bg":[0,0,0],"fg_default":true,"fg_index":null,"bg_index":null,"bg_default":true,"bold":false,"italic":false,"underline":false,"inverse":false,"strike":false,"hyperlink":null},
+            {"text":" ","width":1,"fg":[187,187,187],"bg":[0,0,0],"fg_default":true,"fg_index":null,"bg_index":null,"bg_default":true,"bold":false,"italic":false,"underline":false,"inverse":false,"strike":false,"hyperlink":null},
+            {"text":" ","width":1,"fg":[187,187,187],"bg":[0,0,0],"fg_default":true,"fg_index":null,"bg_index":null,"bg_default":true,"bold":false,"italic":false,"underline":false,"inverse":false,"strike":false,"hyperlink":null},
+            {"text":" ","width":1,"fg":[187,187,187],"bg":[0,0,0],"fg_default":true,"fg_index":null,"bg_index":null,"bg_default":true,"bold":false,"italic":false,"underline":false,"inverse":false,"strike":false,"hyperlink":null},
+            {"text":" ","width":1,"fg":[187,187,187],"bg":[0,0,0],"fg_default":true,"fg_index":null,"bg_index":null,"bg_default":true,"bold":false,"italic":false,"underline":false,"inverse":false,"strike":false,"hyperlink":null},
+            {"text":" ","width":1,"fg":[187,187,187],"bg":[0,0,0],"fg_default":true,"fg_index":null,"bg_index":null,"bg_default":true,"bold":false,"italic":false,"underline":false,"inverse":false,"strike":false,"hyperlink":null},
+            {"text":" ","width":1,"fg":[187,187,187],"bg":[0,0,0],"fg_default":true,"fg_index":null,"bg_index":null,"bg_default":true,"bold":false,"italic":false,"underline":false,"inverse":false,"strike":false,"hyperlink":null},
+            {"text":" ","width":1,"fg":[187,187,187],"bg":[0,0,0],"fg_default":true,"fg_index":null,"bg_index":null,"bg_default":true,"bold":false,"italic":false,"underline":false,"inverse":false,"strike":false,"hyperlink":null},
+            {"text":" ","width":1,"fg":[187,187,187],"bg":[0,0,0],"fg_default":true,"fg_index":null,"bg_index":null,"bg_default":true,"bold":false,"italic":false,"underline":false,"inverse":false,"strike":false,"hyperlink":null},
+            {"text":" ","width":1,"fg":[187,187,187],"bg":[0,0,0],"fg_default":true,"fg_index":null,"bg_index":null,"bg_default":true,"bold":false,"italic":false,"underline":false,"inverse":false,"strike":false,"hyperlink":null}
+          ]
+        }
+      ],
+      "history": [],
+      "history_dropped": 0,
+      "cursor": {
+        "row": 1,
+        "col": 3,
+        "visible": true
+      },
+      "alternate": false,
+      "title": "",
+      "mouse_mode": 0,
+      "focus_report": false
+    },
+    "alternate": {
+      "cols": 10,
+      "rows": 4,
+      "lines": [
+        {
+          "runs": [
+            {"text":"Z","width":1,"fg":[0,0,187],"bg":[0,0,0],"fg_default":false,"fg_index":4,"bg_index":null,"bg_default":true,"bold":false,"italic":false,"underline":true,"inverse":false,"strike":false,"hyperlink":null},
+            {"text":" ","width":1,"fg":[187,187,187],"bg":[0,0,0],"fg_default":true,"fg_index":null,"bg_index":null,"bg_default":true,"bold":false,"italic":false,"underline":false,"inverse":false,"strike":false,"hyperlink":null},
+            {"text":" ","width":1,"fg":[187,187,187],"bg":[0,0,0],"fg_default":true,"fg_index":null,"bg_index":null,"bg_default":true,"bold":false,"italic":false,"underline":false,"inverse":false,"strike":false,"hyperlink":null},
+            {"text":" ","width":1,"fg":[187,187,187],"bg":[0,0,0],"fg_default":true,"fg_index":null,"bg_index":null,"bg_default":true,"bold":false,"italic":false,"underline":false,"inverse":false,"strike":false,"hyperlink":null},
+            {"text":" ","width":1,"fg":[187,187,187],"bg":[0,0,0],"fg_default":true,"fg_index":null,"bg_index":null,"bg_default":true,"bold":false,"italic":false,"underline":false,"inverse":false,"strike":false,"hyperlink":null},
+            {"text":" ","width":1,"fg":[187,187,187],"bg":[0,0,0],"fg_default":true,"fg_index":null,"bg_index":null,"bg_default":true,"bold":false,"italic":false,"underline":false,"inverse":false,"strike":false,"hyperlink":null},
+            {"text":" ","width":1,"fg":[187,187,187],"bg":[0,0,0],"fg_default":true,"fg_index":null,"bg_index":null,"bg_default":true,"bold":false,"italic":false,"underline":false,"inverse":false,"strike":false,"hyperlink":null},
+            {"text":" ","width":1,"fg":[187,187,187],"bg":[0,0,0],"fg_default":true,"fg_index":null,"bg_index":null,"bg_default":true,"bold":false,"italic":false,"underline":false,"inverse":false,"strike":false,"hyperlink":null},
+            {"text":" ","width":1,"fg":[187,187,187],"bg":[0,0,0],"fg_default":true,"fg_index":null,"bg_index":null,"bg_default":true,"bold":false,"italic":false,"underline":false,"inverse":false,"strike":false,"hyperlink":null},
+            {"text":" ","width":1,"fg":[187,187,187],"bg":[0,0,0],"fg_default":true,"fg_index":null,"bg_index":null,"bg_default":true,"bold":false,"italic":false,"underline":false,"inverse":false,"strike":false,"hyperlink":null}
+          ]
+        },
+        {
+          "runs": [
+            {"text":" ","width":1,"fg":[187,187,187],"bg":[0,0,0],"fg_default":true,"fg_index":null,"bg_index":null,"bg_default":true,"bold":false,"italic":false,"underline":false,"inverse":false,"strike":false,"hyperlink":null},
+            {"text":" ","width":1,"fg":[187,187,187],"bg":[0,0,0],"fg_default":true,"fg_index":null,"bg_index":null,"bg_default":true,"bold":false,"italic":false,"underline":false,"inverse":false,"strike":false,"hyperlink":null},
+            {"text":" ","width":1,"fg":[187,187,187],"bg":[0,0,0],"fg_default":true,"fg_index":null,"bg_index":null,"bg_default":true,"bold":false,"italic":false,"underline":false,"inverse":false,"strike":false,"hyperlink":null},
+            {"text":" ","width":1,"fg":[187,187,187],"bg":[0,0,0],"fg_default":true,"fg_index":null,"bg_index":null,"bg_default":true,"bold":false,"italic":false,"underline":false,"inverse":false,"strike":false,"hyperlink":null},
+            {"text":" ","width":1,"fg":[187,187,187],"bg":[0,0,0],"fg_default":true,"fg_index":null,"bg_index":null,"bg_default":true,"bold":false,"italic":false,"underline":false,"inverse":false,"strike":false,"hyperlink":null},
+            {"text":" ","width":1,"fg":[187,187,187],"bg":[0,0,0],"fg_default":true,"fg_index":null,"bg_index":null,"bg_default":true,"bold":false,"italic":false,"underline":false,"inverse":false,"strike":false,"hyperlink":null},
+            {"text":" ","width":1,"fg":[187,187,187],"bg":[0,0,0],"fg_default":true,"fg_index":null,"bg_index":null,"bg_default":true,"bold":false,"italic":false,"underline":false,"inverse":false,"strike":false,"hyperlink":null},
+            {"text":" ","width":1,"fg":[187,187,187],"bg":[0,0,0],"fg_default":true,"fg_index":null,"bg_index":null,"bg_default":true,"bold":false,"italic":false,"underline":false,"inverse":false,"strike":false,"hyperlink":null},
+            {"text":" ","width":1,"fg":[187,187,187],"bg":[0,0,0],"fg_default":true,"fg_index":null,"bg_index":null,"bg_default":true,"bold":false,"italic":false,"underline":false,"inverse":false,"strike":false,"hyperlink":null},
+            {"text":" ","width":1,"fg":[187,187,187],"bg":[0,0,0],"fg_default":true,"fg_index":null,"bg_index":null,"bg_default":true,"bold":false,"italic":false,"underline":false,"inverse":false,"strike":false,"hyperlink":null}
+          ]
+        },
+        {
+          "runs": [
+            {"text":" ","width":1,"fg":[187,187,187],"bg":[0,0,0],"fg_default":true,"fg_index":null,"bg_index":null,"bg_default":true,"bold":false,"italic":false,"underline":false,"inverse":false,"strike":false,"hyperlink":null},
+            {"text":" ","width":1,"fg":[187,187,187],"bg":[0,0,0],"fg_default":true,"fg_index":null,"bg_index":null,"bg_default":true,"bold":false,"italic":false,"underline":false,"inverse":false,"strike":false,"hyperlink":null},
+            {"text":" ","width":1,"fg":[187,187,187],"bg":[0,0,0],"fg_default":true,"fg_index":null,"bg_index":null,"bg_default":true,"bold":false,"italic":false,"underline":false,"inverse":false,"strike":false,"hyperlink":null},
+            {"text":" ","width":1,"fg":[187,187,187],"bg":[0,0,0],"fg_default":true,"fg_index":null,"bg_index":null,"bg_default":true,"bold":false,"italic":false,"underline":false,"inverse":false,"strike":false,"hyperlink":null},
+            {"text":" ","width":1,"fg":[187,187,187],"bg":[0,0,0],"fg_default":true,"fg_index":null,"bg_index":null,"bg_default":true,"bold":false,"italic":false,"underline":false,"inverse":false,"strike":false,"hyperlink":null},
+            {"text":" ","width":1,"fg":[187,187,187],"bg":[0,0,0],"fg_default":true,"fg_index":null,"bg_index":null,"bg_default":true,"bold":false,"italic":false,"underline":false,"inverse":false,"strike":false,"hyperlink":null},
+            {"text":" ","width":1,"fg":[187,187,187],"bg":[0,0,0],"fg_default":true,"fg_index":null,"bg_index":null,"bg_default":true,"bold":false,"italic":false,"underline":false,"inverse":false,"strike":false,"hyperlink":null},
+            {"text":" ","width":1,"fg":[187,187,187],"bg":[0,0,0],"fg_default":true,"fg_index":null,"bg_index":null,"bg_default":true,"bold":false,"italic":false,"underline":false,"inverse":false,"strike":false,"hyperlink":null},
+            {"text":" ","width":1,"fg":[187,187,187],"bg":[0,0,0],"fg_default":true,"fg_index":null,"bg_index":null,"bg_default":true,"bold":false,"italic":false,"underline":false,"inverse":false,"strike":false,"hyperlink":null},
+            {"text":" ","width":1,"fg":[187,187,187],"bg":[0,0,0],"fg_default":true,"fg_index":null,"bg_index":null,"bg_default":true,"bold":false,"italic":false,"underline":false,"inverse":false,"strike":false,"hyperlink":null}
+          ]
+        },
+        {
+          "runs": [
+            {"text":" ","width":1,"fg":[187,187,187],"bg":[0,0,0],"fg_default":true,"fg_index":null,"bg_index":null,"bg_default":true,"bold":false,"italic":false,"underline":false,"inverse":false,"strike":false,"hyperlink":null},
+            {"text":" ","width":1,"fg":[187,187,187],"bg":[0,0,0],"fg_default":true,"fg_index":null,"bg_index":null,"bg_default":true,"bold":false,"italic":false,"underline":false,"inverse":false,"strike":false,"hyperlink":null},
+            {"text":" ","width":1,"fg":[187,187,187],"bg":[0,0,0],"fg_default":true,"fg_index":null,"bg_index":null,"bg_default":true,"bold":false,"italic":false,"underline":false,"inverse":false,"strike":false,"hyperlink":null},
+            {"text":" ","width":1,"fg":[187,187,187],"bg":[0,0,0],"fg_default":true,"fg_index":null,"bg_index":null,"bg_default":true,"bold":false,"italic":false,"underline":false,"inverse":false,"strike":false,"hyperlink":null},
+            {"text":" ","width":1,"fg":[187,187,187],"bg":[0,0,0],"fg_default":true,"fg_index":null,"bg_index":null,"bg_default":true,"bold":false,"italic":false,"underline":false,"inverse":false,"strike":false,"hyperlink":null},
+            {"text":" ","width":1,"fg":[187,187,187],"bg":[0,0,0],"fg_default":true,"fg_index":null,"bg_index":null,"bg_default":true,"bold":false,"italic":false,"underline":false,"inverse":false,"strike":false,"hyperlink":null},
+            {"text":" ","width":1,"fg":[187,187,187],"bg":[0,0,0],"fg_default":true,"fg_index":null,"bg_index":null,"bg_default":true,"bold":false,"italic":false,"underline":false,"inverse":false,"strike":false,"hyperlink":null},
+            {"text":" ","width":1,"fg":[187,187,187],"bg":[0,0,0],"fg_default":true,"fg_index":null,"bg_index":null,"bg_default":true,"bold":false,"italic":false,"underline":false,"inverse":false,"strike":false,"hyperlink":null},
+            {"text":" ","width":1,"fg":[187,187,187],"bg":[0,0,0],"fg_default":true,"fg_index":null,"bg_index":null,"bg_default":true,"bold":false,"italic":false,"underline":false,"inverse":false,"strike":false,"hyperlink":null},
+            {"text":" ","width":1,"fg":[187,187,187],"bg":[0,0,0],"fg_default":true,"fg_index":null,"bg_index":null,"bg_default":true,"bold":false,"italic":false,"underline":false,"inverse":false,"strike":false,"hyperlink":null}
+          ]
+        }
+      ],
+      "history": [],
+      "history_dropped": 0,
+      "cursor": {
+        "row": 0,
+        "col": 1,
+        "visible": true
+      },
+      "alternate": true,
+      "title": "",
+      "mouse_mode": 0,
+      "focus_report": false
+    }
+  }
+}

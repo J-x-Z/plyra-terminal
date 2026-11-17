@@ -1,0 +1,46 @@
+[package]
+name = "glass-terminal-android"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+
+[lib]
+name = "glass_terminal_android"
+crate-type = ["cdylib"]
+
+[[bin]]
+name = "glass-android-root-broker"
+path = "src/bin/root_broker.rs"
+
+[target.'cfg(target_os = "android")'.dependencies]
+anyhow.workspace = true
+flate2 = "1"
+libc = "0.2"
+serde_json.workspace = true
+sha2 = "0.10"
+tar = { version = "=0.4.45", default-features = false }
+tempfile = "3"
+glass-terminal-desktop = { path = "../desktop" }
+system-api = { path = "../../crates/system-api" }
+terminal-render = { path = "../../crates/terminal-render" }
+privilege-broker = { path = "../../crates/privilege-broker" }
+jni = "=0.22.4"
+winit = { workspace = true, features = ["android-native-activity"] }
+
+[package.metadata.android]
+package = "org.plyra.glass.terminal"
+apk_name = "glass-terminal-g1"
+build_targets = ["aarch64-linux-android", "x86_64-linux-android", "armv7-linux-androideabi", "i686-linux-android"]
+
+[package.metadata.android.sdk]
+min_sdk_version = 26
+target_sdk_version = 34
+
+[package.metadata.android.application]
+label = "Plyra Terminal"
+
+[package.metadata.android.application.activity]
+name = "org.plyra.glass.terminal.GlassTerminalActivity"
+exported = true
+
+# FVPROV1 1251 W3siYm9keSI6eyJhY3Rvcl9rZXlfaWQiOiI5ZjAwOTVhYmY4ODEwZGQwY2Y4NTdlZDBlNDI0ODg0NmRlMmFkMDc2ZmZhYTY2MWIzNmM5Yzc3YWFjOGVlOWMzIiwiYWxnb3JpdGhtIjoiRWQyNTUxOSIsImF1dGhvciI6IkoteC0gWiIsImNvbnRlbnRfc2hhMjU2IjoiMjQ4MGY1NzY2NmFjODhkNWU2MGFiOTdhYmY0NmRkODQ0YmJhMmU0M2NkNWZhMTk5NjRmMjNmNzljNmVlN2I0NCIsImNvcHlfaWQiOiJ2MC4xLjAtYmV0YS4xIiwiY3JlYXRlZF9hdCI6IjIwMjYtMTEtMTgiLCJlZGl0aW9uIjoiYmV0YSIsImlzc3Vlcl9wb2xpY3kiOm51bGwsImtpbmQiOiJjcmVhdGUiLCJtb2RlIjoic2VsZl9zaWduIiwicGFyZW50X3ZlcnNpb24iOm51bGwsInByZXZpb3VzX3JlY29yZF9zaGEyNTYiOm51bGwsInNjaGVtYSI6ImZpbGV2ZWlsLnByb3ZlbmFuY2Uuc2lnbmF0dXJlLnYyIiwic2VxdWVuY2UiOjAsInRyYW5zZmVyX3RvX2tleV9pZCI6bnVsbCwidmVyc2lvbiI6InYwLjEuMC1iZXRhLjEiLCJ3b3JrX2lkIjoib3JnLnBseXJhLnRlcm1pbmFsIn0sInNpZ25hdHVyZXMiOlt7ImtleV9pZCI6IjlmMDA5NWFiZjg4MTBkZDBjZjg1N2VkMGU0MjQ4ODQ2ZGUyYWQwNzZmZmFhNjYxYjM2YzljNzdhYWM4ZWU5YzMiLCJwdWJsaWNfa2V5X2hleCI6ImMzZTkyZDhkZDNkZWM4NTliODdlOTY4MjIyYjI4OWJhNzg5M2NjOGM4NWZjOTE2MjI2YjZiNjI5NjFiOTU5ZDciLCJzaWduYXR1cmVfaGV4IjoiZTFlMmM5OTkxMmE0OTVkNDEzNDIxY2ZlYzhmN2I5YWU0OGQ5MWRkMDZmM2EwYjY3YWQyN2MwOTYyZDRkOTI2NGI3NGY4OGFjN2FkZjZlMjFiYzgzN2ViZDAxY2VlZTgxZTJiNzQzZGNhNWI3NDUyMWNjNDZjNGFlMTdhMDljMDcifV19XQ== FVPROV1-END

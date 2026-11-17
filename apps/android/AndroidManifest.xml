@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="org.plyra.glass.terminal"
+    android:versionCode="1"
+    android:versionName="0.1.0-beta.1">
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-sdk android:minSdkVersion="26" android:targetSdkVersion="34" />
+    <uses-feature android:glEsVersion="0x00030000" android:required="false" />
+    <application
+        android:label="Plyra Terminal"
+        android:icon="@mipmap/glass_terminal_icon"
+        android:hasCode="true"
+        android:debuggable="true"
+        android:allowBackup="false"
+        android:extractNativeLibs="true"
+        android:theme="@style/GlassTerminalTheme">
+        <provider
+            android:name="org.plyra.glass.terminal.ManagedObjectProvider"
+            android:authorities="org.plyra.glass.terminal.objects"
+            android:exported="false"
+            android:grantUriPermissions="true" />
+        <activity
+            android:name="org.plyra.glass.terminal.GlassTerminalActivity"
+            android:exported="true"
+            android:configChanges="orientation|screenSize|screenLayout|keyboardHidden|keyboard|uiMode"
+            android:windowSoftInputMode="adjustResize">
+            <meta-data android:name="android.app.lib_name" android:value="glass_terminal_android" />
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+    </application>
+</manifest>

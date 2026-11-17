@@ -1,0 +1,11 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=Plyra Terminal
+Comment=GPU terminal and interactive system tools
+Exec=glass-terminal
+Icon=org.plyra.glass-terminal
+Terminal=false
+Categories=System;TerminalEmulator;
+StartupNotify=true
+StartupWMClass=org.plyra.glass-terminal

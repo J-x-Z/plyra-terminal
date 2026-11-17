@@ -1,0 +1,1729 @@
+{
+  "schema": "glass.upstream-license-supplements.v1",
+  "scope": "Original license and attribution documents omitted by the published package layout. Each URL is fixed to an upstream commit. Historical documents are labeled separately and do not represent a license file at the current package commit. Runtime notice entries separately record the exact installed toolchain version, original local paths, byte hashes, and any verbatim source-header extraction ranges.",
+  "groups": [
+    {
+      "repository": "DoumanAsh/clipboard-win",
+      "commit": "ed27008ae5d1f10cfbb266de039f0fb35fd05a56",
+      "packages": [
+        {
+          "name": "clipboard-win",
+          "version": "5.4.3",
+          "license": "BSL-1.0",
+          "repository": "https://github.com/DoumanAsh/clipboard-win",
+          "vcs": {
+            "git": {
+              "sha1": "ed27008ae5d1f10cfbb266de039f0fb35fd05a56"
+            },
+            "path_in_vcs": ""
+          }
+        }
+      ],
+      "files": [
+        {
+          "source_url": "https://raw.githubusercontent.com/DoumanAsh/clipboard-win/ed27008ae5d1f10cfbb266de039f0fb35fd05a56/LICENSE",
+          "sha256": "c9bff75738922193e67fa726fa225535870d2aa1059f91452c411736284ad566",
+          "upstream_path": "LICENSE",
+          "commit": "ed27008ae5d1f10cfbb266de039f0fb35fd05a56",
+          "path": "assets/terminal/upstream-notices/c9bff75738922193e67fa726fa225535870d2aa1059f91452c411736284ad566.txt",
+          "kind": "upstream_notice"
+        }
+      ]
+    },
+    {
+      "repository": "aclysma/profiling",
+      "commit": "8271551172eb6fa4cba47369aedd93790c623df9",
+      "packages": [
+        {
+          "name": "profiling",
+          "version": "1.0.18",
+          "license": "MIT OR Apache-2.0",
+          "repository": "https://github.com/aclysma/profiling",
+          "vcs": {
+            "git": {
+              "sha1": "8271551172eb6fa4cba47369aedd93790c623df9"
+            },
+            "path_in_vcs": "profiling"
+          }
+        }
+      ],
+      "files": [
+        {
+          "source_url": "https://raw.githubusercontent.com/aclysma/profiling/8271551172eb6fa4cba47369aedd93790c623df9/LICENSE-APACHE",
+          "sha256": "10d30a673cd5e9349bdc02aeb48f14b3386d27d0da32df8f0a555d4aa16aa551",
+          "upstream_path": "LICENSE-APACHE",
+          "commit": "8271551172eb6fa4cba47369aedd93790c623df9",
+          "path": "assets/terminal/upstream-notices/10d30a673cd5e9349bdc02aeb48f14b3386d27d0da32df8f0a555d4aa16aa551.txt",
+          "kind": "upstream_notice"
+        },
+        {
+          "source_url": "https://raw.githubusercontent.com/aclysma/profiling/8271551172eb6fa4cba47369aedd93790c623df9/LICENSE-MIT",
+          "sha256": "c8167fdeeed46d3f244d3f85c5bf998ce889343691c32be2c61a8bc4b5c08333",
+          "upstream_path": "LICENSE-MIT",
+          "commit": "8271551172eb6fa4cba47369aedd93790c623df9",
+          "path": "assets/terminal/upstream-notices/c8167fdeeed46d3f244d3f85c5bf998ce889343691c32be2c61a8bc4b5c08333.txt",
+          "kind": "upstream_notice"
+        }
+      ]
+    },
+    {
+      "repository": "brendanzab/codespan",
+      "commit": "fd389a13f5bb6d625b71e2e4694b26e127f393f9",
+      "packages": [
+        {
+          "name": "codespan-reporting",
+          "version": "0.11.1",
+          "license": "Apache-2.0",
+          "repository": "https://github.com/brendanzab/codespan",
+          "vcs": {
+            "git": {
+              "sha1": "fd389a13f5bb6d625b71e2e4694b26e127f393f9"
+            }
+          }
+        }
+      ],
+      "files": [
+        {
+          "source_url": "https://raw.githubusercontent.com/brendanzab/codespan/fd389a13f5bb6d625b71e2e4694b26e127f393f9/LICENSE",
+          "sha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4",
+          "upstream_path": "LICENSE",
+          "commit": "fd389a13f5bb6d625b71e2e4694b26e127f393f9",
+          "path": "assets/terminal/upstream-notices/c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4.txt",
+          "kind": "upstream_notice"
+        }
+      ]
+    },
+    {
+      "repository": "brendanzab/gl-rs",
+      "commit": "ea503e8d5fb6d73c6030e6191ce738cd3bf3433e",
+      "packages": [
+        {
+          "name": "gl_generator",
+          "version": "0.14.0",
+          "license": "Apache-2.0",
+          "repository": "https://github.com/brendanzab/gl-rs/",
+          "vcs": {
+            "git": {
+              "sha1": "ea503e8d5fb6d73c6030e6191ce738cd3bf3433e"
+            }
+          }
+        }
+      ],
+      "files": [
+        {
+          "source_url": "https://raw.githubusercontent.com/brendanzab/gl-rs/ea503e8d5fb6d73c6030e6191ce738cd3bf3433e/LICENSE",
+          "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+          "upstream_path": "LICENSE",
+          "commit": "ea503e8d5fb6d73c6030e6191ce738cd3bf3433e",
+          "path": "assets/terminal/upstream-notices/cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30.txt",
+          "kind": "upstream_notice"
+        }
+      ]
+    },
+    {
+      "repository": "brendanzab/gl-rs",
+      "commit": "f150967b1c44ae888e6676f93f639ebc82771bdc",
+      "packages": [
+        {
+          "name": "khronos_api",
+          "version": "3.1.0",
+          "license": "Apache-2.0",
+          "repository": "https://github.com/brendanzab/gl-rs/",
+          "vcs": {
+            "git": {
+              "sha1": "f150967b1c44ae888e6676f93f639ebc82771bdc"
+            }
+          }
+        }
+      ],
+      "files": [
+        {
+          "source_url": "https://raw.githubusercontent.com/brendanzab/gl-rs/f150967b1c44ae888e6676f93f639ebc82771bdc/LICENSE",
+          "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+          "upstream_path": "LICENSE",
+          "commit": "f150967b1c44ae888e6676f93f639ebc82771bdc",
+          "path": "assets/terminal/upstream-notices/cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30.txt",
+          "kind": "upstream_notice"
+        }
+      ]
+    },
+    {
+      "repository": "emilk/egui",
+      "commit": "1669e52a7ccfc3489c1b0999b9ed48894a0b3887",
+      "packages": [
+        {
+          "name": "ecolor",
+          "version": "0.31.1",
+          "license": "MIT OR Apache-2.0",
+          "repository": "https://github.com/emilk/egui",
+          "vcs": {
+            "git": {
+              "sha1": "1669e52a7ccfc3489c1b0999b9ed48894a0b3887"
+            },
+            "path_in_vcs": "crates/ecolor"
+          }
+        },
+        {
+          "name": "egui",
+          "version": "0.31.1",
+          "license": "MIT OR Apache-2.0",
+          "repository": "https://github.com/emilk/egui",
+          "vcs": {
+            "git": {
+              "sha1": "1669e52a7ccfc3489c1b0999b9ed48894a0b3887"
+            },
+            "path_in_vcs": "crates/egui"
+          }
+        },
+        {
+          "name": "egui-wgpu",
+          "version": "0.31.1",
+          "license": "MIT OR Apache-2.0",
+          "repository": "https://github.com/emilk/egui/tree/master/crates/egui-wgpu",
+          "vcs": {
+            "git": {
+              "sha1": "1669e52a7ccfc3489c1b0999b9ed48894a0b3887"
+            },
+            "path_in_vcs": "crates/egui-wgpu"
+          }
+        },
+        {
+          "name": "egui-winit",
+          "version": "0.31.1",
+          "license": "MIT OR Apache-2.0",
+          "repository": "https://github.com/emilk/egui/tree/master/crates/egui-winit",
+          "vcs": {
+            "git": {
+              "sha1": "1669e52a7ccfc3489c1b0999b9ed48894a0b3887"
+            },
+            "path_in_vcs": "crates/egui-winit"
+          }
+        },
+        {
+          "name": "emath",
+          "version": "0.31.1",
+          "license": "MIT OR Apache-2.0",
+          "repository": "https://github.com/emilk/egui/tree/master/crates/emath",
+          "vcs": {
+            "git": {
+              "sha1": "1669e52a7ccfc3489c1b0999b9ed48894a0b3887"
+            },
+            "path_in_vcs": "crates/emath"
+          }
+        },
+        {
+          "name": "epaint",
+          "version": "0.31.1",
+          "license": "MIT OR Apache-2.0",
+          "repository": "https://github.com/emilk/egui/tree/master/crates/epaint",
+          "vcs": {
+            "git": {
+              "sha1": "1669e52a7ccfc3489c1b0999b9ed48894a0b3887"
+            },
+            "path_in_vcs": "crates/epaint"
+          }
+        }
+      ],
+      "files": [
+        {
+          "source_url": "https://raw.githubusercontent.com/emilk/egui/1669e52a7ccfc3489c1b0999b9ed48894a0b3887/LICENSE-APACHE",
+          "sha256": "8173d5c29b4f956d532781d2b86e4e30f83e6b7878dce18c919451d6ba707c90",
+          "upstream_path": "LICENSE-APACHE",
+          "commit": "1669e52a7ccfc3489c1b0999b9ed48894a0b3887",
+          "path": "assets/terminal/upstream-notices/8173d5c29b4f956d532781d2b86e4e30f83e6b7878dce18c919451d6ba707c90.txt",
+          "kind": "upstream_notice"
+        },
+        {
+          "source_url": "https://raw.githubusercontent.com/emilk/egui/1669e52a7ccfc3489c1b0999b9ed48894a0b3887/LICENSE-MIT",
+          "sha256": "95ca92f5f8ea5231f1580b3a2a799e8260af3114b900e1def5355a7f44bcf60c",
+          "upstream_path": "LICENSE-MIT",
+          "commit": "1669e52a7ccfc3489c1b0999b9ed48894a0b3887",
+          "path": "assets/terminal/upstream-notices/95ca92f5f8ea5231f1580b3a2a799e8260af3114b900e1def5355a7f44bcf60c.txt",
+          "kind": "upstream_notice"
+        }
+      ]
+    },
+    {
+      "repository": "gfx-rs/rspirv",
+      "commit": "e91a5debc10c395b36db7721dfff6326d697a1e2",
+      "packages": [
+        {
+          "name": "spirv",
+          "version": "0.3.0+sdk-1.3.268.0",
+          "license": "Apache-2.0",
+          "repository": "https://github.com/gfx-rs/rspirv",
+          "vcs": {
+            "git": {
+              "sha1": "e91a5debc10c395b36db7721dfff6326d697a1e2"
+            },
+            "path_in_vcs": "spirv"
+          }
+        }
+      ],
+      "files": [
+        {
+          "source_url": "https://raw.githubusercontent.com/gfx-rs/rspirv/e91a5debc10c395b36db7721dfff6326d697a1e2/LICENSE",
+          "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+          "upstream_path": "LICENSE",
+          "commit": "e91a5debc10c395b36db7721dfff6326d697a1e2",
+          "path": "assets/terminal/upstream-notices/cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30.txt",
+          "kind": "upstream_notice"
+        }
+      ]
+    },
+    {
+      "repository": "gfx-rs/wgpu",
+      "commit": "dc1e50e08cd4a5c8d6c3e8a180e93535d40bec4a",
+      "packages": [
+        {
+          "name": "naga",
+          "version": "24.0.0",
+          "license": "MIT OR Apache-2.0",
+          "repository": "https://github.com/gfx-rs/wgpu/tree/trunk/naga",
+          "vcs": {
+            "git": {
+              "sha1": "dc1e50e08cd4a5c8d6c3e8a180e93535d40bec4a"
+            },
+            "path_in_vcs": "naga"
+          }
+        }
+      ],
+      "files": [
+        {
+          "source_url": "https://raw.githubusercontent.com/gfx-rs/wgpu/dc1e50e08cd4a5c8d6c3e8a180e93535d40bec4a/LICENSE.APACHE",
+          "sha256": "a6cba85bc92e0cff7a450b1d873c0eaa2e9fc96bf472df0247a26bec77bf3ff9",
+          "upstream_path": "LICENSE.APACHE",
+          "commit": "dc1e50e08cd4a5c8d6c3e8a180e93535d40bec4a",
+          "path": "assets/terminal/upstream-notices/a6cba85bc92e0cff7a450b1d873c0eaa2e9fc96bf472df0247a26bec77bf3ff9.txt",
+          "kind": "upstream_notice"
+        },
+        {
+          "source_url": "https://raw.githubusercontent.com/gfx-rs/wgpu/dc1e50e08cd4a5c8d6c3e8a180e93535d40bec4a/LICENSE.MIT",
+          "sha256": "c7fea58d1cfe49634cd92e54fc10a9d871f4b275321a4cd8c09e449122caaeb4",
+          "upstream_path": "LICENSE.MIT",
+          "commit": "dc1e50e08cd4a5c8d6c3e8a180e93535d40bec4a",
+          "path": "assets/terminal/upstream-notices/c7fea58d1cfe49634cd92e54fc10a9d871f4b275321a4cd8c09e449122caaeb4.txt",
+          "kind": "upstream_notice"
+        }
+      ]
+    },
+    {
+      "repository": "jni-rs/jni-rs",
+      "commit": "5ae9458a4ec44c5318f37ddc7569c1d4ae8a69e7",
+      "packages": [
+        {
+          "name": "jni",
+          "version": "0.22.4",
+          "license": "MIT OR Apache-2.0",
+          "repository": "https://github.com/jni-rs/jni-rs",
+          "vcs": {
+            "git": {
+              "sha1": "5ae9458a4ec44c5318f37ddc7569c1d4ae8a69e7"
+            },
+            "path_in_vcs": "crates/jni"
+          }
+        }
+      ],
+      "files": [
+        {
+          "source_url": "https://raw.githubusercontent.com/jni-rs/jni-rs/5ae9458a4ec44c5318f37ddc7569c1d4ae8a69e7/LICENSE-APACHE",
+          "sha256": "a60eea817514531668d7e00765731449fe14d059d3249e0bc93b36de45f759f2",
+          "upstream_path": "LICENSE-APACHE",
+          "commit": "5ae9458a4ec44c5318f37ddc7569c1d4ae8a69e7",
+          "path": "assets/terminal/upstream-notices/a60eea817514531668d7e00765731449fe14d059d3249e0bc93b36de45f759f2.txt",
+          "kind": "upstream_notice"
+        },
+        {
+          "source_url": "https://raw.githubusercontent.com/jni-rs/jni-rs/5ae9458a4ec44c5318f37ddc7569c1d4ae8a69e7/LICENSE-MIT",
+          "sha256": "fea1d5bf3dd71605ce5d7d2ff695c1837e914c77195e523a86b5391716477960",
+          "upstream_path": "LICENSE-MIT",
+          "commit": "5ae9458a4ec44c5318f37ddc7569c1d4ae8a69e7",
+          "path": "assets/terminal/upstream-notices/fea1d5bf3dd71605ce5d7d2ff695c1837e914c77195e523a86b5391716477960.txt",
+          "kind": "upstream_notice"
+        }
+      ]
+    },
+    {
+      "repository": "jni-rs/jni-rs",
+      "commit": "33045a124105c939d1e2cbdcb5a39e5d868ffa03",
+      "packages": [
+        {
+          "name": "jni-macros",
+          "version": "0.22.4",
+          "license": "MIT OR Apache-2.0",
+          "repository": "https://github.com/jni-rs/jni-rs",
+          "vcs": {
+            "git": {
+              "sha1": "33045a124105c939d1e2cbdcb5a39e5d868ffa03"
+            },
+            "path_in_vcs": "crates/jni-macros"
+          }
+        }
+      ],
+      "files": [
+        {
+          "source_url": "https://raw.githubusercontent.com/jni-rs/jni-rs/33045a124105c939d1e2cbdcb5a39e5d868ffa03/LICENSE-APACHE",
+          "sha256": "a60eea817514531668d7e00765731449fe14d059d3249e0bc93b36de45f759f2",
+          "upstream_path": "LICENSE-APACHE",
+          "commit": "33045a124105c939d1e2cbdcb5a39e5d868ffa03",
+          "path": "assets/terminal/upstream-notices/a60eea817514531668d7e00765731449fe14d059d3249e0bc93b36de45f759f2.txt",
+          "kind": "upstream_notice"
+        },
+        {
+          "source_url": "https://raw.githubusercontent.com/jni-rs/jni-rs/33045a124105c939d1e2cbdcb5a39e5d868ffa03/LICENSE-MIT",
+          "sha256": "fea1d5bf3dd71605ce5d7d2ff695c1837e914c77195e523a86b5391716477960",
+          "upstream_path": "LICENSE-MIT",
+          "commit": "33045a124105c939d1e2cbdcb5a39e5d868ffa03",
+          "path": "assets/terminal/upstream-notices/fea1d5bf3dd71605ce5d7d2ff695c1837e914c77195e523a86b5391716477960.txt",
+          "kind": "upstream_notice"
+        }
+      ]
+    },
+    {
+      "repository": "jni-rs/jni-sys",
+      "commit": "64d77b7a5f119d7b55b4e2c169a4668067ff59e6",
+      "packages": [
+        {
+          "name": "jni-sys-macros",
+          "version": "0.4.1",
+          "license": "MIT OR Apache-2.0",
+          "repository": "https://github.com/jni-rs/jni-sys",
+          "vcs": {
+            "git": {
+              "sha1": "64d77b7a5f119d7b55b4e2c169a4668067ff59e6"
+            },
+            "path_in_vcs": "jni-sys-macros"
+          }
+        }
+      ],
+      "files": [
+        {
+          "source_url": "https://raw.githubusercontent.com/jni-rs/jni-sys/64d77b7a5f119d7b55b4e2c169a4668067ff59e6/LICENSE-APACHE",
+          "sha256": "c6596eb7be8581c18be736c846fb9173b69eccf6ef94c5135893ec56bd92ba08",
+          "upstream_path": "LICENSE-APACHE",
+          "commit": "64d77b7a5f119d7b55b4e2c169a4668067ff59e6",
+          "path": "assets/terminal/upstream-notices/c6596eb7be8581c18be736c846fb9173b69eccf6ef94c5135893ec56bd92ba08.txt",
+          "kind": "upstream_notice"
+        },
+        {
+          "source_url": "https://raw.githubusercontent.com/jni-rs/jni-sys/64d77b7a5f119d7b55b4e2c169a4668067ff59e6/LICENSE-MIT",
+          "sha256": "1d85bd754b04ceec93e98e890edd1fa3c6a22e81bcb32135806beeccefa51cd1",
+          "upstream_path": "LICENSE-MIT",
+          "commit": "64d77b7a5f119d7b55b4e2c169a4668067ff59e6",
+          "path": "assets/terminal/upstream-notices/1d85bd754b04ceec93e98e890edd1fa3c6a22e81bcb32135806beeccefa51cd1.txt",
+          "kind": "upstream_notice"
+        }
+      ]
+    },
+    {
+      "repository": "nical/rust_debug",
+      "commit": "93f414cd572b5c2781df93dbdc068ed13443d05a",
+      "packages": [
+        {
+          "name": "svg_fmt",
+          "version": "0.4.5",
+          "license": "MIT/Apache-2.0",
+          "repository": "https://github.com/nical/rust_debug",
+          "vcs": {
+            "git": {
+              "sha1": "93f414cd572b5c2781df93dbdc068ed13443d05a"
+            },
+            "path_in_vcs": "svg_fmt"
+          }
+        }
+      ],
+      "files": [
+        {
+          "source_url": "https://raw.githubusercontent.com/nical/rust_debug/93f414cd572b5c2781df93dbdc068ed13443d05a/LICENSE",
+          "sha256": "7e98bed7f100747aaae7d82ab94fbe6b76fd6b84b09a3aaa413bff8196d0fbb1",
+          "upstream_path": "LICENSE",
+          "commit": "93f414cd572b5c2781df93dbdc068ed13443d05a",
+          "path": "assets/terminal/upstream-notices/7e98bed7f100747aaae7d82ab94fbe6b76fd6b84b09a3aaa413bff8196d0fbb1.txt",
+          "kind": "upstream_notice"
+        }
+      ]
+    },
+    {
+      "repository": "r-efi/r-efi",
+      "commit": "97b55bed1c2c91dcbf787674849f05337ff80b33",
+      "packages": [
+        {
+          "name": "r-efi",
+          "version": "5.3.0",
+          "license": "MIT OR Apache-2.0 OR LGPL-2.1-or-later",
+          "repository": "https://github.com/r-efi/r-efi",
+          "vcs": {
+            "git": {
+              "sha1": "97b55bed1c2c91dcbf787674849f05337ff80b33"
+            },
+            "path_in_vcs": ""
+          }
+        }
+      ],
+      "contains_current_commit_full_license_text": true,
+      "files": [
+        {
+          "source_url": "https://raw.githubusercontent.com/r-efi/r-efi/97b55bed1c2c91dcbf787674849f05337ff80b33/AUTHORS",
+          "sha256": "ff92bed461f50338dd703a9ba9aee496a425957873df1d91192776e4bdf5dda7",
+          "upstream_path": "AUTHORS",
+          "commit": "97b55bed1c2c91dcbf787674849f05337ff80b33",
+          "kind": "current_full_license",
+          "content_kind": "Original AUTHORS file includes MIT permission and copyright plus alternative license declarations.",
+          "path": "assets/terminal/upstream-notices/ff92bed461f50338dd703a9ba9aee496a425957873df1d91192776e4bdf5dda7.txt"
+        }
+      ]
+    },
+    {
+      "repository": "r-efi/r-efi",
+      "commit": "7e1b0322d31d625f81a5656096330934f9cd835d",
+      "packages": [
+        {
+          "name": "r-efi",
+          "version": "6.0.0",
+          "license": "MIT OR Apache-2.0 OR LGPL-2.1-or-later",
+          "repository": "https://github.com/r-efi/r-efi",
+          "vcs": {
+            "git": {
+              "sha1": "7e1b0322d31d625f81a5656096330934f9cd835d"
+            },
+            "path_in_vcs": ""
+          }
+        }
+      ],
+      "contains_current_commit_full_license_text": true,
+      "files": [
+        {
+          "source_url": "https://raw.githubusercontent.com/r-efi/r-efi/7e1b0322d31d625f81a5656096330934f9cd835d/AUTHORS",
+          "sha256": "d027e91dbc9cdbb2f1190068e498bd6b61cff022b6a032b191021ba658d96111",
+          "upstream_path": "AUTHORS",
+          "commit": "7e1b0322d31d625f81a5656096330934f9cd835d",
+          "kind": "current_full_license",
+          "content_kind": "Original AUTHORS file includes MIT permission and copyright plus alternative license declarations.",
+          "path": "assets/terminal/upstream-notices/d027e91dbc9cdbb2f1190068e498bd6b61cff022b6a032b191021ba658d96111.txt"
+        }
+      ]
+    },
+    {
+      "repository": "rust-mobile/ndk",
+      "commit": "49bbbba16c58ff63cb8a0ad0eca5a9fb7ecaec25",
+      "packages": [
+        {
+          "name": "ndk",
+          "version": "0.9.0",
+          "license": "MIT OR Apache-2.0",
+          "repository": "https://github.com/rust-mobile/ndk",
+          "vcs": {
+            "git": {
+              "sha1": "49bbbba16c58ff63cb8a0ad0eca5a9fb7ecaec25"
+            },
+            "path_in_vcs": "ndk"
+          }
+        },
+        {
+          "name": "ndk-sys",
+          "version": "0.6.0+11769913",
+          "license": "MIT OR Apache-2.0",
+          "repository": "https://github.com/rust-mobile/ndk",
+          "vcs": {
+            "git": {
+              "sha1": "49bbbba16c58ff63cb8a0ad0eca5a9fb7ecaec25"
+            },
+            "path_in_vcs": "ndk-sys"
+          }
+        }
+      ],
+      "files": [
+        {
+          "source_url": "https://raw.githubusercontent.com/rust-mobile/ndk/49bbbba16c58ff63cb8a0ad0eca5a9fb7ecaec25/LICENSE-APACHE",
+          "sha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4",
+          "upstream_path": "LICENSE-APACHE",
+          "commit": "49bbbba16c58ff63cb8a0ad0eca5a9fb7ecaec25",
+          "path": "assets/terminal/upstream-notices/c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4.txt",
+          "kind": "upstream_notice"
+        },
+        {
+          "source_url": "https://raw.githubusercontent.com/rust-mobile/ndk/49bbbba16c58ff63cb8a0ad0eca5a9fb7ecaec25/LICENSE-MIT",
+          "sha256": "508a77d2e7b51d98adeed32648ad124b7b30241a8e70b2e72c99f92d8e5874d1",
+          "upstream_path": "LICENSE-MIT",
+          "commit": "49bbbba16c58ff63cb8a0ad0eca5a9fb7ecaec25",
+          "path": "assets/terminal/upstream-notices/508a77d2e7b51d98adeed32648ad124b7b30241a8e70b2e72c99f92d8e5874d1.txt",
+          "kind": "upstream_notice"
+        }
+      ]
+    },
+    {
+      "repository": "rust-mobile/ndk",
+      "commit": "f414cabc12211ebcba4edb3da90950967d4a1933",
+      "packages": [
+        {
+          "name": "ndk-sys",
+          "version": "0.5.0+25.2.9519653",
+          "license": "MIT OR Apache-2.0",
+          "repository": "https://github.com/rust-mobile/ndk",
+          "vcs": {
+            "git": {
+              "sha1": "f414cabc12211ebcba4edb3da90950967d4a1933"
+            },
+            "path_in_vcs": "ndk-sys"
+          }
+        }
+      ],
+      "files": [
+        {
+          "source_url": "https://raw.githubusercontent.com/rust-mobile/ndk/f414cabc12211ebcba4edb3da90950967d4a1933/LICENSE-APACHE",
+          "sha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4",
+          "upstream_path": "LICENSE-APACHE",
+          "commit": "f414cabc12211ebcba4edb3da90950967d4a1933",
+          "path": "assets/terminal/upstream-notices/c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4.txt",
+          "kind": "upstream_notice"
+        },
+        {
+          "source_url": "https://raw.githubusercontent.com/rust-mobile/ndk/f414cabc12211ebcba4edb3da90950967d4a1933/LICENSE-MIT",
+          "sha256": "508a77d2e7b51d98adeed32648ad124b7b30241a8e70b2e72c99f92d8e5874d1",
+          "upstream_path": "LICENSE-MIT",
+          "commit": "f414cabc12211ebcba4edb3da90950967d4a1933",
+          "path": "assets/terminal/upstream-notices/508a77d2e7b51d98adeed32648ad124b7b30241a8e70b2e72c99f92d8e5874d1.txt",
+          "kind": "upstream_notice"
+        }
+      ]
+    },
+    {
+      "repository": "rust-windowing/android-ndk-rs",
+      "commit": "10f2ba388fca20f7349996ebae26ccda7a6fda5c",
+      "packages": [
+        {
+          "name": "ndk-context",
+          "version": "0.1.1",
+          "license": "MIT OR Apache-2.0",
+          "repository": "https://github.com/rust-windowing/android-ndk-rs",
+          "vcs": {
+            "git": {
+              "sha1": "10f2ba388fca20f7349996ebae26ccda7a6fda5c"
+            },
+            "path_in_vcs": "ndk-context"
+          }
+        }
+      ],
+      "files": [
+        {
+          "source_url": "https://raw.githubusercontent.com/rust-windowing/android-ndk-rs/10f2ba388fca20f7349996ebae26ccda7a6fda5c/LICENSE-APACHE",
+          "sha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4",
+          "upstream_path": "LICENSE-APACHE",
+          "commit": "10f2ba388fca20f7349996ebae26ccda7a6fda5c",
+          "path": "assets/terminal/upstream-notices/c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4.txt",
+          "kind": "upstream_notice"
+        },
+        {
+          "source_url": "https://raw.githubusercontent.com/rust-windowing/android-ndk-rs/10f2ba388fca20f7349996ebae26ccda7a6fda5c/LICENSE-MIT",
+          "sha256": "508a77d2e7b51d98adeed32648ad124b7b30241a8e70b2e72c99f92d8e5874d1",
+          "upstream_path": "LICENSE-MIT",
+          "commit": "10f2ba388fca20f7349996ebae26ccda7a6fda5c",
+          "path": "assets/terminal/upstream-notices/508a77d2e7b51d98adeed32648ad124b7b30241a8e70b2e72c99f92d8e5874d1.txt",
+          "kind": "upstream_notice"
+        }
+      ]
+    },
+    {
+      "repository": "zakarumych/gpu-alloc",
+      "commit": "61020bdcb4eb04fca6bbf748aeb9570e859236e0",
+      "packages": [
+        {
+          "name": "gpu-alloc",
+          "version": "0.6.2",
+          "license": "MIT OR Apache-2.0",
+          "repository": "https://github.com/zakarumych/gpu-alloc",
+          "vcs": {
+            "git": {
+              "sha1": "61020bdcb4eb04fca6bbf748aeb9570e859236e0"
+            },
+            "path_in_vcs": "gpu-alloc"
+          }
+        }
+      ],
+      "files": [
+        {
+          "source_url": "https://raw.githubusercontent.com/zakarumych/gpu-alloc/61020bdcb4eb04fca6bbf748aeb9570e859236e0/COPYING",
+          "sha256": "12121dfa588677007848ab922a45a1e3248868f6ff063598fceb3141d7897314",
+          "upstream_path": "COPYING",
+          "commit": "61020bdcb4eb04fca6bbf748aeb9570e859236e0",
+          "path": "assets/terminal/upstream-notices/12121dfa588677007848ab922a45a1e3248868f6ff063598fceb3141d7897314.txt",
+          "kind": "upstream_notice"
+        },
+        {
+          "source_url": "https://raw.githubusercontent.com/zakarumych/gpu-alloc/61020bdcb4eb04fca6bbf748aeb9570e859236e0/license/APACHE",
+          "sha256": "58317934bf818c379e4215fad7e8dfb6812edff32c9557b8b039343f69711e08",
+          "upstream_path": "license/APACHE",
+          "commit": "61020bdcb4eb04fca6bbf748aeb9570e859236e0",
+          "path": "assets/terminal/upstream-notices/58317934bf818c379e4215fad7e8dfb6812edff32c9557b8b039343f69711e08.txt",
+          "kind": "upstream_notice"
+        },
+        {
+          "source_url": "https://raw.githubusercontent.com/zakarumych/gpu-alloc/61020bdcb4eb04fca6bbf748aeb9570e859236e0/license/MIT",
+          "sha256": "f774bf68151714985324d90adbd59e8f271b7ba518608d871b6ba16464692879",
+          "upstream_path": "license/MIT",
+          "commit": "61020bdcb4eb04fca6bbf748aeb9570e859236e0",
+          "path": "assets/terminal/upstream-notices/f774bf68151714985324d90adbd59e8f271b7ba518608d871b6ba16464692879.txt",
+          "kind": "upstream_notice"
+        }
+      ]
+    },
+    {
+      "repository": "zakarumych/gpu-alloc",
+      "commit": "7ddd1fe576fcfc503347eb97e476a47581479f22",
+      "packages": [
+        {
+          "name": "gpu-alloc-types",
+          "version": "0.3.1",
+          "license": "MIT OR Apache-2.0",
+          "repository": "https://github.com/zakarumych/gpu-alloc",
+          "vcs": {
+            "git": {
+              "sha1": "7ddd1fe576fcfc503347eb97e476a47581479f22"
+            },
+            "path_in_vcs": "types"
+          }
+        }
+      ],
+      "files": [
+        {
+          "source_url": "https://raw.githubusercontent.com/zakarumych/gpu-alloc/7ddd1fe576fcfc503347eb97e476a47581479f22/COPYING",
+          "sha256": "12121dfa588677007848ab922a45a1e3248868f6ff063598fceb3141d7897314",
+          "upstream_path": "COPYING",
+          "commit": "7ddd1fe576fcfc503347eb97e476a47581479f22",
+          "path": "assets/terminal/upstream-notices/12121dfa588677007848ab922a45a1e3248868f6ff063598fceb3141d7897314.txt",
+          "kind": "upstream_notice"
+        },
+        {
+          "source_url": "https://raw.githubusercontent.com/zakarumych/gpu-alloc/7ddd1fe576fcfc503347eb97e476a47581479f22/license/APACHE",
+          "sha256": "58317934bf818c379e4215fad7e8dfb6812edff32c9557b8b039343f69711e08",
+          "upstream_path": "license/APACHE",
+          "commit": "7ddd1fe576fcfc503347eb97e476a47581479f22",
+          "path": "assets/terminal/upstream-notices/58317934bf818c379e4215fad7e8dfb6812edff32c9557b8b039343f69711e08.txt",
+          "kind": "upstream_notice"
+        },
+        {
+          "source_url": "https://raw.githubusercontent.com/zakarumych/gpu-alloc/7ddd1fe576fcfc503347eb97e476a47581479f22/license/MIT",
+          "sha256": "f774bf68151714985324d90adbd59e8f271b7ba518608d871b6ba16464692879",
+          "upstream_path": "license/MIT",
+          "commit": "7ddd1fe576fcfc503347eb97e476a47581479f22",
+          "path": "assets/terminal/upstream-notices/f774bf68151714985324d90adbd59e8f271b7ba518608d871b6ba16464692879.txt",
+          "kind": "upstream_notice"
+        }
+      ]
+    },
+    {
+      "repository": "zakarumych/gpu-descriptor",
+      "commit": "bb28b4e55b742e0ea3e7a0968e7ee6287ba0e06a",
+      "packages": [
+        {
+          "name": "gpu-descriptor",
+          "version": "0.3.2",
+          "license": "MIT OR Apache-2.0",
+          "repository": "https://github.com/zakarumych/gpu-descriptor",
+          "vcs": {
+            "git": {
+              "sha1": "bb28b4e55b742e0ea3e7a0968e7ee6287ba0e06a"
+            },
+            "path_in_vcs": "gpu-descriptor"
+          }
+        }
+      ],
+      "files": [
+        {
+          "source_url": "https://raw.githubusercontent.com/zakarumych/gpu-descriptor/bb28b4e55b742e0ea3e7a0968e7ee6287ba0e06a/COPYING",
+          "sha256": "f72143f7e9d9fb8bd336b139fa22f825a299591c29f2f7338c5566347b137613",
+          "upstream_path": "COPYING",
+          "commit": "bb28b4e55b742e0ea3e7a0968e7ee6287ba0e06a",
+          "path": "assets/terminal/upstream-notices/f72143f7e9d9fb8bd336b139fa22f825a299591c29f2f7338c5566347b137613.txt",
+          "kind": "upstream_notice"
+        },
+        {
+          "source_url": "https://raw.githubusercontent.com/zakarumych/gpu-descriptor/bb28b4e55b742e0ea3e7a0968e7ee6287ba0e06a/license/APACHE",
+          "sha256": "6bec8c944a6d4251be50ac86bb4ca360bcce5aea472505dee2800e160bf1cdbf",
+          "upstream_path": "license/APACHE",
+          "commit": "bb28b4e55b742e0ea3e7a0968e7ee6287ba0e06a",
+          "path": "assets/terminal/upstream-notices/6bec8c944a6d4251be50ac86bb4ca360bcce5aea472505dee2800e160bf1cdbf.txt",
+          "kind": "upstream_notice"
+        },
+        {
+          "source_url": "https://raw.githubusercontent.com/zakarumych/gpu-descriptor/bb28b4e55b742e0ea3e7a0968e7ee6287ba0e06a/license/MIT",
+          "sha256": "5226e27d5fbc683db56c52853cdb9d15b69abadb525a60f95c862c2dbd77cdc8",
+          "upstream_path": "license/MIT",
+          "commit": "bb28b4e55b742e0ea3e7a0968e7ee6287ba0e06a",
+          "path": "assets/terminal/upstream-notices/5226e27d5fbc683db56c52853cdb9d15b69abadb525a60f95c862c2dbd77cdc8.txt",
+          "kind": "upstream_notice"
+        }
+      ]
+    },
+    {
+      "repository": "zakarumych/gpu-descriptor",
+      "commit": "9f2fb9546591322e7b77ee1e79385e01effd85e4",
+      "packages": [
+        {
+          "name": "gpu-descriptor-types",
+          "version": "0.2.0",
+          "license": "MIT OR Apache-2.0",
+          "repository": "https://github.com/zakarumych/gpu-descriptor",
+          "vcs": {
+            "git": {
+              "sha1": "9f2fb9546591322e7b77ee1e79385e01effd85e4"
+            },
+            "path_in_vcs": "types"
+          }
+        }
+      ],
+      "files": [
+        {
+          "source_url": "https://raw.githubusercontent.com/zakarumych/gpu-descriptor/9f2fb9546591322e7b77ee1e79385e01effd85e4/COPYING",
+          "sha256": "f72143f7e9d9fb8bd336b139fa22f825a299591c29f2f7338c5566347b137613",
+          "upstream_path": "COPYING",
+          "commit": "9f2fb9546591322e7b77ee1e79385e01effd85e4",
+          "path": "assets/terminal/upstream-notices/f72143f7e9d9fb8bd336b139fa22f825a299591c29f2f7338c5566347b137613.txt",
+          "kind": "upstream_notice"
+        },
+        {
+          "source_url": "https://raw.githubusercontent.com/zakarumych/gpu-descriptor/9f2fb9546591322e7b77ee1e79385e01effd85e4/license/APACHE",
+          "sha256": "6bec8c944a6d4251be50ac86bb4ca360bcce5aea472505dee2800e160bf1cdbf",
+          "upstream_path": "license/APACHE",
+          "commit": "9f2fb9546591322e7b77ee1e79385e01effd85e4",
+          "path": "assets/terminal/upstream-notices/6bec8c944a6d4251be50ac86bb4ca360bcce5aea472505dee2800e160bf1cdbf.txt",
+          "kind": "upstream_notice"
+        },
+        {
+          "source_url": "https://raw.githubusercontent.com/zakarumych/gpu-descriptor/9f2fb9546591322e7b77ee1e79385e01effd85e4/license/MIT",
+          "sha256": "5226e27d5fbc683db56c52853cdb9d15b69abadb525a60f95c862c2dbd77cdc8",
+          "upstream_path": "license/MIT",
+          "commit": "9f2fb9546591322e7b77ee1e79385e01effd85e4",
+          "path": "assets/terminal/upstream-notices/5226e27d5fbc683db56c52853cdb9d15b69abadb525a60f95c862c2dbd77cdc8.txt",
+          "kind": "upstream_notice"
+        }
+      ]
+    },
+    {
+      "repository": "retep998/winapi-rs",
+      "commit": "796a8e6c2971dc2ff1bcff166e6671284f9b5b6b",
+      "packages": [
+        {
+          "name": "winapi-i686-pc-windows-gnu",
+          "version": "0.4.0",
+          "license": "MIT/Apache-2.0",
+          "repository": "https://github.com/retep998/winapi-rs",
+          "vcs": {},
+          "identity_evidence": "https://raw.githubusercontent.com/retep998/winapi-rs/796a8e6c2971dc2ff1bcff166e6671284f9b5b6b/i686/Cargo.toml"
+        },
+        {
+          "name": "winapi-x86_64-pc-windows-gnu",
+          "version": "0.4.0",
+          "license": "MIT/Apache-2.0",
+          "repository": "https://github.com/retep998/winapi-rs",
+          "vcs": {},
+          "identity_evidence": "https://raw.githubusercontent.com/retep998/winapi-rs/796a8e6c2971dc2ff1bcff166e6671284f9b5b6b/x86_64/Cargo.toml"
+        }
+      ],
+      "identity_scope": "Pinned child Cargo.toml names and versions match both locked 0.4.0 import-library packages; selected commit is the .cargo_vcs_info commit of locked winapi 0.3.9 from the same repository.",
+      "files": [
+        {
+          "source_url": "https://raw.githubusercontent.com/retep998/winapi-rs/796a8e6c2971dc2ff1bcff166e6671284f9b5b6b/LICENSE-APACHE",
+          "sha256": "b40930bbcf80744c86c46a12bc9da056641d722716c378f5659b9e555ef833e1",
+          "upstream_path": "LICENSE-APACHE",
+          "commit": "796a8e6c2971dc2ff1bcff166e6671284f9b5b6b",
+          "path": "assets/terminal/upstream-notices/b40930bbcf80744c86c46a12bc9da056641d722716c378f5659b9e555ef833e1.txt",
+          "kind": "upstream_notice"
+        },
+        {
+          "source_url": "https://raw.githubusercontent.com/retep998/winapi-rs/796a8e6c2971dc2ff1bcff166e6671284f9b5b6b/LICENSE-MIT",
+          "sha256": "ce7bc3499fee93d5022ef430d5e4201e79a6d9154f3974e42f41349f0569e09b",
+          "upstream_path": "LICENSE-MIT",
+          "commit": "796a8e6c2971dc2ff1bcff166e6671284f9b5b6b",
+          "path": "assets/terminal/upstream-notices/ce7bc3499fee93d5022ef430d5e4201e79a6d9154f3974e42f41349f0569e09b.txt",
+          "kind": "upstream_notice"
+        }
+      ]
+    },
+    {
+      "repository": "madsmtm/objc2",
+      "commit": "4fc083f1c6d6784577e38b0ee8dbd344481e2fd2",
+      "packages": [
+        {
+          "name": "block2",
+          "version": "0.5.1",
+          "license": "MIT",
+          "repository": "https://github.com/madsmtm/objc2",
+          "vcs": {
+            "git": {
+              "sha1": "4fc083f1c6d6784577e38b0ee8dbd344481e2fd2"
+            },
+            "path_in_vcs": "crates/block2"
+          }
+        },
+        {
+          "name": "objc-sys",
+          "version": "0.3.5",
+          "license": "MIT",
+          "repository": "https://github.com/madsmtm/objc2",
+          "vcs": {
+            "git": {
+              "sha1": "4fc083f1c6d6784577e38b0ee8dbd344481e2fd2"
+            },
+            "path_in_vcs": "crates/objc-sys"
+          }
+        }
+      ],
+      "contains_current_commit_full_license_text": true,
+      "files": [
+        {
+          "source_url": "https://raw.githubusercontent.com/madsmtm/objc2/4fc083f1c6d6784577e38b0ee8dbd344481e2fd2/LICENSE.txt",
+          "sha256": "e353f37b12aefbb9f9b29490e837cfee05d9bda70804b3562839a3285c1df1e5",
+          "upstream_path": "LICENSE.txt",
+          "commit": "4fc083f1c6d6784577e38b0ee8dbd344481e2fd2",
+          "git_blob_sha1": "e9ab3babc0d8602b83dccde8a462f8f3dc1e52ad",
+          "bytes": 1066,
+          "content_kind": "MIT license text",
+          "kind": "current_full_license",
+          "path": "assets/terminal/upstream-notices/e353f37b12aefbb9f9b29490e837cfee05d9bda70804b3562839a3285c1df1e5.txt"
+        }
+      ]
+    },
+    {
+      "repository": "madsmtm/objc2",
+      "commit": "5237cbf081d04ef75a1f6a207b4018e7c1ae7438",
+      "packages": [
+        {
+          "name": "objc2",
+          "version": "0.5.3",
+          "license": "MIT",
+          "repository": "https://github.com/madsmtm/objc2",
+          "vcs": {
+            "git": {
+              "sha1": "5237cbf081d04ef75a1f6a207b4018e7c1ae7438"
+            },
+            "path_in_vcs": "crates/objc2"
+          }
+        }
+      ],
+      "contains_current_commit_full_license_text": true,
+      "files": [
+        {
+          "source_url": "https://raw.githubusercontent.com/madsmtm/objc2/5237cbf081d04ef75a1f6a207b4018e7c1ae7438/LICENSE.txt",
+          "sha256": "e353f37b12aefbb9f9b29490e837cfee05d9bda70804b3562839a3285c1df1e5",
+          "upstream_path": "LICENSE.txt",
+          "commit": "5237cbf081d04ef75a1f6a207b4018e7c1ae7438",
+          "git_blob_sha1": "e9ab3babc0d8602b83dccde8a462f8f3dc1e52ad",
+          "bytes": 1066,
+          "content_kind": "MIT license text",
+          "kind": "current_full_license",
+          "path": "assets/terminal/upstream-notices/e353f37b12aefbb9f9b29490e837cfee05d9bda70804b3562839a3285c1df1e5.txt"
+        }
+      ]
+    },
+    {
+      "repository": "madsmtm/objc2",
+      "commit": "7b1abfd750a2cacaea71d6a56ecfb83cb7de560b",
+      "packages": [
+        {
+          "name": "objc2-app-kit",
+          "version": "0.3.2",
+          "license": "Zlib OR Apache-2.0 OR MIT",
+          "repository": "https://github.com/madsmtm/objc2",
+          "vcs": {
+            "git": {
+              "sha1": "7b1abfd750a2cacaea71d6a56ecfb83cb7de560b"
+            },
+            "path_in_vcs": "framework-crates/objc2-app-kit"
+          }
+        },
+        {
+          "name": "objc2-core-foundation",
+          "version": "0.3.2",
+          "license": "Zlib OR Apache-2.0 OR MIT",
+          "repository": "https://github.com/madsmtm/objc2",
+          "vcs": {
+            "git": {
+              "sha1": "7b1abfd750a2cacaea71d6a56ecfb83cb7de560b"
+            },
+            "path_in_vcs": "framework-crates/objc2-core-foundation"
+          }
+        },
+        {
+          "name": "objc2-core-graphics",
+          "version": "0.3.2",
+          "license": "Zlib OR Apache-2.0 OR MIT",
+          "repository": "https://github.com/madsmtm/objc2",
+          "vcs": {
+            "git": {
+              "sha1": "7b1abfd750a2cacaea71d6a56ecfb83cb7de560b"
+            },
+            "path_in_vcs": "framework-crates/objc2-core-graphics"
+          }
+        },
+        {
+          "name": "objc2-core-services",
+          "version": "0.3.2",
+          "license": "Zlib OR Apache-2.0 OR MIT",
+          "repository": "https://github.com/madsmtm/objc2",
+          "vcs": {
+            "git": {
+              "sha1": "7b1abfd750a2cacaea71d6a56ecfb83cb7de560b"
+            },
+            "path_in_vcs": "framework-crates/objc2-core-services"
+          }
+        },
+        {
+          "name": "objc2-foundation",
+          "version": "0.3.2",
+          "license": "MIT",
+          "repository": "https://github.com/madsmtm/objc2",
+          "vcs": {
+            "git": {
+              "sha1": "7b1abfd750a2cacaea71d6a56ecfb83cb7de560b"
+            },
+            "path_in_vcs": "framework-crates/objc2-foundation"
+          }
+        },
+        {
+          "name": "objc2-io-surface",
+          "version": "0.3.2",
+          "license": "Zlib OR Apache-2.0 OR MIT",
+          "repository": "https://github.com/madsmtm/objc2",
+          "vcs": {
+            "git": {
+              "sha1": "7b1abfd750a2cacaea71d6a56ecfb83cb7de560b"
+            },
+            "path_in_vcs": "framework-crates/objc2-io-surface"
+          }
+        }
+      ],
+      "contains_current_commit_full_license_text": false,
+      "files": [
+        {
+          "source_url": "https://raw.githubusercontent.com/madsmtm/objc2/7b1abfd750a2cacaea71d6a56ecfb83cb7de560b/LICENSE.md",
+          "sha256": "7f976f7e9cb2d87df7230606feb932c3f21ac0e664045a775b600046ff850c54",
+          "upstream_path": "LICENSE.md",
+          "commit": "7b1abfd750a2cacaea71d6a56ecfb83cb7de560b",
+          "git_blob_sha1": "540ae4c81adb5f64a9f61e222b688880da24300e",
+          "bytes": 1339,
+          "content_kind": "upstream licensing and Apple SDK notice",
+          "kind": "upstream_notice",
+          "path": "assets/terminal/upstream-notices/7f976f7e9cb2d87df7230606feb932c3f21ac0e664045a775b600046ff850c54.txt"
+        },
+        {
+          "source_url": "https://raw.githubusercontent.com/madsmtm/objc2/4fc083f1c6d6784577e38b0ee8dbd344481e2fd2/LICENSE.txt",
+          "sha256": "e353f37b12aefbb9f9b29490e837cfee05d9bda70804b3562839a3285c1df1e5",
+          "upstream_path": "LICENSE.txt",
+          "commit": "4fc083f1c6d6784577e38b0ee8dbd344481e2fd2",
+          "git_blob_sha1": "e9ab3babc0d8602b83dccde8a462f8f3dc1e52ad",
+          "bytes": 1066,
+          "content_kind": "MIT license text",
+          "kind": "historical_license",
+          "history_supplement": true,
+          "applies_as": "Historical MIT notice from the same repository; not a license file present at this package commit.",
+          "path": "assets/terminal/upstream-notices/e353f37b12aefbb9f9b29490e837cfee05d9bda70804b3562839a3285c1df1e5.txt"
+        }
+      ]
+    },
+    {
+      "repository": "madsmtm/objc2",
+      "commit": "8852b424193ca41602281b3d7540d7c8ed51e49a",
+      "packages": [
+        {
+          "name": "dispatch2",
+          "version": "0.3.1",
+          "license": "Zlib OR Apache-2.0 OR MIT",
+          "repository": "https://github.com/madsmtm/objc2",
+          "vcs": {
+            "git": {
+              "sha1": "8852b424193ca41602281b3d7540d7c8ed51e49a"
+            },
+            "path_in_vcs": "crates/dispatch2"
+          }
+        }
+      ],
+      "contains_current_commit_full_license_text": false,
+      "files": [
+        {
+          "source_url": "https://raw.githubusercontent.com/madsmtm/objc2/8852b424193ca41602281b3d7540d7c8ed51e49a/LICENSE.md",
+          "sha256": "7f976f7e9cb2d87df7230606feb932c3f21ac0e664045a775b600046ff850c54",
+          "upstream_path": "LICENSE.md",
+          "commit": "8852b424193ca41602281b3d7540d7c8ed51e49a",
+          "git_blob_sha1": "540ae4c81adb5f64a9f61e222b688880da24300e",
+          "bytes": 1339,
+          "content_kind": "upstream licensing and Apple SDK notice",
+          "kind": "upstream_notice",
+          "path": "assets/terminal/upstream-notices/7f976f7e9cb2d87df7230606feb932c3f21ac0e664045a775b600046ff850c54.txt"
+        },
+        {
+          "source_url": "https://raw.githubusercontent.com/madsmtm/objc2/4fc083f1c6d6784577e38b0ee8dbd344481e2fd2/LICENSE.txt",
+          "sha256": "e353f37b12aefbb9f9b29490e837cfee05d9bda70804b3562839a3285c1df1e5",
+          "upstream_path": "LICENSE.txt",
+          "commit": "4fc083f1c6d6784577e38b0ee8dbd344481e2fd2",
+          "git_blob_sha1": "e9ab3babc0d8602b83dccde8a462f8f3dc1e52ad",
+          "bytes": 1066,
+          "content_kind": "MIT license text",
+          "kind": "historical_license",
+          "history_supplement": true,
+          "applies_as": "Historical MIT notice from the same repository; not a license file present at this package commit.",
+          "path": "assets/terminal/upstream-notices/e353f37b12aefbb9f9b29490e837cfee05d9bda70804b3562839a3285c1df1e5.txt"
+        }
+      ]
+    },
+    {
+      "repository": "madsmtm/objc2",
+      "commit": "8d214f5477365ffcbcbb7de058c86ed9a518efb7",
+      "packages": [
+        {
+          "name": "objc2-encode",
+          "version": "4.1.0",
+          "license": "MIT",
+          "repository": "https://github.com/madsmtm/objc2",
+          "vcs": {
+            "git": {
+              "sha1": "8d214f5477365ffcbcbb7de058c86ed9a518efb7"
+            },
+            "path_in_vcs": "crates/objc2-encode"
+          }
+        }
+      ],
+      "contains_current_commit_full_license_text": false,
+      "files": [
+        {
+          "source_url": "https://raw.githubusercontent.com/madsmtm/objc2/8d214f5477365ffcbcbb7de058c86ed9a518efb7/LICENSE.md",
+          "sha256": "7f976f7e9cb2d87df7230606feb932c3f21ac0e664045a775b600046ff850c54",
+          "upstream_path": "LICENSE.md",
+          "commit": "8d214f5477365ffcbcbb7de058c86ed9a518efb7",
+          "git_blob_sha1": "540ae4c81adb5f64a9f61e222b688880da24300e",
+          "bytes": 1339,
+          "content_kind": "upstream licensing and Apple SDK notice",
+          "kind": "upstream_notice",
+          "path": "assets/terminal/upstream-notices/7f976f7e9cb2d87df7230606feb932c3f21ac0e664045a775b600046ff850c54.txt"
+        },
+        {
+          "source_url": "https://raw.githubusercontent.com/madsmtm/objc2/4fc083f1c6d6784577e38b0ee8dbd344481e2fd2/LICENSE.txt",
+          "sha256": "e353f37b12aefbb9f9b29490e837cfee05d9bda70804b3562839a3285c1df1e5",
+          "upstream_path": "LICENSE.txt",
+          "commit": "4fc083f1c6d6784577e38b0ee8dbd344481e2fd2",
+          "git_blob_sha1": "e9ab3babc0d8602b83dccde8a462f8f3dc1e52ad",
+          "bytes": 1066,
+          "content_kind": "MIT license text",
+          "kind": "historical_license",
+          "history_supplement": true,
+          "applies_as": "Historical MIT notice from the same repository; not a license file present at this package commit.",
+          "path": "assets/terminal/upstream-notices/e353f37b12aefbb9f9b29490e837cfee05d9bda70804b3562839a3285c1df1e5.txt"
+        }
+      ]
+    },
+    {
+      "repository": "madsmtm/objc2",
+      "commit": "d7d2fa23ceaa5e6096c923b081040e5d81b3b9df",
+      "packages": [
+        {
+          "name": "objc2",
+          "version": "0.6.5",
+          "license": "MIT",
+          "repository": "https://github.com/madsmtm/objc2",
+          "vcs": {
+            "git": {
+              "sha1": "d7d2fa23ceaa5e6096c923b081040e5d81b3b9df"
+            },
+            "path_in_vcs": "crates/objc2"
+          }
+        }
+      ],
+      "contains_current_commit_full_license_text": false,
+      "files": [
+        {
+          "source_url": "https://raw.githubusercontent.com/madsmtm/objc2/d7d2fa23ceaa5e6096c923b081040e5d81b3b9df/LICENSE.md",
+          "sha256": "7f976f7e9cb2d87df7230606feb932c3f21ac0e664045a775b600046ff850c54",
+          "upstream_path": "LICENSE.md",
+          "commit": "d7d2fa23ceaa5e6096c923b081040e5d81b3b9df",
+          "git_blob_sha1": "540ae4c81adb5f64a9f61e222b688880da24300e",
+          "bytes": 1339,
+          "content_kind": "upstream licensing and Apple SDK notice",
+          "kind": "upstream_notice",
+          "path": "assets/terminal/upstream-notices/7f976f7e9cb2d87df7230606feb932c3f21ac0e664045a775b600046ff850c54.txt"
+        },
+        {
+          "source_url": "https://raw.githubusercontent.com/madsmtm/objc2/4fc083f1c6d6784577e38b0ee8dbd344481e2fd2/LICENSE.txt",
+          "sha256": "e353f37b12aefbb9f9b29490e837cfee05d9bda70804b3562839a3285c1df1e5",
+          "upstream_path": "LICENSE.txt",
+          "commit": "4fc083f1c6d6784577e38b0ee8dbd344481e2fd2",
+          "git_blob_sha1": "e9ab3babc0d8602b83dccde8a462f8f3dc1e52ad",
+          "bytes": 1066,
+          "content_kind": "MIT license text",
+          "kind": "historical_license",
+          "history_supplement": true,
+          "applies_as": "Historical MIT notice from the same repository; not a license file present at this package commit.",
+          "path": "assets/terminal/upstream-notices/e353f37b12aefbb9f9b29490e837cfee05d9bda70804b3562839a3285c1df1e5.txt"
+        }
+      ]
+    },
+    {
+      "repository": "madsmtm/objc2",
+      "commit": "e282618be4c3a3b9542957e0c8540e9588472ce8",
+      "packages": [
+        {
+          "name": "objc2-app-kit",
+          "version": "0.2.2",
+          "license": "MIT",
+          "repository": "https://github.com/madsmtm/objc2",
+          "vcs": {
+            "git": {
+              "sha1": "e282618be4c3a3b9542957e0c8540e9588472ce8"
+            },
+            "path_in_vcs": "framework-crates/objc2-app-kit"
+          }
+        },
+        {
+          "name": "objc2-cloud-kit",
+          "version": "0.2.2",
+          "license": "MIT",
+          "repository": "https://github.com/madsmtm/objc2",
+          "vcs": {
+            "git": {
+              "sha1": "e282618be4c3a3b9542957e0c8540e9588472ce8"
+            },
+            "path_in_vcs": "framework-crates/objc2-cloud-kit"
+          }
+        },
+        {
+          "name": "objc2-contacts",
+          "version": "0.2.2",
+          "license": "MIT",
+          "repository": "https://github.com/madsmtm/objc2",
+          "vcs": {
+            "git": {
+              "sha1": "e282618be4c3a3b9542957e0c8540e9588472ce8"
+            },
+            "path_in_vcs": "framework-crates/objc2-contacts"
+          }
+        },
+        {
+          "name": "objc2-core-data",
+          "version": "0.2.2",
+          "license": "MIT",
+          "repository": "https://github.com/madsmtm/objc2",
+          "vcs": {
+            "git": {
+              "sha1": "e282618be4c3a3b9542957e0c8540e9588472ce8"
+            },
+            "path_in_vcs": "framework-crates/objc2-core-data"
+          }
+        },
+        {
+          "name": "objc2-core-image",
+          "version": "0.2.2",
+          "license": "MIT",
+          "repository": "https://github.com/madsmtm/objc2",
+          "vcs": {
+            "git": {
+              "sha1": "e282618be4c3a3b9542957e0c8540e9588472ce8"
+            },
+            "path_in_vcs": "framework-crates/objc2-core-image"
+          }
+        },
+        {
+          "name": "objc2-core-location",
+          "version": "0.2.2",
+          "license": "MIT",
+          "repository": "https://github.com/madsmtm/objc2",
+          "vcs": {
+            "git": {
+              "sha1": "e282618be4c3a3b9542957e0c8540e9588472ce8"
+            },
+            "path_in_vcs": "framework-crates/objc2-core-location"
+          }
+        },
+        {
+          "name": "objc2-foundation",
+          "version": "0.2.2",
+          "license": "MIT",
+          "repository": "https://github.com/madsmtm/objc2",
+          "vcs": {
+            "git": {
+              "sha1": "e282618be4c3a3b9542957e0c8540e9588472ce8"
+            },
+            "path_in_vcs": "framework-crates/objc2-foundation"
+          }
+        },
+        {
+          "name": "objc2-link-presentation",
+          "version": "0.2.2",
+          "license": "MIT",
+          "repository": "https://github.com/madsmtm/objc2",
+          "vcs": {
+            "git": {
+              "sha1": "e282618be4c3a3b9542957e0c8540e9588472ce8"
+            },
+            "path_in_vcs": "framework-crates/objc2-link-presentation"
+          }
+        },
+        {
+          "name": "objc2-metal",
+          "version": "0.2.2",
+          "license": "MIT",
+          "repository": "https://github.com/madsmtm/objc2",
+          "vcs": {
+            "git": {
+              "sha1": "e282618be4c3a3b9542957e0c8540e9588472ce8"
+            },
+            "path_in_vcs": "framework-crates/objc2-metal"
+          }
+        },
+        {
+          "name": "objc2-quartz-core",
+          "version": "0.2.2",
+          "license": "MIT",
+          "repository": "https://github.com/madsmtm/objc2",
+          "vcs": {
+            "git": {
+              "sha1": "e282618be4c3a3b9542957e0c8540e9588472ce8"
+            },
+            "path_in_vcs": "framework-crates/objc2-quartz-core"
+          }
+        },
+        {
+          "name": "objc2-symbols",
+          "version": "0.2.2",
+          "license": "MIT",
+          "repository": "https://github.com/madsmtm/objc2",
+          "vcs": {
+            "git": {
+              "sha1": "e282618be4c3a3b9542957e0c8540e9588472ce8"
+            },
+            "path_in_vcs": "framework-crates/objc2-symbols"
+          }
+        },
+        {
+          "name": "objc2-ui-kit",
+          "version": "0.2.2",
+          "license": "MIT",
+          "repository": "https://github.com/madsmtm/objc2",
+          "vcs": {
+            "git": {
+              "sha1": "e282618be4c3a3b9542957e0c8540e9588472ce8"
+            },
+            "path_in_vcs": "framework-crates/objc2-ui-kit"
+          }
+        },
+        {
+          "name": "objc2-uniform-type-identifiers",
+          "version": "0.2.2",
+          "license": "MIT",
+          "repository": "https://github.com/madsmtm/objc2",
+          "vcs": {
+            "git": {
+              "sha1": "e282618be4c3a3b9542957e0c8540e9588472ce8"
+            },
+            "path_in_vcs": "framework-crates/objc2-uniform-type-identifiers"
+          }
+        },
+        {
+          "name": "objc2-user-notifications",
+          "version": "0.2.2",
+          "license": "MIT",
+          "repository": "https://github.com/madsmtm/objc2",
+          "vcs": {
+            "git": {
+              "sha1": "e282618be4c3a3b9542957e0c8540e9588472ce8"
+            },
+            "path_in_vcs": "framework-crates/objc2-user-notifications"
+          }
+        }
+      ],
+      "contains_current_commit_full_license_text": true,
+      "files": [
+        {
+          "source_url": "https://raw.githubusercontent.com/madsmtm/objc2/e282618be4c3a3b9542957e0c8540e9588472ce8/LICENSE.txt",
+          "sha256": "e353f37b12aefbb9f9b29490e837cfee05d9bda70804b3562839a3285c1df1e5",
+          "upstream_path": "LICENSE.txt",
+          "commit": "e282618be4c3a3b9542957e0c8540e9588472ce8",
+          "git_blob_sha1": "e9ab3babc0d8602b83dccde8a462f8f3dc1e52ad",
+          "bytes": 1066,
+          "content_kind": "MIT license text",
+          "kind": "current_full_license",
+          "path": "assets/terminal/upstream-notices/e353f37b12aefbb9f9b29490e837cfee05d9bda70804b3562839a3285c1df1e5.txt"
+        }
+      ]
+    },
+    {
+      "repository": "rustls/rustls-platform-verifier",
+      "commit": "252e25161a91af476cbea620e29d277592d27ec7",
+      "packages": [
+        {
+          "name": "rustls-platform-verifier-android",
+          "version": "0.2.0",
+          "license": "MIT OR Apache-2.0",
+          "repository": "https://github.com/rustls/rustls-platform-verifier",
+          "vcs": {
+            "git": {
+              "sha1": "252e25161a91af476cbea620e29d277592d27ec7"
+            },
+            "path_in_vcs": "android-release-support"
+          }
+        }
+      ],
+      "contains_current_commit_full_license_text": true,
+      "provenance_note": "The package records android-release-support at this source commit. Its LICENSE files are repository-relative symlinks, so the original full texts are collected from the repository root at the same commit.",
+      "files": [
+        {
+          "source_url": "https://raw.githubusercontent.com/rustls/rustls-platform-verifier/252e25161a91af476cbea620e29d277592d27ec7/LICENSE-APACHE",
+          "sha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4",
+          "upstream_path": "LICENSE-APACHE",
+          "commit": "252e25161a91af476cbea620e29d277592d27ec7",
+          "git_blob_sha1": "261eeb9e9f8b2b4b0d119366dda99c6fd7d35c64",
+          "bytes": 11357,
+          "content_kind": "Apache-2.0 license text",
+          "kind": "current_full_license",
+          "path": "assets/terminal/upstream-notices/c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4.txt"
+        },
+        {
+          "source_url": "https://raw.githubusercontent.com/rustls/rustls-platform-verifier/252e25161a91af476cbea620e29d277592d27ec7/LICENSE-MIT",
+          "sha256": "1c7cf76689c837a68ed8d704994e52a0f2940c087958f860d17f3186afbdcc0c",
+          "upstream_path": "LICENSE-MIT",
+          "commit": "252e25161a91af476cbea620e29d277592d27ec7",
+          "git_blob_sha1": "9964122648c6348a3c8e61d6d46a87d5942d036c",
+          "bytes": 1066,
+          "content_kind": "MIT license text",
+          "kind": "current_full_license",
+          "path": "assets/terminal/upstream-notices/1c7cf76689c837a68ed8d704994e52a0f2940c087958f860d17f3186afbdcc0c.txt"
+        }
+      ]
+    }
+  ],
+  "unresolved": [
+    {
+      "name": "block",
+      "version": "0.1.6",
+      "license": "MIT",
+      "repository": "http://github.com/SSheldon/rust-block",
+      "vcs": {},
+      "checked_upstream_commits": [
+        {
+          "commit": "47178790cfc9d4a8b092051d8b413b78bd31254a",
+          "tree_url": "https://github.com/SSheldon/rust-block/tree/47178790cfc9d4a8b092051d8b413b78bd31254a"
+        },
+        {
+          "commit": "642ea4a4a5853a21b55b05c34832a5f1bb1af61c",
+          "tree_url": "https://github.com/SSheldon/rust-block/tree/642ea4a4a5853a21b55b05c34832a5f1bb1af61c"
+        }
+      ],
+      "reason": "No original standalone license, copying, notice, or copyright file exists in the published package, its 0.1.6 upstream tag, or the inspected upstream head. The MIT metadata declaration is retained."
+    },
+    {
+      "name": "dispatch",
+      "version": "0.2.0",
+      "license": "MIT",
+      "repository": "http://github.com/SSheldon/rust-dispatch",
+      "vcs": {
+        "git": {
+          "sha1": "82d6c7a5b75dc0c71c3f46f87bb6c16a476f7748"
+        }
+      },
+      "checked_upstream_commits": [
+        {
+          "commit": "82d6c7a5b75dc0c71c3f46f87bb6c16a476f7748",
+          "tree_url": "https://github.com/SSheldon/rust-dispatch/tree/82d6c7a5b75dc0c71c3f46f87bb6c16a476f7748"
+        },
+        {
+          "commit": "f540a2d8ccaebf0e87f5805033b9e287e8d01ba5",
+          "tree_url": "https://github.com/SSheldon/rust-dispatch/tree/f540a2d8ccaebf0e87f5805033b9e287e8d01ba5"
+        }
+      ],
+      "reason": "No original standalone license, copying, notice, or copyright file exists in the published package, its recorded source commit, or the inspected upstream head. The MIT metadata declaration is retained."
+    },
+    {
+      "name": "malloc_buf",
+      "version": "0.0.6",
+      "license": "MIT",
+      "repository": "https://github.com/SSheldon/malloc_buf",
+      "vcs": {},
+      "checked_upstream_commits": [
+        {
+          "commit": "a7811e5f4c6f9685dd57ad9bfe34e9bf6b0ba4f9",
+          "tree_url": "https://github.com/SSheldon/malloc_buf/tree/a7811e5f4c6f9685dd57ad9bfe34e9bf6b0ba4f9"
+        },
+        {
+          "commit": "d9a3e539642bd90e07df458d226b19cdfa606863",
+          "tree_url": "https://github.com/SSheldon/malloc_buf/tree/d9a3e539642bd90e07df458d226b19cdfa606863"
+        }
+      ],
+      "reason": "The 0.0.6 tag contains no original standalone notice. The later LICENSE was added on 2020-06-29 at d9a3e539642bd90e07df458d226b19cdfa606863 for upstream 1.0.0 and is excluded from this 0.0.6 collection. The original MIT metadata declaration is retained."
+    },
+    {
+      "name": "hexf-parse",
+      "version": "0.2.1",
+      "license": "CC0-1.0",
+      "repository": "https://github.com/lifthrasiir/hexf",
+      "vcs": {
+        "git": {
+          "sha1": "4225763d744183d720f575ae96d04161b4d08ea0"
+        }
+      },
+      "checked_upstream_commits": [
+        {
+          "commit": "4225763d744183d720f575ae96d04161b4d08ea0",
+          "tree_url": "https://github.com/lifthrasiir/hexf/tree/4225763d744183d720f575ae96d04161b4d08ea0"
+        },
+        {
+          "commit": "0e69bc4f63895feb51e9b738a8a2d4ec9398957b",
+          "tree_url": "https://github.com/lifthrasiir/hexf/tree/0e69bc4f63895feb51e9b738a8a2d4ec9398957b"
+        }
+      ],
+      "reason": "The recorded package source commit contains no original standalone notice. The later upstream LICENSE and Cargo.toml declare 0BSD at 0e69bc4f63895feb51e9b738a8a2d4ec9398957b. They are excluded from the locked package collection, whose metadata declares CC0-1.0."
+    }
+  ],
+  "runtime_notices": [
+    {
+      "toolchain": "Zig",
+      "toolchain_version": "0.17.0",
+      "target": "x86_64-pc-windows-gnu",
+      "selection_basis": "Runtime sources supplied by the installed Zig toolchain used for the successful Windows static-CRT link in build-windows-closure18-04.log. Crate source-notice gaps remain recorded separately.",
+      "files": [
+        {
+          "path": "assets/terminal/upstream-notices/runtime/zig-0.17.0/LICENSE.Zig.txt",
+          "sha256": "5c537d6853e005298a285d508cff9ac7192cea23576c840d485b2b586a7ff177",
+          "bytes": 1080,
+          "kind": "Zig compiler runtime license",
+          "source_path": "LICENSE",
+          "source_sha256": "5c537d6853e005298a285d508cff9ac7192cea23576c840d485b2b586a7ff177",
+          "extraction": "complete original file"
+        },
+        {
+          "path": "assets/terminal/upstream-notices/runtime/zig-0.17.0/COPYING.mingw-w64.txt",
+          "sha256": "99a69660981156c21336fdb5661f89341b013c94e4bf9e1c7467b4745718397f",
+          "bytes": 2326,
+          "kind": "MinGW-w64 runtime license and copyright",
+          "source_path": "lib/zig/libc/mingw/COPYING",
+          "source_sha256": "99a69660981156c21336fdb5661f89341b013c94e4bf9e1c7467b4745718397f",
+          "extraction": "complete original file"
+        },
+        {
+          "path": "assets/terminal/upstream-notices/runtime/zig-0.17.0/LICENSE.libunwind.txt",
+          "sha256": "b5efebcaca80879234098e52d1725e6d9eb8fb96a19fce625d39184b705f7b6d",
+          "bytes": 16706,
+          "kind": "LLVM libunwind license and historical notices",
+          "source_path": "lib/zig/libunwind/LICENSE.TXT",
+          "source_sha256": "b5efebcaca80879234098e52d1725e6d9eb8fb96a19fce625d39184b705f7b6d",
+          "extraction": "complete original file"
+        },
+        {
+          "path": "assets/terminal/upstream-notices/runtime/zig-0.17.0/LICENSE.winpthreads-mingw.txt",
+          "sha256": "89a665a4dddb189b9a34c4431a52c9e17fcf3d4c1aac7e7dfd902e97dccc5564",
+          "bytes": 1120,
+          "kind": "winpthreads MinGW-w64 MIT header",
+          "extraction": "verbatim leading C comment bytes, shared across listed source files",
+          "source_files": [
+            {
+              "source_path": "/opt/homebrew/Cellar/zig/0.17.0/lib/zig/libc/mingw/winpthreads/barrier.c",
+              "source_sha256": "bc8dc6fb69ec64970e59d346cd8eebd54203b9ad2e51aba676d85e67c24e70ae",
+              "source_bytes": 6208,
+              "byte_start": 0,
+              "byte_end_exclusive": 1120
+            },
+            {
+              "source_path": "/opt/homebrew/Cellar/zig/0.17.0/lib/zig/libc/mingw/winpthreads/barrier.h",
+              "source_sha256": "358eb218aa2e6751c54e0a15b9a69c9220f257be7cfbd01baa90638835bb0952",
+              "source_bytes": 1809,
+              "byte_start": 0,
+              "byte_end_exclusive": 1120
+            },
+            {
+              "source_path": "/opt/homebrew/Cellar/zig/0.17.0/lib/zig/libc/mingw/winpthreads/cond.c",
+              "source_sha256": "0c189408edf1a87ba1a92807ccd42b9fb6e6397f9265aeea470028d58d6d7c2d",
+              "source_bytes": 17402,
+              "byte_start": 0,
+              "byte_end_exclusive": 1120
+            },
+            {
+              "source_path": "/opt/homebrew/Cellar/zig/0.17.0/lib/zig/libc/mingw/winpthreads/cond.h",
+              "source_sha256": "019e886e30ed15ab165bea2c05aa5133deeb40944122390994161c7ea7dfd8b6",
+              "source_bytes": 2566,
+              "byte_start": 0,
+              "byte_end_exclusive": 1120
+            },
+            {
+              "source_path": "/opt/homebrew/Cellar/zig/0.17.0/lib/zig/libc/mingw/winpthreads/misc.c",
+              "source_sha256": "4927cee8285580d2eec04f0f1226f1fe7df1307795123cbc4225f6d3a8de19a5",
+              "source_bytes": 7539,
+              "byte_start": 0,
+              "byte_end_exclusive": 1120
+            },
+            {
+              "source_path": "/opt/homebrew/Cellar/zig/0.17.0/lib/zig/libc/mingw/winpthreads/misc.h",
+              "source_sha256": "8bee8d3e680402463950829e8c13b6c6fea223916f4585569d184723b69f2c31",
+              "source_bytes": 4367,
+              "byte_start": 0,
+              "byte_end_exclusive": 1120
+            },
+            {
+              "source_path": "/opt/homebrew/Cellar/zig/0.17.0/lib/zig/libc/mingw/winpthreads/rwlock.c",
+              "source_sha256": "3410bc1626aea891c8690eedb2442c81600f9634e2f7a465e10baef8077dfcc1",
+              "source_bytes": 14069,
+              "byte_start": 0,
+              "byte_end_exclusive": 1120
+            },
+            {
+              "source_path": "/opt/homebrew/Cellar/zig/0.17.0/lib/zig/libc/mingw/winpthreads/rwlock.h",
+              "source_sha256": "6d0a3bd1467599e2b447b3e32d36c4329a6b8e39faf0b13de74a08e6fba4ef81",
+              "source_bytes": 1849,
+              "byte_start": 0,
+              "byte_end_exclusive": 1120
+            },
+            {
+              "source_path": "/opt/homebrew/Cellar/zig/0.17.0/lib/zig/libc/mingw/winpthreads/sched.c",
+              "source_sha256": "21b5569cfce648dd2c75fea05cffab92d8aa2abca64ab091e15fb8a0bf1a6cd7",
+              "source_bytes": 5489,
+              "byte_start": 0,
+              "byte_end_exclusive": 1120
+            },
+            {
+              "source_path": "/opt/homebrew/Cellar/zig/0.17.0/lib/zig/libc/mingw/winpthreads/sem.c",
+              "source_sha256": "471f545d01bd1ea55fcab4429db92152c81d5f77c274dee87c8e4b43d2450e32",
+              "source_bytes": 7852,
+              "byte_start": 0,
+              "byte_end_exclusive": 1120
+            },
+            {
+              "source_path": "/opt/homebrew/Cellar/zig/0.17.0/lib/zig/libc/mingw/winpthreads/sem.h",
+              "source_sha256": "7d327f480f401771f8dffb9973c425d86965841e878478fe0386b349a68beb9b",
+              "source_bytes": 1373,
+              "byte_start": 0,
+              "byte_end_exclusive": 1120
+            },
+            {
+              "source_path": "/opt/homebrew/Cellar/zig/0.17.0/lib/zig/libc/mingw/winpthreads/thread.c",
+              "source_sha256": "6822eae16ce9faa8a98d0d241c27e8f7e48e628dd25640333bdbcdb4b27ea0d5",
+              "source_bytes": 45649,
+              "byte_start": 0,
+              "byte_end_exclusive": 1120
+            },
+            {
+              "source_path": "/opt/homebrew/Cellar/zig/0.17.0/lib/zig/libc/mingw/winpthreads/thread.h",
+              "source_sha256": "3c105e10217cabae5a34d1e6e83352fb4eb8a9c2cf048de8053351eb6edf6a25",
+              "source_bytes": 2384,
+              "byte_start": 0,
+              "byte_end_exclusive": 1120
+            },
+            {
+              "source_path": "/opt/homebrew/Cellar/zig/0.17.0/lib/zig/libc/mingw/winpthreads/wpth_ver.h",
+              "source_sha256": "0feec62dcf153310646956d1b79afba9c0a17ce5ab4f24264e42c826c4620ca5",
+              "source_bytes": 1299,
+              "byte_start": 0,
+              "byte_end_exclusive": 1120
+            }
+          ]
+        },
+        {
+          "path": "assets/terminal/upstream-notices/runtime/zig-0.17.0/NOTICE.winpthreads-public-domain.txt",
+          "sha256": "5ffbd86993a233f30cfe9fac7c3c1b6ac9ef9c4dd867882eb28c65203101165b",
+          "bytes": 215,
+          "kind": "winpthreads public-domain header",
+          "extraction": "verbatim leading C comment bytes, shared across listed source files",
+          "source_files": [
+            {
+              "source_path": "/opt/homebrew/Cellar/zig/0.17.0/lib/zig/libc/mingw/winpthreads/clock.c",
+              "source_sha256": "5d5a7ba2ef59415b080cae0170da9b50763f4352cc1c080e231568dc264259c1",
+              "source_bytes": 10175,
+              "byte_start": 0,
+              "byte_end_exclusive": 215
+            },
+            {
+              "source_path": "/opt/homebrew/Cellar/zig/0.17.0/lib/zig/libc/mingw/winpthreads/nanosleep.c",
+              "source_sha256": "aaaa7e579bb992dea6575d0ff9e4e862d9cb222c0217bfcab525cc91a7bf4eab",
+              "source_bytes": 2848,
+              "byte_start": 0,
+              "byte_end_exclusive": 215
+            }
+          ]
+        },
+        {
+          "path": "assets/terminal/upstream-notices/runtime/zig-0.17.0/LICENSE.winpthreads-mutex.txt",
+          "sha256": "ef9037661f83ee9a18b42ae6ca2625df32d8e5aa674d97922528a061a117d2e8",
+          "bytes": 1160,
+          "kind": "winpthreads MinGW-w64 and Intel MIT header",
+          "extraction": "verbatim leading C comment bytes, shared across listed source files",
+          "source_files": [
+            {
+              "source_path": "/opt/homebrew/Cellar/zig/0.17.0/lib/zig/libc/mingw/winpthreads/mutex.c",
+              "source_sha256": "ee240898cc99eefde62f4a6017d99f366c58d7ec0e8d463dc9c303582965cc76",
+              "source_bytes": 11233,
+              "byte_start": 0,
+              "byte_end_exclusive": 1160
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "toolchain": "Rust",
+      "toolchain_version": "1.98.0-nightly (f28ac764c 2026-06-23)",
+      "reported_commit": "f28ac764c",
+      "commit_identifier_kind": "abbreviated Git commit reported by the installed toolchain distribution",
+      "source_commit_date": "2026-06-23",
+      "distribution_date": "2026-06-24",
+      "distribution_manifest_path": "lib/rustlib/multirust-channel-manifest.toml",
+      "distribution_manifest_sha256": "292ef7aa02ee9647218351dd29f2107d809fa3db09f5cf9be34fb9e630bbdb6d",
+      "targets": [
+        "aarch64-apple-darwin",
+        "x86_64-pc-windows-gnu",
+        "aarch64-linux-android"
+      ],
+      "selection_basis": "Preserves the installed Rust standard-library copyright collection and the original compiler-builtins, stdarch, and portable-simd runtime notices.",
+      "files": [
+        {
+          "path": "assets/terminal/upstream-notices/runtime/rust-1.98.0-nightly-f28ac764c/COPYRIGHT-library.html",
+          "sha256": "7807d12c0c8a196ae3b47ada81ddc92ab2a835d8eb68788c440e656a21de3201",
+          "bytes": 1435128,
+          "kind": "Original Rust standard-library copyright collection in HTML",
+          "source_path": "share/doc/rust/COPYRIGHT-library.html",
+          "source_sha256": "7807d12c0c8a196ae3b47ada81ddc92ab2a835d8eb68788c440e656a21de3201",
+          "extraction": "complete original file"
+        },
+        {
+          "path": "assets/terminal/upstream-notices/runtime/rust-1.98.0-nightly-f28ac764c/LICENSE-MIT.txt",
+          "sha256": "b85dcd3e453d05982552c52b5fc9e0bdd6d23c6f8e844b984a88af32570b0cc0",
+          "bytes": 1078,
+          "kind": "Toolchain-provided MIT template with placeholders preserved",
+          "source_path": "share/doc/rust/licenses/MIT.txt",
+          "source_sha256": "b85dcd3e453d05982552c52b5fc9e0bdd6d23c6f8e844b984a88af32570b0cc0",
+          "extraction": "complete original file"
+        },
+        {
+          "path": "assets/terminal/upstream-notices/runtime/rust-1.98.0-nightly-f28ac764c/LICENSE-APACHE.txt",
+          "sha256": "074e6e32c86a4c0ef8b3ed25b721ca23aca83df277cd88106ef7177c354615ff",
+          "bytes": 10280,
+          "kind": "Toolchain-provided Apache-2.0 license text",
+          "source_path": "share/doc/rust/licenses/Apache-2.0.txt",
+          "source_sha256": "074e6e32c86a4c0ef8b3ed25b721ca23aca83df277cd88106ef7177c354615ff",
+          "extraction": "complete original file"
+        },
+        {
+          "path": "assets/terminal/upstream-notices/runtime/rust-1.98.0-nightly-f28ac764c/LICENSE.compiler-builtins.txt",
+          "sha256": "ab6eec6caf0fa5775e411c7a8bc6a45c4ef2956b0980b157ab74fc5cd62a928b",
+          "bytes": 15078,
+          "kind": "Rust compiler-builtins original license and third-party notices",
+          "source_path": "lib/rustlib/src/rust/library/compiler-builtins/LICENSE.txt",
+          "source_sha256": "ab6eec6caf0fa5775e411c7a8bc6a45c4ef2956b0980b157ab74fc5cd62a928b",
+          "extraction": "complete original file"
+        },
+        {
+          "path": "assets/terminal/upstream-notices/runtime/rust-1.98.0-nightly-f28ac764c/LICENSE.stdarch-MIT.txt",
+          "sha256": "29662666b44dff84977b46e05642cdef910bc3a93a17b5fd86e632bafa59cf21",
+          "bytes": 1071,
+          "kind": "Rust stdarch original MIT notice",
+          "source_path": "lib/rustlib/src/rust/library/stdarch/LICENSE-MIT",
+          "source_sha256": "29662666b44dff84977b46e05642cdef910bc3a93a17b5fd86e632bafa59cf21",
+          "extraction": "complete original file"
+        },
+        {
+          "path": "assets/terminal/upstream-notices/runtime/rust-1.98.0-nightly-f28ac764c/LICENSE.portable-simd-MIT.txt",
+          "sha256": "eb07d497d26e6d68fbc76e793f5e5c9cfa197df2a580e47383569c287a55edf9",
+          "bytes": 1071,
+          "kind": "Rust portable-simd original MIT notice",
+          "source_path": "lib/rustlib/src/rust/library/portable-simd/LICENSE-MIT",
+          "source_sha256": "eb07d497d26e6d68fbc76e793f5e5c9cfa197df2a580e47383569c287a55edf9",
+          "extraction": "complete original file"
+        }
+      ]
+    }
+  ]
+}

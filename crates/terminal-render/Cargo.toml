@@ -1,0 +1,47 @@
+[package]
+name = "terminal-render"
+version.workspace = true
+edition = "2021"
+license = "GPL-3.0-only"
+
+[dependencies]
+anyhow = "1.0"
+bytemuck = { version = "1.24", features = ["derive"] }
+egui = "=0.31.1"
+egui-wgpu = "=0.31.1"
+glyphon = "=0.8.0"
+lru = { version = "=0.12.5", default-features = false }
+png = "0.17"
+pollster = "=0.4.0"
+raw-window-handle = "=0.6.2"
+terminal-core = { path = "../terminal-core" }
+wgpu = "=24.0.5"
+winit = "=0.30.13"
+
+[target.'cfg(target_os = "linux")'.dependencies]
+libc = "0.2"
+wayland-backend = { version = "=0.3.17", features = ["client_system", "dlopen"] }
+wayland-client = "=0.31.15"
+wayland-protocols = { version = "=0.32.13", features = ["client", "staging"] }
+x11rb = "=0.13.2"
+
+[target.'cfg(target_os = "macos")'.dependencies]
+objc2 = "=0.5.3"
+objc2-foundation = { version = "=0.2.2", features = ["NSGeometry", "NSString"] }
+
+[target.'cfg(windows)'.dependencies]
+windows = { version = "=0.58.0", default-features = false, features = [
+    "Win32_Foundation",
+    "Win32_Graphics_DirectComposition",
+] }
+windows-sys = { version = "=0.59.0", features = [
+    "Win32_Foundation",
+    "Win32_Graphics_Dwm",
+    "Win32_Graphics_Gdi",
+    "Win32_UI_Accessibility",
+    "Win32_UI_Controls",
+    "Win32_UI_Shell",
+    "Win32_UI_WindowsAndMessaging",
+] }
+
+# FVPROV1 1285 W3siYm9keSI6eyJhY3Rvcl9rZXlfaWQiOiI5ZjAwOTVhYmY4ODEwZGQwY2Y4NTdlZDBlNDI0ODg0NmRlMmFkMDc2ZmZhYTY2MWIzNmM5Yzc3YWFjOGVlOWMzIiwiYWxnb3JpdGhtIjoiRWQyNTUxOSIsImF1dGhvciI6IkoteC0gWiIsImNvbnRlbnRfc2hhMjU2IjoiM2Q0YzNjMTgxMjk1ZmMyNDU3Y2FlOGFjZWRkNjM5NjZiZDQ4MzI2ZDkxMmJjODEwMzgxODgyNzRmYzJkMTAzMiIsImNvcHlfaWQiOiJ2MC4xLjAtYmV0YS4xIiwiY3JlYXRlZF9hdCI6IjIwMjYtMTEtMTgiLCJlZGl0aW9uIjoiYmV0YSIsImlzc3Vlcl9wb2xpY3kiOm51bGwsImtpbmQiOiJjcmVhdGUiLCJtb2RlIjoic2VsZl9zaWduIiwicGFyZW50X3ZlcnNpb24iOm51bGwsInByZXZpb3VzX3JlY29yZF9zaGEyNTYiOm51bGwsInNjaGVtYSI6ImZpbGV2ZWlsLnByb3ZlbmFuY2Uuc2lnbmF0dXJlLnYyIiwic2VxdWVuY2UiOjAsInRyYW5zZmVyX3RvX2tleV9pZCI6bnVsbCwidmVyc2lvbiI6InYwLjEuMC1iZXRhLjEiLCJ3b3JrX2lkIjoib3JnLnBseXJhLnRlcm1pbmFsIn0sInNpZ25hdHVyZXMiOlt7ImtleV9pZCI6IjlmMDA5NWFiZjg4MTBkZDBjZjg1N2VkMGU0MjQ4ODQ2ZGUyYWQwNzZmZmFhNjYxYjM2YzljNzdhYWM4ZWU5YzMiLCJwdWJsaWNfa2V5X2hleCI6ImMzZTkyZDhkZDNkZWM4NTliODdlOTY4MjIyYjI4OWJhNzg5M2NjOGM4NWZjOTE2MjI2YjZiNjI5NjFiOTU5ZDciLCJzaWduYXR1cmVfaGV4IjoiZDEwZjBiMmNjOWU2N2FiYWM0NDFjZWIyOWJhOGQxOTNmNzU2YjNkMzFkOWM5MTA2MjZmYTZmMjg2ZjZkMjRlOTI4ODRmNTM0MDI4NzY4N2I0NmI2YmU1YTJkNmJiYTE3OWFmNjAxMmJiY2ZmNjhkYzI1OGVjMzI3MTg4NTIzMGIifV19XQ== FVPROV1-END

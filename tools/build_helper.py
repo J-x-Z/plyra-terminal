@@ -1,0 +1,23 @@
+#!/usr/bin/env python3
+"""Run the preserved native recipe against this standalone checkout.
+
+The recipe never installs a compiler or contacts a device. It uses existing cc
+and Zig to produce macOS arm64 and Linux arm64 artifacts. Choose a new external
+output directory under PLYRA_TERMINAL_BUILD_ROOT for each build receipt.
+"""
+import importlib.util
+import os
+from pathlib import Path
+
+root = Path(__file__).resolve().parents[1]
+spec = importlib.util.spec_from_file_location("terminal_build", root / "tools/mobile/terminal/build.py")
+recipe = importlib.util.module_from_spec(spec)
+spec.loader.exec_module(recipe)
+recipe.ROOT = root
+recipe.SOURCE = root / "tools/mobile/terminal"
+recipe.ASSETS = root / "assets/terminal"
+recipe.BUILD_ROOT = Path(os.environ.get("PLYRA_TERMINAL_BUILD_ROOT", str(root.parent / "plyra-terminal-builds")))
+if __name__ == "__main__":
+    recipe.main()
+
+# FVPROV1 880 W3siYm9keSI6eyJhY3Rvcl9rZXlfaWQiOiI5ZjAwOTVhYmY4ODEwZGQwY2Y4NTdlZDBlNDI0ODg0NmRlMmFkMDc2ZmZhYTY2MWIzNmM5Yzc3YWFjOGVlOWMzIiwiYWxnb3JpdGhtIjoiRWQyNTUxOSIsImF1dGhvciI6IkoteC0gWiIsImNvbnRlbnRfc2hhMjU2IjoiZWQzMGU0NGY3ZGUzZTdmZGIwOTY0Yjc2ZWNlYTRhNGYwNmQ0MmYxZjVkMGI5NGI2N2JmMjE5ZjE2YTdlMzZlZiIsImNvcHlfaWQiOiJ2MC4xLjAtYmV0YS4xIiwiY3JlYXRlZF9hdCI6IjIwMjYtMTEtMTgiLCJlZGl0aW9uIjoiYmV0YSIsImlzc3Vlcl9wb2xpY3kiOm51bGwsImtpbmQiOiJjcmVhdGUiLCJtb2RlIjoic2VsZl9zaWduIiwicGFyZW50X3ZlcnNpb24iOm51bGwsInByZXZpb3VzX3JlY29yZF9zaGEyNTYiOm51bGwsInNjaGVtYSI6ImZpbGV2ZWlsLnByb3ZlbmFuY2Uuc2lnbmF0dXJlLnYyIiwic2VxdWVuY2UiOjAsInRyYW5zZmVyX3RvX2tleV9pZCI6bnVsbCwidmVyc2lvbiI6InYwLjEuMC1iZXRhLjEiLCJ3b3JrX2lkIjoib3JnLnBseXJhLnRlcm1pbmFsIn0sInNpZ25hdHVyZXMiOlt7ImtleV9pZCI6IjlmMDA5NWFiZjg4MTBkZDBjZjg1N2VkMGU0MjQ4ODQ2ZGUyYWQwNzZmZmFhNjYxYjM2YzljNzdhYWM4ZWU5YzMiLCJwdWJsaWNfa2V5X2hleCI6ImMzZTkyZDhkZDNkZWM4NTliODdlOTY4MjIyYjI4OWJhNzg5M2NjOGM4NWZjOTE2MjI2YjZiNjI5NjFiOTU5ZDciLCJzaWduYXR1cmVfaGV4IjoiY2NmYTBjMTBkOTI0NmM1ZTE3NTk0Yzc5MGI2ZmIzNTc3N2E0MWI5Y2YyODBmNGNlMmZiMzc5ZjlkODE2MjM3MWU2Y2FiNzI4YjM0NWZiYTA1ZDk4YjE4YWNkODU4MTRjMTVlZTIyNGY0MGQzMTc0MTM4NjYyYWVlY2RiMjM4MDYifV19XQ== FVPROV1-END

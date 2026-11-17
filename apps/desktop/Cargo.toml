@@ -1,0 +1,36 @@
+[package]
+name = "glass-terminal-desktop"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+
+[dependencies]
+anyhow.workspace = true
+serde_json.workspace = true
+serde.workspace = true
+winit.workspace = true
+egui = "=0.31.1"
+egui-winit = { version = "=0.31.1", default-features = false, features = ["clipboard", "links"] }
+terminal-core = { path = "../../crates/terminal-core" }
+session-manager = { path = "../../crates/session-manager" }
+terminal-render = { path = "../../crates/terminal-render" }
+system-api = { path = "../../crates/system-api" }
+mcp-client = { path = "../../crates/mcp-client" }
+
+[target.'cfg(target_os = "macos")'.dependencies]
+arboard = { version = "=3.6.1", default-features = false }
+block2 = "=0.5.1"
+objc2 = "=0.5.3"
+objc2-foundation = { version = "=0.2.2", features = ["NSString", "NSGeometry"] }
+
+[target.'cfg(target_os = "linux")'.dependencies]
+egui-winit = { version = "=0.31.1", default-features = false, features = ["clipboard", "links", "wayland", "x11"] }
+
+[target.'cfg(windows)'.dependencies]
+windows-sys = { version = "=0.59.0", features = ["Win32_Foundation", "Win32_UI_Shell", "Win32_UI_WindowsAndMessaging"] }
+
+[[bin]]
+name = "glass-terminal"
+path = "src/main.rs"
+
+# FVPROV1 1226 W3siYm9keSI6eyJhY3Rvcl9rZXlfaWQiOiI5ZjAwOTVhYmY4ODEwZGQwY2Y4NTdlZDBlNDI0ODg0NmRlMmFkMDc2ZmZhYTY2MWIzNmM5Yzc3YWFjOGVlOWMzIiwiYWxnb3JpdGhtIjoiRWQyNTUxOSIsImF1dGhvciI6IkoteC0gWiIsImNvbnRlbnRfc2hhMjU2IjoiYmUyZDYwODVjY2UyNmI2M2E5MDlkMTNlNzRmOWE5MmEyYWMzMDgzYWY3M2Y5NWRjZjk3ODUwMzcyOTNjOGMxZCIsImNvcHlfaWQiOiJ2MC4xLjAtYmV0YS4xIiwiY3JlYXRlZF9hdCI6IjIwMjYtMTEtMTgiLCJlZGl0aW9uIjoiYmV0YSIsImlzc3Vlcl9wb2xpY3kiOm51bGwsImtpbmQiOiJjcmVhdGUiLCJtb2RlIjoic2VsZl9zaWduIiwicGFyZW50X3ZlcnNpb24iOm51bGwsInByZXZpb3VzX3JlY29yZF9zaGEyNTYiOm51bGwsInNjaGVtYSI6ImZpbGV2ZWlsLnByb3ZlbmFuY2Uuc2lnbmF0dXJlLnYyIiwic2VxdWVuY2UiOjAsInRyYW5zZmVyX3RvX2tleV9pZCI6bnVsbCwidmVyc2lvbiI6InYwLjEuMC1iZXRhLjEiLCJ3b3JrX2lkIjoib3JnLnBseXJhLnRlcm1pbmFsIn0sInNpZ25hdHVyZXMiOlt7ImtleV9pZCI6IjlmMDA5NWFiZjg4MTBkZDBjZjg1N2VkMGU0MjQ4ODQ2ZGUyYWQwNzZmZmFhNjYxYjM2YzljNzdhYWM4ZWU5YzMiLCJwdWJsaWNfa2V5X2hleCI6ImMzZTkyZDhkZDNkZWM4NTliODdlOTY4MjIyYjI4OWJhNzg5M2NjOGM4NWZjOTE2MjI2YjZiNjI5NjFiOTU5ZDciLCJzaWduYXR1cmVfaGV4IjoiM2ZjODQwZmFkMmFjNDYyZjkwMjNjMTRkZDk3YWI5NWM0ODk3MTM0ZWYwNDBjZGM3Yzg1MWM5MDY1N2NiZTBlM2RhNjUwMzIxMmQ1NTY0MGFlZDUwZjkwNDFjMGE3ZmQ0MTNiNjczYTJmYTlmNWFiNGIyNjQwYjUyODM0NTYyMDEifV19XQ== FVPROV1-END

@@ -1,0 +1,31 @@
+{
+  "package": "wgpu-hal",
+  "version": "24.0.4",
+  "registry_archive_url": "https://static.crates.io/crates/wgpu-hal/wgpu-hal-24.0.4.crate",
+  "registry_archive_sha256": "f112f464674ca69f3533248508ee30cb84c67cf06c25ff6800685f5e0294e259",
+  "upstream_git_revision": "993fc39b07e8a4418a15043265298d7bc016d059",
+  "license": "MIT OR Apache-2.0",
+  "scope": "DX12 CompositionVisual premultiplied alpha support. Other surface targets retain their existing opaque capability. Existing swapchain code is reused. Alpha-mode changes recreate the chain and transparent composition uses FLIP_SEQUENTIAL. Other backends keep upstream source unchanged.",
+  "modified_files": {
+    "src/dx12/adapter.rs": {
+      "upstream_sha256": "6a9d821a364e5874bbb6b005e36115e8882d8bbec0376b4b38f63de8545fbe10",
+      "patched_sha256": "5298d9c056aa5684cbde6fbf8bb1f4df6d09f4f6fc407e391d3802f06fd0f1d8"
+    },
+    "src/auxil/dxgi/conv.rs": {
+      "upstream_sha256": "da4fd09b22183a779ea165d0c27ded21ab388ceb3f6cafc5bbf1646730bf6dfd",
+      "patched_sha256": "cdc6bc8d5e0c1c8c81595279da3ac11bb16e09faac1a5aad00499466dfcb1e0d"
+    },
+    "src/dx12/mod.rs": {
+      "upstream_sha256": "f5ff7a3c5f39b82495c041816f2c86580f692ac2c44bb1e7c080176c8b4479f0",
+      "patched_sha256": "357561455f09322cb93e8cafc4a2b8ea31d9fb2b97068d495b566467c82f19df"
+    }
+  },
+  "license_files": {
+    "LICENSE.APACHE": "93322bf14207312d2ac79c0dc02f97f4592bc3c72d9e1a4f6012c21a0f6d816d",
+    "LICENSE.MIT": "10b693f4060285108e21fbca779818813849a4bb52101b6ec0512e4b0750ba64"
+  },
+  "references": [
+    "https://learn.microsoft.com/en-us/windows/win32/api/dxgi1_2/nf-dxgi1_2-idxgifactory2-createswapchainforcomposition",
+    "https://learn.microsoft.com/en-us/windows/win32/api/dxgicommon/ne-dxgicommon-dxgi_alpha_mode"
+  ]
+}

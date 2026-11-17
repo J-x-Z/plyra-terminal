@@ -1,0 +1,123 @@
+{
+  "primary": {
+    "cols": 10,
+    "rows": 4,
+    "lines": [
+      {
+        "runs": [
+          {"text":"A","width":1,"fg":[187,0,0],"bg":[0,0,0],"fg_default":false,"fg_index":1,"bg_index":null,"bg_default":true,"bold":true,"italic":false,"underline":false,"inverse":false,"strike":false,"hyperlink":null},
+          {"text":"中","width":2,"fg":[187,187,187],"bg":[0,0,0],"fg_default":true,"fg_index":null,"bg_index":null,"bg_default":true,"bold":false,"italic":false,"underline":false,"inverse":false,"strike":false,"hyperlink":null},
+          {"text":"é","width":1,"fg":[187,187,187],"bg":[0,0,0],"fg_default":true,"fg_index":null,"bg_index":null,"bg_default":true,"bold":false,"italic":true,"underline":true,"inverse":false,"strike":false,"hyperlink":null},
+          {"text":"R","width":1,"fg":[12,34,56],"bg":[128,64,32],"fg_default":false,"fg_index":null,"bg_index":null,"bg_default":false,"bold":false,"italic":false,"underline":false,"inverse":true,"strike":true,"hyperlink":"https://example.com/golden"}
+        ]
+      },
+      {
+        "runs": [
+          {"text":"ready","width":5,"fg":[187,187,187],"bg":[0,0,0],"fg_default":true,"fg_index":null,"bg_index":null,"bg_default":true,"bold":false,"italic":false,"underline":false,"inverse":false,"strike":false,"hyperlink":null}
+        ]
+      },
+      {
+        "runs": []
+      },
+      {
+        "runs": []
+      }
+    ],
+    "history": [
+      {
+        "runs": [
+          {"text":"old","width":3,"fg":[187,187,187],"bg":[0,0,0],"fg_default":true,"fg_index":null,"bg_index":null,"bg_default":true,"bold":false,"italic":false,"underline":false,"inverse":false,"strike":false,"hyperlink":null}
+        ]
+      }
+    ],
+    "history_dropped": 2,
+    "cursor": {
+      "row": 1,
+      "col": 3,
+      "visible": true
+    },
+    "alternate": false,
+    "title": "golden",
+    "mouse_mode": 2,
+    "focus_report": true
+  },
+  "alternate": {
+    "cols": 10,
+    "rows": 4,
+    "lines": [
+      {
+        "runs": [
+          {"text":"Z","width":1,"fg":[0,0,187],"bg":[0,0,0],"fg_default":false,"fg_index":4,"bg_index":null,"bg_default":true,"bold":false,"italic":false,"underline":true,"inverse":false,"strike":false,"hyperlink":null}
+        ]
+      },
+      {
+        "runs": []
+      },
+      {
+        "runs": []
+      },
+      {
+        "runs": []
+      }
+    ],
+    "history": [
+      {
+        "runs": [
+          {"text":"old","width":3,"fg":[187,187,187],"bg":[0,0,0],"fg_default":true,"fg_index":null,"bg_index":null,"bg_default":true,"bold":false,"italic":false,"underline":false,"inverse":false,"strike":false,"hyperlink":null}
+        ]
+      }
+    ],
+    "history_dropped": 2,
+    "cursor": {
+      "row": 0,
+      "col": 1,
+      "visible": false
+    },
+    "alternate": true,
+    "title": "golden-alt",
+    "mouse_mode": 0,
+    "focus_report": false
+  },
+  "restored": {
+    "cols": 10,
+    "rows": 4,
+    "lines": [
+      {
+        "runs": [
+          {"text":"A","width":1,"fg":[187,0,0],"bg":[0,0,0],"fg_default":false,"fg_index":1,"bg_index":null,"bg_default":true,"bold":true,"italic":false,"underline":false,"inverse":false,"strike":false,"hyperlink":null},
+          {"text":"中","width":2,"fg":[187,187,187],"bg":[0,0,0],"fg_default":true,"fg_index":null,"bg_index":null,"bg_default":true,"bold":false,"italic":false,"underline":false,"inverse":false,"strike":false,"hyperlink":null},
+          {"text":"é","width":1,"fg":[187,187,187],"bg":[0,0,0],"fg_default":true,"fg_index":null,"bg_index":null,"bg_default":true,"bold":false,"italic":true,"underline":true,"inverse":false,"strike":false,"hyperlink":null},
+          {"text":"R","width":1,"fg":[12,34,56],"bg":[128,64,32],"fg_default":false,"fg_index":null,"bg_index":null,"bg_default":false,"bold":false,"italic":false,"underline":false,"inverse":true,"strike":true,"hyperlink":"https://example.com/golden"}
+        ]
+      },
+      {
+        "runs": [
+          {"text":"ready","width":5,"fg":[187,187,187],"bg":[0,0,0],"fg_default":true,"fg_index":null,"bg_index":null,"bg_default":true,"bold":false,"italic":false,"underline":false,"inverse":false,"strike":false,"hyperlink":null}
+        ]
+      },
+      {
+        "runs": []
+      },
+      {
+        "runs": []
+      }
+    ],
+    "history": [
+      {
+        "runs": [
+          {"text":"old","width":3,"fg":[187,187,187],"bg":[0,0,0],"fg_default":true,"fg_index":null,"bg_index":null,"bg_default":true,"bold":false,"italic":false,"underline":false,"inverse":false,"strike":false,"hyperlink":null}
+        ]
+      }
+    ],
+    "history_dropped": 2,
+    "cursor": {
+      "row": 1,
+      "col": 3,
+      "visible": true
+    },
+    "alternate": false,
+    "title": "golden",
+    "mouse_mode": 2,
+    "focus_report": true
+  }
+}
