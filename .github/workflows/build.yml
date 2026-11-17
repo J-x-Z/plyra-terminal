@@ -1,0 +1,132 @@
+name: Build development packages
+
+on:
+  workflow_dispatch:
+    inputs:
+      source_ref:
+        description: Git ref to build (defaults to the workflow commit)
+        type: string
+        required: false
+  push:
+    tags: ['v*']
+
+permissions:
+  contents: read
+
+env:
+  RUSTUP_TOOLCHAIN: nightly-2026-06-24
+  CARGO_INCREMENTAL: '0'
+  CARGO_PROFILE_DEV_DEBUG: '0'
+  GIT_CONFIG_COUNT: '1'
+  GIT_CONFIG_KEY_0: core.autocrlf
+  GIT_CONFIG_VALUE_0: 'false'
+
+jobs:
+  build:
+    name: ${{ matrix.platform }}
+    runs-on: ${{ matrix.runner }}
+    timeout-minutes: 30
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - platform: macos-arm64
+            runner: macos-15
+          - platform: linux-x64
+            runner: ubuntu-22.04
+          - platform: windows-x64
+            runner: windows-2025
+          - platform: android-arm64
+            runner: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+        with:
+          ref: ${{ inputs.source_ref || github.sha }}
+          persist-credentials: false
+
+      - name: Install the pinned Rust toolchain
+        shell: bash
+        run: rustup toolchain install "$RUSTUP_TOOLCHAIN" --profile minimal
+
+      - name: Record the build source
+        shell: bash
+        run: |
+          mkdir -p artifacts
+          git rev-parse HEAD > artifacts/SOURCE-REVISION
+          cargo metadata --locked --format-version 1 --no-deps > "$RUNNER_TEMP/plyra-metadata.json"
+          python_command=python3
+          if [ "$RUNNER_OS" = Windows ]; then python_command=python; fi
+          "$python_command" - "$RUNNER_TEMP/plyra-metadata.json" <<'PY'
+          import json, os, sys
+          from pathlib import Path
+          metadata = json.loads(Path(sys.argv[1]).read_text(encoding="utf-8"))
+          version = next(p["version"] for p in metadata["packages"] if p["name"] == "glass-terminal-desktop")
+          target_dir = Path(os.environ["RUNNER_TEMP"]) / "plyra-target"
+          with open(os.environ["GITHUB_ENV"], "a", encoding="utf-8", newline="\n") as env:
+              env.write(f"PLYRA_VERSION={version}\n")
+              env.write(f"CARGO_TARGET_DIR={target_dir}\n")
+          PY
+
+      - name: Build and verify the macOS app
+        if: matrix.platform == 'macos-arm64'
+        shell: bash
+        run: |
+          test "$(uname -m)" = arm64
+          bundle="$RUNNER_TEMP/Plyra Terminal.app"
+          python3 tools/build_macos_app.py --release --version "${PLYRA_VERSION%%-*}" --output "$bundle"
+          codesign --verify --strict --deep "$bundle"
+          "$bundle/Contents/MacOS/glass-terminal" --help
+          ditto -c -k --sequesterRsrc --keepParent "$bundle" "artifacts/Plyra-Terminal-$PLYRA_VERSION-macOS-arm64.zip"
+
+      - name: Build and verify the Linux package
+        if: matrix.platform == 'linux-x64'
+        shell: bash
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends libssl-dev libx11-dev libxkbcommon-dev libwayland-dev libegl1-mesa-dev
+          bundle="$RUNNER_TEMP/PlyraTerminal"
+          python3 tools/build_linux_app.py --release --version "$PLYRA_VERSION" --output "$bundle"
+          env -u DISPLAY -u WAYLAND_DISPLAY "$bundle/bin/glass-terminal" --help
+          tar -C "$RUNNER_TEMP" -czf "artifacts/Plyra-Terminal-$PLYRA_VERSION-Linux-x64.tar.gz" PlyraTerminal
+
+      - name: Build and verify the Windows package
+        if: matrix.platform == 'windows-x64'
+        shell: pwsh
+        run: |
+          $PSNativeCommandUseErrorActionPreference = $true
+          $target = 'x86_64-pc-windows-msvc'
+          $bundle = Join-Path $env:RUNNER_TEMP 'PlyraTerminal'
+          cargo build --locked --release --target $target -p glass-terminal-desktop -p privilege-broker
+          python tools/package_windows_app.py --target $target --bin-dir "$env:CARGO_TARGET_DIR/$target/release" --output-dir $bundle
+          $app = Start-Process -FilePath "$bundle/glass-terminal.exe" -ArgumentList '--help' -PassThru -Wait
+          if ($app.ExitCode -ne 0) { throw "CLI startup exited with $($app.ExitCode)" }
+          Compress-Archive -LiteralPath $bundle -DestinationPath "artifacts/Plyra-Terminal-${env:PLYRA_VERSION}-Windows-x64.zip"
+
+      - name: Build and verify the Android development APK
+        if: matrix.platform == 'android-arm64'
+        shell: bash
+        run: |
+          sdkmanager --sdk_root="$ANDROID_HOME" 'ndk;25.1.8937393' 'platforms;android-34' 'build-tools;34.0.0'
+          rustup target add aarch64-linux-android --toolchain "$RUSTUP_TOOLCHAIN"
+          # The beta's packager expects the macOS NDK directory name.
+          # Alias the Linux host tools outside the tagged source checkout.
+          ndk="$RUNNER_TEMP/plyra-ndk"
+          mkdir -p "$ndk/toolchains/llvm/prebuilt"
+          ln -s "$ANDROID_HOME/ndk/25.1.8937393/toolchains/llvm/prebuilt/linux-x86_64" \
+            "$ndk/toolchains/llvm/prebuilt/darwin-x86_64"
+          python3 apps/android/build_apk.py --sdk "$ANDROID_HOME" --ndk "$ndk" \
+            --java-home "$JAVA_HOME_17_X64" --rust-toolchain "$RUSTUP_TOOLCHAIN" \
+            --build-dir "$RUNNER_TEMP/plyra-android" --output-dir "$RUNNER_TEMP/plyra-apk"
+          cp "$RUNNER_TEMP/plyra-apk/glass-terminal-g1-debug.apk" \
+            "artifacts/Plyra-Terminal-$PLYRA_VERSION-Android-arm64-debug.apk"
+
+      - name: Confirm the checked-out source is unchanged
+        shell: bash
+        run: git diff --exit-code HEAD --
+
+      - uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f # v6
+        with:
+          name: Plyra-Terminal-${{ matrix.platform }}
+          path: artifacts/
+          if-no-files-found: error
+          compression-level: 0
