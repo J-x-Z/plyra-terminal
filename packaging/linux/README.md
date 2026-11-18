@@ -8,7 +8,7 @@ From the repository root, use Rust, Cargo, a C toolchain, and Python 3.
 
 ```sh
 python3 tools/build_linux_app.py --release \
-  --version 0.1.0-beta.1 \
+  --version 0.1.0-beta.2 \
   --output ../plyra-terminal-builds/linux-beta
 cd ../plyra-terminal-builds/linux-beta
 ./bin/glass-terminal

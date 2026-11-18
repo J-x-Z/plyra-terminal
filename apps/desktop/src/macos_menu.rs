@@ -2,7 +2,7 @@
 //! AppKit menu commands and nonblocking termination confirmation.
 
 use std::{
-    cell::RefCell,
+    cell::{Cell, RefCell},
     sync::OnceLock,
     time::{Duration, Instant},
 };
@@ -37,6 +37,9 @@ const COMMAND: usize = 1 << 20;
 const CONTROL: usize = 1 << 18;
 const OPTION: usize = 1 << 19;
 const SHIFT: usize = 1 << 17;
+const KEY_DOWN: usize = 10;
+const KEY_UP: usize = 11;
+const FLAGS_CHANGED: usize = 12;
 
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]
 pub struct QuitChord {
@@ -46,16 +49,10 @@ pub struct QuitChord {
 
 impl QuitChord {
     pub(crate) fn from_key_event(event: &KeyEvent, modifiers: ModifiersState) -> Option<Self> {
-        let chord = Self {
+        Some(Self {
             key_code: event.physical_key.to_scancode()?.try_into().ok()?,
             modifiers: modifier_bits(modifiers),
-        };
-        QUIT_CHORD.with(|state| *state.borrow_mut() = Some(chord));
-        Some(chord)
-    }
-
-    pub(crate) fn matches_modifiers(self, modifiers: ModifiersState) -> bool {
-        self.modifiers == modifier_bits(modifiers)
+        })
     }
 }
 
@@ -77,11 +74,7 @@ impl QuitDoublePress {
         chord: QuitChord,
         now: Instant,
         interval: Duration,
-        repeat: bool,
     ) -> bool {
-        if repeat {
-            return false;
-        }
         if let Some(first) = self.first {
             if first.chord == chord && !first.released {
                 return false;
@@ -194,7 +187,8 @@ thread_local! {
     static PROXY: RefCell<Option<EventLoopProxy<Wake>>> = const { RefCell::new(None) };
     static QUIT_CHORD: RefCell<Option<QuitChord>> = const { RefCell::new(None) };
     static QUIT_SHORTCUT: RefCell<Option<Chord>> = const { RefCell::new(None) };
-    static TRACKED_QUIT: RefCell<Option<(QuitChord, bool)>> = const { RefCell::new(None) };
+    static TRACKED_QUIT: RefCell<Option<(QuitChord, bool, Option<Instant>)>> = const { RefCell::new(None) };
+    static QUIT_TRACKING_GENERATION: Cell<u64> = const { Cell::new(0) };
 }
 
 fn send(event: Wake) {
@@ -235,28 +229,12 @@ extern "C" fn perform_action(_: &AnyObject, _: Sel, item: &AnyObject) {
         return;
     };
     if matches!(command, MenuCommand::Quit) {
-        if let Some(chord) = current_quit_chord() {
-            let application: *mut AnyObject =
-                unsafe { msg_send![class!(NSApplication), sharedApplication] };
-            let event: *mut AnyObject = unsafe { msg_send![application, currentEvent] };
-            let characters: *mut AnyObject =
-                unsafe { msg_send![event, charactersIgnoringModifiers] };
-            let characters: *mut AnyObject = unsafe { msg_send![characters, lowercaseString] };
-            let equivalent: *mut AnyObject = unsafe { msg_send![item, keyEquivalent] };
-            let matches_key: objc2::runtime::Bool =
-                unsafe { msg_send![characters, isEqualToString: equivalent] };
-            if !matches_key.as_bool() {
-                cancel_menu_tracking();
-                send(Wake::MacMenu(command));
-                return;
-            }
-            let repeat: objc2::runtime::Bool = unsafe { msg_send![event, isARepeat] };
-            // End AppKit's tracking loop before the queued winit event presents a sheet.
-            cancel_menu_tracking();
-            if !repeat.as_bool() {
-                QUIT_CHORD.with(|state| *state.borrow_mut() = Some(chord));
-                send(Wake::MacQuitKeyDown(chord));
-            }
+        let application: *mut AnyObject =
+            unsafe { msg_send![class!(NSApplication), sharedApplication] };
+        let event: *mut AnyObject = unsafe { msg_send![application, currentEvent] };
+        if let Some(chord) = equivalent_quit_chord(event) {
+            let repeat: Bool = unsafe { msg_send![event, isARepeat] };
+            dispatch_tracked_quit(chord, repeat.as_bool(), key_event_time(event));
             return;
         }
         cancel_menu_tracking();
@@ -264,18 +242,81 @@ extern "C" fn perform_action(_: &AnyObject, _: Sel, item: &AnyObject) {
     send(Wake::MacMenu(command));
 }
 
-fn dispatch_tracked_quit(chord: QuitChord, repeat: bool) {
+fn dispatch_tracked_quit(chord: QuitChord, repeat: bool, pressed_at: Option<Instant>) {
+    // The winit loop must resume before it can handle the queued command.
     cancel_menu_tracking();
-    if !repeat {
-        QUIT_CHORD.with(|state| *state.borrow_mut() = Some(chord));
-        send(Wake::MacQuitKeyDown(chord));
+    queue_quit_press(chord, repeat, pressed_at);
+}
+
+fn key_event_time(event: *mut AnyObject) -> Option<Instant> {
+    if event.is_null() {
+        return None;
     }
+    // AppKit time stamps and systemUptime use elapsed system time. Convert
+    // the event's age instead of timing a press or release when the UI drains it.
+    unsafe {
+        let timestamp: f64 = msg_send![event, timestamp];
+        if timestamp <= 0.0 {
+            return None;
+        }
+        let info: *mut AnyObject = msg_send![class!(NSProcessInfo), processInfo];
+        let uptime: f64 = msg_send![info, systemUptime];
+        let age = Duration::try_from_secs_f64(uptime - timestamp).ok()?;
+        Instant::now().checked_sub(age)
+    }
+}
+
+pub(crate) fn current_key_down_time() -> Option<Instant> {
+    unsafe {
+        let application: *mut AnyObject = msg_send![class!(NSApplication), sharedApplication];
+        let event: *mut AnyObject = msg_send![application, currentEvent];
+        let kind: usize = msg_send![event, type];
+        if kind == KEY_DOWN {
+            key_event_time(event)
+        } else {
+            None
+        }
+    }
+}
+
+pub(crate) fn queue_quit_press(chord: QuitChord, repeat: bool, pressed_at: Option<Instant>) {
+    if track_quit_press(chord, repeat) {
+        send(Wake::MacQuitKeyDown(
+            chord,
+            pressed_at.unwrap_or_else(Instant::now),
+            quit_tracking_generation(),
+        ));
+    }
+}
+
+fn track_quit_press(chord: QuitChord, repeat: bool) -> bool {
+    if repeat {
+        return false;
+    }
+    QUIT_CHORD.with(|state| {
+        let mut state = state.borrow_mut();
+        if *state == Some(chord) {
+            return false;
+        }
+        *state = Some(chord);
+        true
+    })
+}
+
+pub(crate) fn reset_quit_tracking() {
+    QUIT_CHORD.with(|state| *state.borrow_mut() = None);
+    TRACKED_QUIT.with(|state| *state.borrow_mut() = None);
+    QUIT_TRACKING_GENERATION.with(|state| state.set(state.get().wrapping_add(1)));
+}
+
+pub(crate) fn quit_tracking_generation() -> u64 {
+    QUIT_TRACKING_GENERATION.with(Cell::get)
 }
 
 extern "C" fn perform_tracked_quit(_: &AnyObject, _: Sel, _: *mut AnyObject) {
     let pending = TRACKED_QUIT.with(|state| state.borrow_mut().take());
-    if let Some((chord, repeat)) = pending {
-        dispatch_tracked_quit(chord, repeat);
+    if let Some((chord, repeat, pressed_at)) = pending {
+        dispatch_tracked_quit(chord, repeat, pressed_at);
     }
 }
 
@@ -304,7 +345,9 @@ extern "C" fn menu_key_equivalent(
     }
     unsafe {
         let repeat: Bool = msg_send![event, isARepeat];
-        TRACKED_QUIT.with(|state| *state.borrow_mut() = Some((chord, repeat.as_bool())));
+        TRACKED_QUIT.with(|state| {
+            *state.borrow_mut() = Some((chord, repeat.as_bool(), key_event_time(event)));
+        });
         *target = owner as *const AnyObject as *mut AnyObject;
         *action = SelectorOut(Some(sel!(performTrackedQuit:)));
     }
@@ -314,7 +357,7 @@ extern "C" fn menu_key_equivalent(
 extern "C" fn menu_perform_key_equivalent(menu: &AnyObject, _: Sel, event: *mut AnyObject) -> Bool {
     if let Some(chord) = equivalent_quit_chord(event) {
         let repeat: Bool = unsafe { msg_send![event, isARepeat] };
-        dispatch_tracked_quit(chord, repeat.as_bool());
+        dispatch_tracked_quit(chord, repeat.as_bool(), key_event_time(event));
         return Bool::YES;
     }
     unsafe { msg_send![super(menu, class!(NSMenu)), performKeyEquivalent: event] }
@@ -401,6 +444,57 @@ fn protected_delegate_class(superclass: &'static AnyClass) -> &'static AnyClass 
             builder.add_method(
                 sel!(applicationShouldTerminate:),
                 should_terminate as extern "C" fn(_, _, _) -> _,
+            );
+        }
+        builder.register()
+    })
+}
+
+static KEY_ROUTING_CLASS: OnceLock<&'static AnyClass> = OnceLock::new();
+
+extern "C" fn route_application_key(application: &AnyObject, _: Sel, event: *mut AnyObject) {
+    unsafe {
+        let kind: usize = msg_send![event, type];
+        if kind == KEY_DOWN {
+            if let Some(chord) = equivalent_quit_chord(event) {
+                let repeat: Bool = msg_send![event, isARepeat];
+                dispatch_tracked_quit(chord, repeat.as_bool(), key_event_time(event));
+                return;
+            }
+        } else if kind == KEY_UP || kind == FLAGS_CHANGED {
+            let released = if kind == KEY_UP {
+                let key: u16 = msg_send![event, keyCode];
+                observe_quit_release(KEY_UP, key, 0)
+            } else {
+                let flags: usize = msg_send![event, modifierFlags];
+                observe_quit_release(FLAGS_CHANGED, 0, native_modifier_bits(flags))
+            };
+            if let Some(chord) = released {
+                send(Wake::MacQuitKeyReleased(
+                    chord,
+                    key_event_time(event),
+                    quit_tracking_generation(),
+                ));
+            }
+        }
+        let superclass = KEY_ROUTING_CLASS
+            .get()
+            .and_then(|class| class.superclass())
+            .expect("installed quit key routing class");
+        let _: () = msg_send![super(application, superclass), sendEvent: event];
+    }
+}
+
+fn key_routing_class(superclass: &'static AnyClass) -> &'static AnyClass {
+    KEY_ROUTING_CLASS.get_or_init(|| {
+        let mut builder = ClassBuilder::new("PlyraTerminalKeyRoutingApplication", superclass)
+            .expect("unique quit key routing class");
+        // Observe releases before winit sends Cmd-held key-up straight to the
+        // key window, bypassing NSEvent local monitors and sometimes the view.
+        unsafe {
+            builder.add_method(
+                sel!(sendEvent:),
+                route_application_key as extern "C" fn(_, _, _),
             );
         }
         builder.register()
@@ -564,20 +658,30 @@ pub(crate) struct NativeMenu {
     confirmation_active: bool,
     menu: Retained<AnyObject>,
     target: Retained<AnyObject>,
+    application: Retained<AnyObject>,
+    original_application_class: &'static AnyClass,
     delegate: Retained<AnyObject>,
     original_delegate_class: &'static AnyClass,
     original_menu: Option<Retained<AnyObject>>,
     original_windows_menu: Option<Retained<AnyObject>>,
     proxy: EventLoopProxy<Wake>,
-    quit_monitor: Option<Retained<AnyObject>>,
-    quit_events: RcBlock<dyn Fn(*mut AnyObject) -> *mut AnyObject>,
 }
 
 impl NativeMenu {
     pub(crate) fn install(proxy: EventLoopProxy<Wake>, settings: &Settings) -> Result<Self> {
         unsafe {
-            let application: *mut AnyObject = msg_send![class!(NSApplication), sharedApplication];
-            let delegate: *mut AnyObject = msg_send![application, delegate];
+            let application: Retained<AnyObject> =
+                msg_send_id![class!(NSApplication), sharedApplication];
+            let original_application_class = application.class();
+            let key_routing = key_routing_class(original_application_class);
+            ensure!(
+                key_routing
+                    .superclass()
+                    .is_some_and(|class| std::ptr::eq(class, original_application_class))
+                    && key_routing.instance_size() == original_application_class.instance_size(),
+                "incompatible macOS application layout"
+            );
+            let delegate: *mut AnyObject = msg_send![&*application, delegate];
             let delegate =
                 Retained::retain(delegate).context("macOS application delegate unavailable")?;
             let original_delegate_class = delegate.class();
@@ -586,28 +690,14 @@ impl NativeMenu {
                 protected.instance_size() == original_delegate_class.instance_size(),
                 "incompatible macOS application delegate layout"
             );
-            AnyObject::set_class(&delegate, protected);
-            let previous: *mut AnyObject = msg_send![application, mainMenu];
-            let previous_windows: *mut AnyObject = msg_send![application, windowsMenu];
+            let previous: *mut AnyObject = msg_send![&*application, mainMenu];
+            let previous_windows: *mut AnyObject = msg_send![&*application, windowsMenu];
             let target: Retained<AnyObject> = msg_send_id![target_class(), new];
-            let quit_events = RcBlock::new(|event: *mut AnyObject| {
-                if !event.is_null() {
-                    let kind: usize = msg_send![event, type];
-                    let flags: usize = msg_send![event, modifierFlags];
-                    let key: u16 = if kind == 11 {
-                        msg_send![event, keyCode]
-                    } else {
-                        0
-                    };
-                    if observe_quit_release(kind, key, native_modifier_bits(flags)) {
-                        send(Wake::MacQuitKeyReleased);
-                    }
-                }
-                event
-            });
             let mut value = Self {
                 menu: menu("Plyra Terminal"),
                 target,
+                application,
+                original_application_class,
                 delegate,
                 original_delegate_class,
                 original_menu: Retained::retain(previous),
@@ -615,21 +705,17 @@ impl NativeMenu {
                 confirmation_active: false,
                 original_windows_menu: Retained::retain(previous_windows),
                 proxy: proxy.clone(),
-                quit_monitor: None,
-                quit_events,
             };
             PROXY.with(|slot| *slot.borrow_mut() = Some(proxy));
-            let monitor: *mut AnyObject = msg_send![class!(NSEvent),
-                addLocalMonitorForEventsMatchingMask: ((1usize << 11) | (1usize << 12))
-                handler: &*value.quit_events];
-            value.quit_monitor =
-                Some(Retained::retain(monitor).context("macOS quit-key monitor unavailable")?);
+            AnyObject::set_class(&value.delegate, protected);
+            AnyObject::set_class(&value.application, key_routing);
             value.rebuild(settings);
             Ok(value)
         }
     }
 
     pub(crate) fn rebuild(&mut self, settings: &Settings) {
+        reset_quit_tracking();
         QUIT_SHORTCUT
             .with(|state| *state.borrow_mut() = configured_shortcut(settings, Shortcut::Quit));
         let menubar = menu("Plyra Terminal");
@@ -871,15 +957,17 @@ impl NativeMenu {
 
 impl Drop for NativeMenu {
     fn drop(&mut self) {
-        QUIT_CHORD.with(|state| *state.borrow_mut() = None);
+        reset_quit_tracking();
         QUIT_SHORTCUT.with(|state| *state.borrow_mut() = None);
-        TRACKED_QUIT.with(|state| *state.borrow_mut() = None);
         PROXY.with(|slot| *slot.borrow_mut() = None);
         unsafe {
-            if let Some(monitor) = self.quit_monitor.take() {
-                let _: () = msg_send![class!(NSEvent), removeMonitor: &*monitor];
+            let application = &*self.application;
+            if std::ptr::eq(
+                application.class(),
+                key_routing_class(self.original_application_class),
+            ) {
+                AnyObject::set_class(application, self.original_application_class);
             }
-            let application: *mut AnyObject = msg_send![class!(NSApplication), sharedApplication];
             if let Some(dialog) = &self.confirmation {
                 let parent: *mut AnyObject = msg_send![&*dialog.sheet, sheetParent];
                 if !parent.is_null() {
@@ -911,7 +999,7 @@ fn equivalent_quit_chord(event: *mut AnyObject) -> Option<QuitChord> {
         return None;
     }
     let kind: usize = unsafe { msg_send![event, type] };
-    if kind != 10 {
+    if kind != KEY_DOWN {
         return None;
     }
     let flags: usize = unsafe { msg_send![event, modifierFlags] };
@@ -938,40 +1026,16 @@ fn equivalent_quit_chord(event: *mut AnyObject) -> Option<QuitChord> {
     })
 }
 
-pub(crate) fn current_quit_chord() -> Option<QuitChord> {
-    unsafe {
-        let application: *mut AnyObject = msg_send![class!(NSApplication), sharedApplication];
-        let event: *mut AnyObject = msg_send![application, currentEvent];
-        if event.is_null() {
-            return None;
-        }
-        let kind: usize = msg_send![event, type];
-        let flags: usize = msg_send![event, modifierFlags];
-        if kind == 10 {
-            Some(QuitChord {
-                key_code: msg_send![event, keyCode],
-                modifiers: native_modifier_bits(flags),
-            })
-        } else {
-            None
-        }
-    }
-}
-
 pub(crate) fn quit_chord_is_pressed(chord: QuitChord) -> bool {
     QUIT_CHORD.with(|state| *state.borrow() == Some(chord))
 }
 
-fn observe_quit_release(kind: usize, key: u16, modifiers: u8) -> bool {
+fn observe_quit_release(kind: usize, key: u16, modifiers: u8) -> Option<QuitChord> {
     QUIT_CHORD.with(|state| {
-        let mut state = state.borrow_mut();
-        let cancel = state.is_some_and(|chord| {
-            (kind == 11 && chord.key_code == key) || (kind == 12 && chord.modifiers != modifiers)
-        });
-        if cancel {
-            *state = None;
-        }
-        cancel
+        state.borrow_mut().take_if(|chord| {
+            (kind == KEY_UP && chord.key_code == key)
+                || (kind == FLAGS_CHANGED && chord.modifiers != modifiers)
+        })
     })
 }
 
@@ -980,7 +1044,7 @@ mod tests {
     use super::*;
 
     #[test]
-    fn double_quit_requires_release_and_ignores_autorepeat() {
+    fn double_quit_accepts_a_second_press_while_command_stays_held() {
         let chord = QuitChord {
             key_code: 12,
             modifiers: 1,
@@ -988,13 +1052,18 @@ mod tests {
         let now = Instant::now();
         let interval = Duration::from_millis(800);
         let mut state = QuitDoublePress::default();
-        assert!(!state.press(chord, now, interval, false));
-        assert!(!state.press(chord, now + Duration::from_millis(50), interval, true));
-        assert!(!state.press(chord, now + Duration::from_millis(100), interval, false));
+        assert!(track_quit_press(chord, false));
+        assert!(!state.press(chord, now, interval));
+        assert!(!track_quit_press(chord, true)); // Autorepeat.
+        assert!(!track_quit_press(chord, false)); // Duplicate menu delivery.
+        assert_eq!(observe_quit_release(KEY_UP, 13, 1), None); // Another key.
+        assert_eq!(observe_quit_release(KEY_UP, 12, 1), Some(chord)); // Cmd remains held.
         state.release();
-        assert!(!state.press(chord, now + Duration::from_millis(150), interval, true));
-        assert!(state.press(chord, now + Duration::from_millis(200), interval, false));
+        assert!(!track_quit_press(chord, true));
+        assert!(track_quit_press(chord, false));
+        assert!(state.press(chord, now + Duration::from_millis(200), interval));
         assert!(state.deadline().is_none());
+        reset_quit_tracking();
     }
 
     #[test]
@@ -1006,14 +1075,14 @@ mod tests {
         let now = Instant::now();
         let interval = Duration::from_millis(800);
         let mut state = QuitDoublePress::default();
-        assert!(!state.press(chord, now, interval, false));
+        assert!(!state.press(chord, now, interval));
         state.release();
-        assert!(!state.press(chord, now + interval, interval, false));
+        assert!(!state.press(chord, now + interval, interval));
         assert_eq!(state.deadline(), Some(now + interval + interval));
         state.release();
         assert!(state.expire(now + interval + interval));
         assert!(state.deadline().is_none());
-        assert!(!state.press(chord, now + interval + interval, interval, false));
+        assert!(!state.press(chord, now + interval + interval, interval));
     }
 
     #[test]
@@ -1029,14 +1098,14 @@ mod tests {
         let now = Instant::now();
         let interval = Duration::from_millis(800);
         let mut state = QuitDoublePress::default();
-        assert!(!state.press(chord, now, interval, false));
+        assert!(!state.press(chord, now, interval));
         state.release();
         state.reset(); // Window focus loss, suspend, or changed configuration.
-        assert!(!state.press(chord, now + Duration::from_millis(100), interval, false));
+        assert!(!state.press(chord, now + Duration::from_millis(100), interval));
         state.release();
-        assert!(!state.press(other, now + Duration::from_millis(200), interval, false));
+        assert!(!state.press(other, now + Duration::from_millis(200), interval));
         state.release();
-        assert!(state.press(other, now + Duration::from_millis(300), interval, false));
+        assert!(state.press(other, now + Duration::from_millis(300), interval));
     }
 
     #[test]
@@ -1047,13 +1116,43 @@ mod tests {
         };
         QUIT_CHORD.with(|state| *state.borrow_mut() = Some(chord));
         assert!(quit_chord_is_pressed(chord));
-        assert!(!observe_quit_release(11, 13, 1));
-        assert!(!observe_quit_release(12, 0, 1));
-        assert!(observe_quit_release(11, 12, 1));
+        assert_eq!(observe_quit_release(KEY_UP, 13, 1), None);
+        assert_eq!(observe_quit_release(FLAGS_CHANGED, 0, 1), None);
+        assert_eq!(observe_quit_release(KEY_UP, 12, 1), Some(chord));
         assert!(!quit_chord_is_pressed(chord));
         QUIT_CHORD.with(|state| *state.borrow_mut() = Some(chord));
-        assert!(observe_quit_release(12, 0, 0));
+        assert_eq!(observe_quit_release(FLAGS_CHANGED, 0, 0), Some(chord));
         assert!(!quit_chord_is_pressed(chord));
+    }
+
+    #[test]
+    fn buffered_quit_release_requires_a_completed_hold_in_focus() {
+        let chord = QuitChord {
+            key_code: 12,
+            modifiers: 1,
+        };
+        let other = QuitChord {
+            key_code: 13,
+            ..chord
+        };
+        let pressed_at = Instant::now();
+        let duration = Duration::from_millis(1200);
+        let hold = crate::QuitHold {
+            deadline: pressed_at + duration * 2,
+            release_deadline: pressed_at + duration,
+            chord,
+        };
+        assert!(!hold.completed_by_release(chord, Some(pressed_at), true));
+        assert!(!hold.completed_by_release(chord, None, true));
+        assert!(!hold.completed_by_release(other, Some(hold.release_deadline), true));
+        assert!(!hold.completed_by_release(chord, Some(hold.release_deadline), false));
+        assert!(hold.completed_by_release(chord, Some(hold.release_deadline), true));
+
+        let previous_generation = quit_tracking_generation();
+        assert!(track_quit_press(chord, false));
+        reset_quit_tracking();
+        assert_ne!(quit_tracking_generation(), previous_generation);
+        assert_eq!(observe_quit_release(KEY_UP, chord.key_code, 1), None);
     }
 
     #[test]
@@ -1062,16 +1161,32 @@ mod tests {
             key_code: 12,
             modifiers: 1 | 8,
         };
-        assert!(command_shift.matches_modifiers(ModifiersState::SUPER | ModifiersState::SHIFT));
-        assert!(!command_shift.matches_modifiers(ModifiersState::SUPER));
-        assert!(!command_shift.matches_modifiers(
-            ModifiersState::SUPER | ModifiersState::SHIFT | ModifiersState::ALT
-        ));
+        assert!(track_quit_press(command_shift, false));
+        assert_eq!(
+            observe_quit_release(FLAGS_CHANGED, 0, native_modifier_bits(COMMAND | SHIFT)),
+            None,
+        );
+        assert_eq!(
+            observe_quit_release(FLAGS_CHANGED, 0, native_modifier_bits(COMMAND)),
+            Some(command_shift),
+        );
+        assert!(track_quit_press(command_shift, false));
+        assert_eq!(
+            observe_quit_release(
+                FLAGS_CHANGED,
+                0,
+                native_modifier_bits(COMMAND | SHIFT | OPTION)
+            ),
+            Some(command_shift),
+        );
         let control_option = QuitChord {
             key_code: 12,
             modifiers: 2 | 4,
         };
-        assert!(control_option.matches_modifiers(ModifiersState::CONTROL | ModifiersState::ALT));
+        assert_eq!(
+            modifier_bits(ModifiersState::CONTROL | ModifiersState::ALT),
+            control_option.modifiers
+        );
         assert_eq!(
             native_modifier_bits(CONTROL | OPTION),
             control_option.modifiers
@@ -1083,4 +1198,4 @@ mod tests {
     }
 }
 
-// FVPROV1 36096 W3siYm9keSI6eyJhY3Rvcl9rZXlfaWQiOiI5ZjAwOTVhYmY4ODEwZGQwY2Y4NTdlZDBlNDI0ODg0NmRlMmFkMDc2ZmZhYTY2MWIzNmM5Yzc3YWFjOGVlOWMzIiwiYWxnb3JpdGhtIjoiRWQyNTUxOSIsImF1dGhvciI6IkoteC0gWiIsImNvbnRlbnRfc2hhMjU2IjoiMjk5OTZiN2RjY2EyMTk4NDg0NjY0MmI3ZjRmZTQ4Y2RiYzJlMTI5YTU2NTJiYmI5MzJlY2JlMDhhMWQyZTgzOCIsImNvcHlfaWQiOiJ2MC4xLjAtYmV0YS4xIiwiY3JlYXRlZF9hdCI6IjIwMjYtMTEtMTgiLCJlZGl0aW9uIjoiYmV0YSIsImlzc3Vlcl9wb2xpY3kiOm51bGwsImtpbmQiOiJjcmVhdGUiLCJtb2RlIjoic2VsZl9zaWduIiwicGFyZW50X3ZlcnNpb24iOm51bGwsInByZXZpb3VzX3JlY29yZF9zaGEyNTYiOm51bGwsInNjaGVtYSI6ImZpbGV2ZWlsLnByb3ZlbmFuY2Uuc2lnbmF0dXJlLnYyIiwic2VxdWVuY2UiOjAsInRyYW5zZmVyX3RvX2tleV9pZCI6bnVsbCwidmVyc2lvbiI6InYwLjEuMC1iZXRhLjEiLCJ3b3JrX2lkIjoib3JnLnBseXJhLnRlcm1pbmFsIn0sInNpZ25hdHVyZXMiOlt7ImtleV9pZCI6IjlmMDA5NWFiZjg4MTBkZDBjZjg1N2VkMGU0MjQ4ODQ2ZGUyYWQwNzZmZmFhNjYxYjM2YzljNzdhYWM4ZWU5YzMiLCJwdWJsaWNfa2V5X2hleCI6ImMzZTkyZDhkZDNkZWM4NTliODdlOTY4MjIyYjI4OWJhNzg5M2NjOGM4NWZjOTE2MjI2YjZiNjI5NjFiOTU5ZDciLCJzaWduYXR1cmVfaGV4IjoiZTcxYjkyMWY1YWJlZTU0OTllNDcxYzAwYWI4YjNiNjZhMTEwMTMwZjdiNjAwNzMwM2Q4NTdmNzJjNTE1MmZjZmJjZTUwMzdiZjY2ZTc2ZTE1M2YxYzQxYzhjNWYzMTJiMjY2ZDFmYjg1MzEyYTY5ZDk5ZTVhZTZlZjc1YWYwMDgifV19XQ== FVPROV1-END
+// FVPROV1 40023 W3siYm9keSI6eyJhY3Rvcl9rZXlfaWQiOiI5ZjAwOTVhYmY4ODEwZGQwY2Y4NTdlZDBlNDI0ODg0NmRlMmFkMDc2ZmZhYTY2MWIzNmM5Yzc3YWFjOGVlOWMzIiwiYWxnb3JpdGhtIjoiRWQyNTUxOSIsImF1dGhvciI6IkoteC0gWiIsImNvbnRlbnRfc2hhMjU2IjoiN2NiMTkyYWJkMTY0YjM3MDBkNGMzYWNjN2UyYTRhM2YyZTE5ODg4ZWI5MzkwNGNiMmNkYWNjZDdmMTJkZjE3OCIsImNvcHlfaWQiOiJ2MC4xLjAtYmV0YS4yIiwiY3JlYXRlZF9hdCI6IjIwMjYtMTEtMTgiLCJlZGl0aW9uIjoiYmV0YSIsImlzc3Vlcl9wb2xpY3kiOm51bGwsImtpbmQiOiJjcmVhdGUiLCJtb2RlIjoic2VsZl9zaWduIiwicGFyZW50X3ZlcnNpb24iOm51bGwsInByZXZpb3VzX3JlY29yZF9zaGEyNTYiOm51bGwsInNjaGVtYSI6ImZpbGV2ZWlsLnByb3ZlbmFuY2Uuc2lnbmF0dXJlLnYyIiwic2VxdWVuY2UiOjAsInRyYW5zZmVyX3RvX2tleV9pZCI6bnVsbCwidmVyc2lvbiI6InYwLjEuMC1iZXRhLjIiLCJ3b3JrX2lkIjoib3JnLnBseXJhLnRlcm1pbmFsIn0sInNpZ25hdHVyZXMiOlt7ImtleV9pZCI6IjlmMDA5NWFiZjg4MTBkZDBjZjg1N2VkMGU0MjQ4ODQ2ZGUyYWQwNzZmZmFhNjYxYjM2YzljNzdhYWM4ZWU5YzMiLCJwdWJsaWNfa2V5X2hleCI6ImMzZTkyZDhkZDNkZWM4NTliODdlOTY4MjIyYjI4OWJhNzg5M2NjOGM4NWZjOTE2MjI2YjZiNjI5NjFiOTU5ZDciLCJzaWduYXR1cmVfaGV4IjoiMzYyMjYyY2I1MDllYzg3ODNjMGNmZDYwYTg3OGQ2YTNlZjczNzE1ODI3MGMwZGYwNDRlMTIyNDRmNGY0YTlmOTlhYzg2MTk4MTRhNDFiNGNmZTk1Yzg0ZDVlM2FiY2JiOTkwMGZhOTVjMzNiMzlkYmE4NGYxNGQxZGUzYjY5MGQifV19XQ== FVPROV1-END

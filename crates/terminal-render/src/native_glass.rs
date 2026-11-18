@@ -23,12 +23,18 @@ mod macos {
     use std::sync::OnceLock;
 
     const GLASS_VIEW_TAG: isize = 0x475354;
+    const ACRYLIC_BACKDROP_TAG: isize = 0x474142;
+    const HUD_MATERIAL: isize = 13;
 
     #[link(name = "AppKit", kind = "framework")]
     extern "C" {}
 
     extern "C" fn glass_tag(_: &AnyObject, _: Sel) -> isize {
         GLASS_VIEW_TAG
+    }
+
+    extern "C" fn acrylic_backdrop_tag(_: &AnyObject, _: Sel) -> isize {
+        ACRYLIC_BACKDROP_TAG
     }
 
     extern "C" fn ignore_pointer(_: &AnyObject, _: Sel, _: NSPoint) -> *mut AnyObject {
@@ -70,6 +76,43 @@ mod macos {
         })
     }
 
+    fn acrylic_backdrop_class() -> &'static AnyClass {
+        static CLASS: OnceLock<&'static AnyClass> = OnceLock::new();
+        CLASS.get_or_init(|| {
+            let mut builder = ClassBuilder::new("PlyraAcrylicBackdropView", glass_class())
+                .expect("unique native backdrop class");
+            unsafe {
+                builder.add_method(sel!(tag), acrylic_backdrop_tag as extern "C" fn(_, _) -> _);
+            }
+            builder.register()
+        })
+    }
+
+    unsafe fn configure_visual_effect(
+        view: &AnyObject,
+        corner_radius: f64,
+        material: isize,
+        state: isize,
+    ) {
+        unsafe {
+            let _: () = msg_send![view, setWantsLayer: Bool::YES];
+            let layer: *mut AnyObject = msg_send![view, layer];
+            if !layer.is_null() {
+                let _: () = msg_send![layer, setCornerRadius: corner_radius];
+                let _: () = msg_send![layer, setMasksToBounds: Bool::new(corner_radius > 0.0)];
+            }
+            let _: () = msg_send![view, setMaterial: material];
+            let _: () = msg_send![view, setBlendingMode: 0_isize]; // BehindWindow
+            let _: () = msg_send![view, setState: state];
+            let appearance_name = NSString::from_str("NSAppearanceNameVibrantDark");
+            let appearance: *mut AnyObject =
+                msg_send![class!(NSAppearance), appearanceNamed: &*appearance_name];
+            if !appearance.is_null() {
+                let _: () = msg_send![view, setAppearance: appearance];
+            }
+        }
+    }
+
     pub fn preferences() -> AccessibilityPreferences {
         unsafe {
             let workspace: *mut AnyObject = msg_send![class!(NSWorkspace), sharedWorkspace];
@@ -97,6 +140,7 @@ mod macos {
         effect: GlassEffect,
         material: GlassMaterial,
         corner_radius: f32,
+        acrylic_blur: bool,
     ) -> Result<bool> {
         let is_main: Bool = unsafe { msg_send![class!(NSThread), isMainThread] };
         ensure!(
@@ -137,6 +181,7 @@ mod macos {
                 return Ok(false);
             }
             let mut old: *mut AnyObject = msg_send![container, viewWithTag: GLASS_VIEW_TAG];
+            let backdrop: *mut AnyObject = msg_send![container, viewWithTag: ACRYLIC_BACKDROP_TAG];
             let _: () = msg_send![native_window, setOpaque: Bool::new(!enabled && !rounded)];
             if !backing_layer.is_null() {
                 let is_metal: Bool = msg_send![backing_layer, isKindOfClass: class!(CAMetalLayer)];
@@ -152,6 +197,9 @@ mod macos {
             if !enabled {
                 if !old.is_null() {
                     let _: () = msg_send![old, removeFromSuperview];
+                }
+                if !backdrop.is_null() {
+                    let _: () = msg_send![backdrop, removeFromSuperview];
                 }
                 return Ok(false);
             }
@@ -208,27 +256,13 @@ mod macos {
                     let _: () = msg_send![content, release];
                 }
             } else {
-                let _: () = msg_send![effect_view, setWantsLayer: Bool::YES];
-                let effect_layer: *mut AnyObject = msg_send![effect_view, layer];
-                if !effect_layer.is_null() {
-                    let _: () = msg_send![effect_layer, setCornerRadius: corner_radius];
-                    let _: () = msg_send![effect_layer, setMasksToBounds: Bool::new(rounded)];
-                }
                 let material_value: isize = match material {
                     GlassMaterial::Sidebar => 7,
                     GlassMaterial::UnderWindowBackground => 21,
                     // Older AppKit versions use the existing public HUD material.
-                    _ => 13,
+                    _ => HUD_MATERIAL,
                 };
-                let _: () = msg_send![effect_view, setMaterial: material_value];
-                let _: () = msg_send![effect_view, setBlendingMode: 0_isize];
-                let _: () = msg_send![effect_view, setState: 0_isize];
-                let appearance_name = NSString::from_str("NSAppearanceNameVibrantDark");
-                let appearance: *mut AnyObject =
-                    msg_send![class!(NSAppearance), appearanceNamed: &*appearance_name];
-                if !appearance.is_null() {
-                    let _: () = msg_send![effect_view, setAppearance: appearance];
-                }
+                configure_visual_effect(effect_view, corner_radius, material_value, 0);
             }
             let _: () = msg_send![effect_view, setAutoresizingMask: 18_usize];
             // A child view composites above its parent's CAMetalLayer. Use a
@@ -240,6 +274,34 @@ mod macos {
                     relativeTo: view
                 ];
                 let _: () = msg_send![effect_view, release];
+            }
+            if liquid_class.is_some() && acrylic_blur {
+                let new_backdrop = backdrop.is_null();
+                let backdrop = if new_backdrop {
+                    let allocated: *mut AnyObject = msg_send![acrylic_backdrop_class(), alloc];
+                    let created: *mut AnyObject = msg_send![allocated, initWithFrame: frame];
+                    created
+                } else {
+                    backdrop
+                };
+                let backdrop = backdrop
+                    .as_ref()
+                    .context("Cannot create the acrylic backdrop")?;
+                let _: () = msg_send![backdrop, setFrame: frame];
+                // Keep the backdrop active when the terminal loses focus. AppKit
+                // composites the desktop here without another Metal render pass.
+                configure_visual_effect(backdrop, corner_radius, HUD_MATERIAL, 1);
+                let _: () = msg_send![backdrop, setAutoresizingMask: 18_usize];
+                if new_backdrop {
+                    let _: () = msg_send![container,
+                        addSubview: backdrop
+                        positioned: -1_isize
+                        relativeTo: effect_view
+                    ];
+                    let _: () = msg_send![backdrop, release];
+                }
+            } else if !backdrop.is_null() {
+                let _: () = msg_send![backdrop, removeFromSuperview];
             }
             let _: () = msg_send![view, setNeedsDisplay: Bool::YES];
         }
@@ -291,6 +353,11 @@ mod macos {
             } else {
                 msg_send![parent, viewWithTag: GLASS_VIEW_TAG]
             };
+            let backdrop: *mut AnyObject = if parent.is_null() {
+                ptr::null_mut()
+            } else {
+                msg_send![parent, viewWithTag: ACRYLIC_BACKDROP_TAG]
+            };
             let material_parent: *mut AnyObject = if material.is_null() {
                 ptr::null_mut()
             } else {
@@ -332,8 +399,8 @@ mod macos {
                     .map(|object| object.class().name().to_owned())
                     .unwrap_or_else(|| "none".to_owned())
             };
-            Ok(format!("view={} parent={} layer={} metal_layer={} metal_layer_opaque={metal_layer_opaque:?} material={} actual_material={actual_material} material_parent={} material_is_sibling={} window_opaque={} layer_opaque={} corner_radius={corner_radius} masks_to_bounds={} frame={frame:?} bounds={bounds:?}",
-                class_name(view), class_name(parent), class_name(layer), class_name(metal_layer), class_name(material),
+            Ok(format!("view={} parent={} layer={} metal_layer={} metal_layer_opaque={metal_layer_opaque:?} material={} actual_material={actual_material} acrylic_backdrop={} material_parent={} material_is_sibling={} window_opaque={} layer_opaque={} corner_radius={corner_radius} masks_to_bounds={} frame={frame:?} bounds={bounds:?}",
+                class_name(view), class_name(parent), class_name(layer), class_name(metal_layer), class_name(material), !backdrop.is_null(),
                 class_name(material_parent), !material.is_null() && material_parent == parent,
                 window_opaque.as_bool(), layer_opaque.as_bool(), masks_to_bounds.as_bool()))
         }
@@ -371,7 +438,13 @@ pub(crate) fn configure_with_geometry(
     let _ = parameters;
     let _ = (material, corner_radius);
     #[cfg(target_os = "macos")]
-    return macos::configure(window, effect, material, corner_radius);
+    return macos::configure(
+        window,
+        effect,
+        material,
+        corner_radius,
+        parameters.backdrop_blur_radius_px > 0.0,
+    );
     #[cfg(target_os = "linux")]
     return crate::linux_glass::configure(
         window,
@@ -437,4 +510,4 @@ pub(crate) fn release(window: &Window) {
     let _ = window;
 }
 
-// FVPROV1 18747 W3siYm9keSI6eyJhY3Rvcl9rZXlfaWQiOiI5ZjAwOTVhYmY4ODEwZGQwY2Y4NTdlZDBlNDI0ODg0NmRlMmFkMDc2ZmZhYTY2MWIzNmM5Yzc3YWFjOGVlOWMzIiwiYWxnb3JpdGhtIjoiRWQyNTUxOSIsImF1dGhvciI6IkoteC0gWiIsImNvbnRlbnRfc2hhMjU2IjoiZTNkY2E0NDZhYjIxNDkxMmMwMzExNGNlNTRmYjJmNThjNWZiN2E3ODk0M2IzOWZhZTdjOGNjZThlN2NkNDc4ZCIsImNvcHlfaWQiOiJ2MC4xLjAtYmV0YS4xIiwiY3JlYXRlZF9hdCI6IjIwMjYtMTEtMTgiLCJlZGl0aW9uIjoiYmV0YSIsImlzc3Vlcl9wb2xpY3kiOm51bGwsImtpbmQiOiJjcmVhdGUiLCJtb2RlIjoic2VsZl9zaWduIiwicGFyZW50X3ZlcnNpb24iOm51bGwsInByZXZpb3VzX3JlY29yZF9zaGEyNTYiOm51bGwsInNjaGVtYSI6ImZpbGV2ZWlsLnByb3ZlbmFuY2Uuc2lnbmF0dXJlLnYyIiwic2VxdWVuY2UiOjAsInRyYW5zZmVyX3RvX2tleV9pZCI6bnVsbCwidmVyc2lvbiI6InYwLjEuMC1iZXRhLjEiLCJ3b3JrX2lkIjoib3JnLnBseXJhLnRlcm1pbmFsIn0sInNpZ25hdHVyZXMiOlt7ImtleV9pZCI6IjlmMDA5NWFiZjg4MTBkZDBjZjg1N2VkMGU0MjQ4ODQ2ZGUyYWQwNzZmZmFhNjYxYjM2YzljNzdhYWM4ZWU5YzMiLCJwdWJsaWNfa2V5X2hleCI6ImMzZTkyZDhkZDNkZWM4NTliODdlOTY4MjIyYjI4OWJhNzg5M2NjOGM4NWZjOTE2MjI2YjZiNjI5NjFiOTU5ZDciLCJzaWduYXR1cmVfaGV4IjoiN2FkYzk3N2Q0YTgwMWUwMWE5ZmQ4ZDkyZDBlM2I4ZjA3NzAwMDdhM2Q1MTlmODhkM2M5MWMzODVhZWIyZmZkMTc3Y2UxY2QxYmExYTRlNjEwYzIxNDM1ZGFkNDJmMjYwOGJmYzY5M2JlOTZkZTRkNjMxNWFjNmU4NTgzN2ZkMGIifV19XQ== FVPROV1-END
+// FVPROV1 21628 W3siYm9keSI6eyJhY3Rvcl9rZXlfaWQiOiI5ZjAwOTVhYmY4ODEwZGQwY2Y4NTdlZDBlNDI0ODg0NmRlMmFkMDc2ZmZhYTY2MWIzNmM5Yzc3YWFjOGVlOWMzIiwiYWxnb3JpdGhtIjoiRWQyNTUxOSIsImF1dGhvciI6IkoteC0gWiIsImNvbnRlbnRfc2hhMjU2IjoiYTdmYmNiYmVmNGM4YWM4MzRkYTUyYjk4ZTg0YTgwYjRkNjdkY2U1NDUwOWY0Y2Y2OGUwNDk1ZTNjZWYyM2I1NCIsImNvcHlfaWQiOiJ2MC4xLjAtYmV0YS4yIiwiY3JlYXRlZF9hdCI6IjIwMjYtMTEtMTgiLCJlZGl0aW9uIjoiYmV0YSIsImlzc3Vlcl9wb2xpY3kiOm51bGwsImtpbmQiOiJjcmVhdGUiLCJtb2RlIjoic2VsZl9zaWduIiwicGFyZW50X3ZlcnNpb24iOm51bGwsInByZXZpb3VzX3JlY29yZF9zaGEyNTYiOm51bGwsInNjaGVtYSI6ImZpbGV2ZWlsLnByb3ZlbmFuY2Uuc2lnbmF0dXJlLnYyIiwic2VxdWVuY2UiOjAsInRyYW5zZmVyX3RvX2tleV9pZCI6bnVsbCwidmVyc2lvbiI6InYwLjEuMC1iZXRhLjIiLCJ3b3JrX2lkIjoib3JnLnBseXJhLnRlcm1pbmFsIn0sInNpZ25hdHVyZXMiOlt7ImtleV9pZCI6IjlmMDA5NWFiZjg4MTBkZDBjZjg1N2VkMGU0MjQ4ODQ2ZGUyYWQwNzZmZmFhNjYxYjM2YzljNzdhYWM4ZWU5YzMiLCJwdWJsaWNfa2V5X2hleCI6ImMzZTkyZDhkZDNkZWM4NTliODdlOTY4MjIyYjI4OWJhNzg5M2NjOGM4NWZjOTE2MjI2YjZiNjI5NjFiOTU5ZDciLCJzaWduYXR1cmVfaGV4IjoiOWNmMmIyOWIzZDMyYzgxZmM4ODcxYWRjNTNlMzcwMTg2NjNjYjUyZGM3NjBhZjlmZjMxN2M3Zjc3MTVmMjM0N2E4ZDQ2MmU1M2NhMmYzYTE3YzdkZWU4Njc2MmJmOTgxZDYyOTg4ZGU4MzAxYzc4MWY5MzhiZDc4YWQyNGM3MDgifV19XQ== FVPROV1-END

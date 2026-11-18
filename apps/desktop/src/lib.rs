@@ -51,9 +51,9 @@ pub enum Wake {
     #[cfg(target_os = "macos")]
     MacMenu(macos_menu::MenuCommand),
     #[cfg(target_os = "macos")]
-    MacQuitKeyDown(macos_menu::QuitChord),
+    MacQuitKeyDown(macos_menu::QuitChord, Instant, u64),
     #[cfg(target_os = "macos")]
-    MacQuitKeyReleased,
+    MacQuitKeyReleased(macos_menu::QuitChord, Option<Instant>, u64),
     #[cfg(target_os = "macos")]
     MacQuitDecision(bool),
     #[cfg(target_os = "android")]
@@ -583,7 +583,22 @@ mod redraw_tests {
 #[cfg(target_os = "macos")]
 struct QuitHold {
     deadline: Instant,
+    release_deadline: Instant,
     chord: macos_menu::QuitChord,
+}
+
+#[cfg(target_os = "macos")]
+impl QuitHold {
+    fn completed_by_release(
+        &self,
+        chord: macos_menu::QuitChord,
+        released_at: Option<Instant>,
+        focused: bool,
+    ) -> bool {
+        focused
+            && self.chord == chord
+            && released_at.is_some_and(|released_at| released_at >= self.release_deadline)
+    }
 }
 
 #[cfg(target_os = "macos")]
@@ -1424,7 +1439,7 @@ impl App {
                 _ => false,
             }
         {
-            return self.request_quit(None, false, event_loop);
+            return self.request_quit(None, event_loop);
         }
         self.cancel_mouse_capture();
         let persist = matches!(
@@ -2082,10 +2097,16 @@ impl App {
         };
         #[cfg(target_os = "macos")]
         if shortcut == Shortcut::Quit && self.probe.is_none() {
-            let chord = macos_menu::QuitChord::from_key_event(event, self.modifiers)
-                .or_else(macos_menu::current_quit_chord);
-            let result = self.request_quit(chord, event.repeat, event_loop);
-            self.input_result(result);
+            if let Some(chord) = macos_menu::QuitChord::from_key_event(event, self.modifiers) {
+                macos_menu::queue_quit_press(
+                    chord,
+                    event.repeat,
+                    macos_menu::current_key_down_time(),
+                );
+            } else if !event.repeat {
+                let result = self.request_quit(None, event_loop);
+                self.input_result(result);
+            }
             return true;
         }
         self.dispatch_shortcut(shortcut, event_loop)
@@ -2105,8 +2126,7 @@ impl App {
             Shortcut::Quit => {
                 #[cfg(target_os = "macos")]
                 if self.probe.is_none() {
-                    let result =
-                        self.request_quit(macos_menu::current_quit_chord(), false, event_loop);
+                    let result = self.request_quit(None, event_loop);
                     self.input_result(result);
                     return true;
                 }
@@ -2614,10 +2634,7 @@ impl App {
         self.quit_hold = None;
         self.quit_double_press.release();
         if self.ui.settings.quit_protection.mode == config::QuitMode::HoldOrDoublePress
-            && self
-                .quit_double_press
-                .deadline()
-                .is_some_and(|deadline| Instant::now() < deadline)
+            && self.quit_double_press.deadline().is_some()
         {
             self.ui.notice = Some("Press the quit shortcut again to quit.".into());
             self.redraw();
@@ -2629,8 +2646,7 @@ impl App {
     #[cfg(target_os = "macos")]
     fn request_quit(
         &mut self,
-        chord: Option<macos_menu::QuitChord>,
-        repeat: bool,
+        press: Option<(macos_menu::QuitChord, Instant)>,
         event_loop: &ActiveEventLoop,
     ) -> Result<()> {
         if self.probe.is_some() {
@@ -2643,18 +2659,13 @@ impl App {
         }
         let protection = &self.ui.settings.quit_protection;
         if protection.mode != config::QuitMode::Confirm {
-            if let Some(chord) = chord {
-                if repeat {
-                    return Ok(());
-                }
-                let now = Instant::now();
+            if let Some((chord, pressed_at)) = press {
                 let combined = protection.mode == config::QuitMode::HoldOrDoublePress;
                 if combined
                     && self.quit_double_press.press(
                         chord,
-                        now,
+                        pressed_at,
                         Duration::from_millis(u64::from(protection.double_press_interval_ms)),
-                        repeat,
                     )
                 {
                     self.cancel_quit_hold();
@@ -2663,9 +2674,12 @@ impl App {
                     return Ok(());
                 }
                 if self.quit_hold.is_none() {
+                    let duration = Duration::from_millis(u64::from(protection.hold_duration_ms));
                     self.quit_hold = Some(QuitHold {
-                        deadline: now
-                            + Duration::from_millis(u64::from(protection.hold_duration_ms)),
+                        // Let queued releases settle before a delayed press can
+                        // trigger the timer. A release still uses AppKit time.
+                        deadline: Instant::now() + duration,
+                        release_deadline: pressed_at + duration,
                         chord,
                     });
                     self.ui.notice = Some(if combined {
@@ -2735,7 +2749,7 @@ impl App {
         }
         match command {
             MenuCommand::Quit | MenuCommand::CloseWindow => {
-                self.request_quit(None, false, event_loop)?
+                self.request_quit(None, event_loop)?
             }
             MenuCommand::Copy if self.terminal_input() => self.copy(),
             MenuCommand::Paste if self.terminal_input() => self.paste(),
@@ -2850,7 +2864,10 @@ impl ApplicationHandler<Wake> for App {
     }
     fn suspended(&mut self, _: &ActiveEventLoop) {
         #[cfg(target_os = "macos")]
-        self.cancel_quit_hold();
+        {
+            macos_menu::reset_quit_tracking();
+            self.cancel_quit_hold();
+        }
         #[cfg(target_os = "macos")]
         drop(self.hover_buttons.take());
         self.cancel_mouse_capture();
@@ -2879,14 +2896,26 @@ impl ApplicationHandler<Wake> for App {
                 Ok(())
             }
             #[cfg(target_os = "macos")]
-            Wake::MacQuitKeyDown(chord) => {
-                let result = self.request_quit(Some(chord), false, event_loop);
-                self.input_result(result);
+            Wake::MacQuitKeyDown(chord, pressed_at, generation) => {
+                if generation == macos_menu::quit_tracking_generation() {
+                    let result = self.request_quit(Some((chord, pressed_at)), event_loop);
+                    self.input_result(result);
+                }
                 Ok(())
             }
             #[cfg(target_os = "macos")]
-            Wake::MacQuitKeyReleased => {
-                self.release_quit_shortcut();
+            Wake::MacQuitKeyReleased(chord, released_at, generation) => {
+                if generation == macos_menu::quit_tracking_generation() {
+                    if self.quit_hold.as_ref().is_some_and(|hold| {
+                        hold.completed_by_release(chord, released_at, self.window_focused)
+                    }) {
+                        self.cancel_quit_hold();
+                        self.close_session();
+                        event_loop.exit();
+                    } else {
+                        self.release_quit_shortcut();
+                    }
+                }
                 Ok(())
             }
             #[cfg(target_os = "macos")]
@@ -3029,7 +3058,7 @@ impl ApplicationHandler<Wake> for App {
             WindowEvent::CloseRequested => {
                 #[cfg(target_os = "macos")]
                 if self.probe.is_none() {
-                    let result = self.request_quit(None, false, event_loop);
+                    let result = self.request_quit(None, event_loop);
                     self.input_result(result);
                     return;
                 }
@@ -3044,14 +3073,6 @@ impl ApplicationHandler<Wake> for App {
             }
             WindowEvent::ModifiersChanged(modifiers) => {
                 self.modifiers = modifiers.state();
-                #[cfg(target_os = "macos")]
-                if self
-                    .quit_hold
-                    .as_ref()
-                    .is_some_and(|hold| !hold.chord.matches_modifiers(self.modifiers))
-                {
-                    self.release_quit_shortcut();
-                }
                 Ok(())
             }
             WindowEvent::Focused(focused) => {
@@ -3059,7 +3080,10 @@ impl ApplicationHandler<Wake> for App {
                 self.window_focused = focused;
                 if !focused {
                     #[cfg(target_os = "macos")]
-                    self.cancel_quit_hold();
+                    {
+                        macos_menu::reset_quit_tracking();
+                        self.cancel_quit_hold();
+                    }
                     self.cancel_mouse_capture();
                     self.command_press = None;
                     self.cancel_composition();
@@ -3106,15 +3130,6 @@ impl ApplicationHandler<Wake> for App {
                 is_synthetic: false,
                 ..
             } => {
-                #[cfg(target_os = "macos")]
-                if event.state == ElementState::Released
-                    && self
-                        .quit_hold
-                        .as_ref()
-                        .is_some_and(|hold| !macos_menu::quit_chord_is_pressed(hold.chord))
-                {
-                    self.release_quit_shortcut();
-                }
                 if self.shortcut(&event, event_loop) {
                     Ok(())
                 } else {
@@ -3796,4 +3811,4 @@ mod layout_persistence_tests {
     }
 }
 
-// FVPROV1 143837 W3siYm9keSI6eyJhY3Rvcl9rZXlfaWQiOiI5ZjAwOTVhYmY4ODEwZGQwY2Y4NTdlZDBlNDI0ODg0NmRlMmFkMDc2ZmZhYTY2MWIzNmM5Yzc3YWFjOGVlOWMzIiwiYWxnb3JpdGhtIjoiRWQyNTUxOSIsImF1dGhvciI6IkoteC0gWiIsImNvbnRlbnRfc2hhMjU2IjoiYWUwMmI2YzI5NjQwMWY2MGM1ZGE0YzExMGYwMjBkMjU1N2FlOGM5YTYzNDFiMGZlZTk1MjVhY2ZhMDc2ZDk0OSIsImNvcHlfaWQiOiJ2MC4xLjAtYmV0YS4xIiwiY3JlYXRlZF9hdCI6IjIwMjYtMTEtMTgiLCJlZGl0aW9uIjoiYmV0YSIsImlzc3Vlcl9wb2xpY3kiOm51bGwsImtpbmQiOiJjcmVhdGUiLCJtb2RlIjoic2VsZl9zaWduIiwicGFyZW50X3ZlcnNpb24iOm51bGwsInByZXZpb3VzX3JlY29yZF9zaGEyNTYiOm51bGwsInNjaGVtYSI6ImZpbGV2ZWlsLnByb3ZlbmFuY2Uuc2lnbmF0dXJlLnYyIiwic2VxdWVuY2UiOjAsInRyYW5zZmVyX3RvX2tleV9pZCI6bnVsbCwidmVyc2lvbiI6InYwLjEuMC1iZXRhLjEiLCJ3b3JrX2lkIjoib3JnLnBseXJhLnRlcm1pbmFsIn0sInNpZ25hdHVyZXMiOlt7ImtleV9pZCI6IjlmMDA5NWFiZjg4MTBkZDBjZjg1N2VkMGU0MjQ4ODQ2ZGUyYWQwNzZmZmFhNjYxYjM2YzljNzdhYWM4ZWU5YzMiLCJwdWJsaWNfa2V5X2hleCI6ImMzZTkyZDhkZDNkZWM4NTliODdlOTY4MjIyYjI4OWJhNzg5M2NjOGM4NWZjOTE2MjI2YjZiNjI5NjFiOTU5ZDciLCJzaWduYXR1cmVfaGV4IjoiZDllMGZlZjI5MWI1NzYxYjVlNjQ5NzBkZTdkMGE1MzVlMGQ0ZDU2Yjg1Yjg2NjAwMzZjMWQxYmJiNmNhM2Q4MmEwNDJlNTAxN2YwYWY1ZGYzZjZkYWRlZGU3MmY3NzhmNTc5ZjIyYWQ2ODZlNWQzNzk2ZjMwOTNkNzYzYjVmMGQifV19XQ== FVPROV1-END
+// FVPROV1 144536 W3siYm9keSI6eyJhY3Rvcl9rZXlfaWQiOiI5ZjAwOTVhYmY4ODEwZGQwY2Y4NTdlZDBlNDI0ODg0NmRlMmFkMDc2ZmZhYTY2MWIzNmM5Yzc3YWFjOGVlOWMzIiwiYWxnb3JpdGhtIjoiRWQyNTUxOSIsImF1dGhvciI6IkoteC0gWiIsImNvbnRlbnRfc2hhMjU2IjoiNDllZGJiYTFmZWMxMWViOGNmYzdkZjMwYmRmNjQ0OGYzYTNkZTczNDY0Zjc0MGM2MzE0NTUwMDhlYWY0YTNmZCIsImNvcHlfaWQiOiJ2MC4xLjAtYmV0YS4yIiwiY3JlYXRlZF9hdCI6IjIwMjYtMTEtMTgiLCJlZGl0aW9uIjoiYmV0YSIsImlzc3Vlcl9wb2xpY3kiOm51bGwsImtpbmQiOiJjcmVhdGUiLCJtb2RlIjoic2VsZl9zaWduIiwicGFyZW50X3ZlcnNpb24iOm51bGwsInByZXZpb3VzX3JlY29yZF9zaGEyNTYiOm51bGwsInNjaGVtYSI6ImZpbGV2ZWlsLnByb3ZlbmFuY2Uuc2lnbmF0dXJlLnYyIiwic2VxdWVuY2UiOjAsInRyYW5zZmVyX3RvX2tleV9pZCI6bnVsbCwidmVyc2lvbiI6InYwLjEuMC1iZXRhLjIiLCJ3b3JrX2lkIjoib3JnLnBseXJhLnRlcm1pbmFsIn0sInNpZ25hdHVyZXMiOlt7ImtleV9pZCI6IjlmMDA5NWFiZjg4MTBkZDBjZjg1N2VkMGU0MjQ4ODQ2ZGUyYWQwNzZmZmFhNjYxYjM2YzljNzdhYWM4ZWU5YzMiLCJwdWJsaWNfa2V5X2hleCI6ImMzZTkyZDhkZDNkZWM4NTliODdlOTY4MjIyYjI4OWJhNzg5M2NjOGM4NWZjOTE2MjI2YjZiNjI5NjFiOTU5ZDciLCJzaWduYXR1cmVfaGV4IjoiNmE4ZTBjYzBhMWZiMWVkYmM2NjJiYzU4NzYwNThlM2NjZmUxNWM2ZmJhM2IyMzI1YzRkMmIwN2E4MGEzYmNjNmM3YWJmYTQwY2QxYjk1OGI5MzY2MDIyMGQ3ZWIyNmFjMjM5ZWYwYmVkZmRlMjMzNTVlNTZlOGM3NjJlNDZjMGYifV19XQ== FVPROV1-END

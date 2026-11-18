@@ -15,3 +15,5 @@ python3 /path/to/fileveil/tools/verify-evidence.py evidence.json --asset manifes
 Compare the envelope signer with the pinned key, then compare the downloaded archive's SHA-256 with its entry in the authenticated manifest. The explicit release archive is the payload named in that manifest.
 
 For individual source files, `fileveil verify FILE --json` checks the embedded record. `provenance/source-inventory.json` records the expected path, original hash, distribution hash, and any compatible filename suffix required by the verifier for shader or script languages. Its hashes also cover files that carry no inline record. The archive binds this inventory and the embedded records together.
+
+Files that are unchanged from an earlier release retain their existing embedded records. The signed release archive identifies the complete set of files for that tag.

@@ -4,8 +4,8 @@ Generated from Cargo.lock and `cargo metadata --locked --offline --all-features 
 The inventory includes registry packages and declared vendored patches locked for every target platform and workspace feature.
 License expressions reproduce each package's Cargo metadata declaration, including alternatives.
 
-Cargo.lock SHA-256 `6d84b6cf1abc74b24d56eb63f8e8a86c5fd3a5c7ad8b8455222bd8e4fd54c740`.
-Metadata JSON SHA-256 `30c5e23fcb9e593b3ad38ef50dbf9495547913364aa0cb865a7d7de5ba55b46a`.
+Cargo.lock SHA-256 `1c5a96fa8f2c7f1fc73326fa3c7a093f7282698d7d4b1b3c3868b49d6dbdcc42`.
+Metadata JSON SHA-256 `046ed70c7b6730c36d86d03f8c1c15f945e3a31d32318e2eddce412fcd932203`.
 
 The Source column links to exact published crate versions or the provenance of local patches. Registry source identifiers appear below.
 

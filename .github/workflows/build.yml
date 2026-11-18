@@ -73,10 +73,18 @@ jobs:
         run: |
           test "$(uname -m)" = arm64
           bundle="$RUNNER_TEMP/Plyra Terminal.app"
-          python3 tools/build_macos_app.py --release --version "${PLYRA_VERSION%%-*}" --output "$bundle"
+          python3 tools/build_macos_app.py --release --version "${PLYRA_VERSION%%-*}" \
+            --build-number "$GITHUB_RUN_NUMBER" --output "$bundle"
           codesign --verify --strict --deep "$bundle"
           "$bundle/Contents/MacOS/glass-terminal" --help
           ditto -c -k --sequesterRsrc --keepParent "$bundle" "artifacts/Plyra-Terminal-$PLYRA_VERSION-macOS-arm64.zip"
+
+      - name: Test macOS quit protection
+        if: matrix.platform == 'macos-arm64'
+        shell: bash
+        env:
+          MACOSX_DEPLOYMENT_TARGET: '11.0'
+        run: cargo test --locked --release -p glass-terminal-desktop --lib quit
 
       - name: Build and verify the Linux package
         if: matrix.platform == 'linux-x64'

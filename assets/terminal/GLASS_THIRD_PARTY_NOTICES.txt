@@ -2,7 +2,7 @@ Plyra Terminal third-party license and notice texts
 
 This collection contains notices shipped with registry sources and declared vendored patches for every locked platform.
 Cargo package license expressions are reproduced as declared, including alternatives.
-Cargo.lock SHA-256 6d84b6cf1abc74b24d56eb63f8e8a86c5fd3a5c7ad8b8455222bd8e4fd54c740
+Cargo.lock SHA-256 1c5a96fa8f2c7f1fc73326fa3c7a093f7282698d7d4b1b3c3868b49d6dbdcc42
 
 Project and bundled asset notices
 

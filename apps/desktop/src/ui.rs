@@ -708,20 +708,26 @@ impl UiState {
                         });
                         self.settings_dirty |= ui.add(egui::Slider::new(&mut self.settings.opacity,0.0..=1.0).text("Background opacity"))
                             .on_hover_text("Lower values reveal more of the background. The system compositor controls native blur; text stays opaque.").changed();
-                        #[cfg(windows)]
-                        {
-                            let mut blur = self.settings.appearance_ui.material_parameters.backdrop_blur_radius_px > 0.0;
-                            if ui.checkbox(&mut blur, "Background blur (Acrylic)")
-                                .on_hover_text("Windows controls the blur strength. Turn this off to keep a transparent background without blur. Background opacity is adjusted separately.").changed() {
-                                self.settings.appearance_ui.material_parameters.backdrop_blur_radius_px = if blur { 24.0 } else { 0.0 };
-                                self.settings_dirty = true;
-                            }
-                        }
                         egui::ComboBox::from_label("System material").selected_text(format!("{:?}", self.settings.material)).show_ui(ui, |ui| {
                             for material in [Material::LiquidClear,Material::LiquidRegular,Material::Hud,Material::Sidebar,Material::UnderWindowBackground] {
                                 self.settings_dirty |= ui.selectable_value(&mut self.settings.material,material,format!("{material:?}")).changed();
                             }
                         });
+                        if matches!(self.settings.material, Material::LiquidClear | Material::LiquidRegular)
+                            && objc2::runtime::AnyClass::get("NSGlassEffectView").is_some()
+                        {
+                            let parameters = &mut self.settings.appearance_ui.material_parameters;
+                            let mut blur = parameters.backdrop_blur_radius_px > 0.0;
+                            if ui.checkbox(&mut blur, "Acrylic background blur")
+                                .on_hover_text("Softens the desktop and other windows behind Liquid Glass. Background opacity is adjusted separately.").changed() {
+                                parameters.backdrop_blur_radius_px = if blur {
+                                    terminal_render::MaterialParameters::default().backdrop_blur_radius_px
+                                } else {
+                                    0.0
+                                };
+                                self.settings_dirty = true;
+                            }
+                        }
                         self.settings_dirty |= ui.checkbox(&mut self.settings.reduce_motion,"Reduce motion").changed();
                         ui.small("System accessibility preferences take precedence. Blur uses the selected native material.");
                         self.settings_dirty |= ui.add(egui::Slider::new(&mut self.settings.appearance_ui.window_corner_radius,0.0..=48.0).text("Window corners").suffix(" pt")).changed();
@@ -1921,4 +1927,4 @@ mod completion_popup_tests {
     }
 }
 
-// FVPROV1 84222 W3siYm9keSI6eyJhY3Rvcl9rZXlfaWQiOiI5ZjAwOTVhYmY4ODEwZGQwY2Y4NTdlZDBlNDI0ODg0NmRlMmFkMDc2ZmZhYTY2MWIzNmM5Yzc3YWFjOGVlOWMzIiwiYWxnb3JpdGhtIjoiRWQyNTUxOSIsImF1dGhvciI6IkoteC0gWiIsImNvbnRlbnRfc2hhMjU2IjoiNDZlMTI4NWM0YjFmNGE1ZjI4MDdhOWI0N2Q5Yjk5ZmE2NzM2ODNmMWNhY2FiYzYxMmI5M2ZmZTc3OTNkM2FkYiIsImNvcHlfaWQiOiJ2MC4xLjAtYmV0YS4xIiwiY3JlYXRlZF9hdCI6IjIwMjYtMTEtMTgiLCJlZGl0aW9uIjoiYmV0YSIsImlzc3Vlcl9wb2xpY3kiOm51bGwsImtpbmQiOiJjcmVhdGUiLCJtb2RlIjoic2VsZl9zaWduIiwicGFyZW50X3ZlcnNpb24iOm51bGwsInByZXZpb3VzX3JlY29yZF9zaGEyNTYiOm51bGwsInNjaGVtYSI6ImZpbGV2ZWlsLnByb3ZlbmFuY2Uuc2lnbmF0dXJlLnYyIiwic2VxdWVuY2UiOjAsInRyYW5zZmVyX3RvX2tleV9pZCI6bnVsbCwidmVyc2lvbiI6InYwLjEuMC1iZXRhLjEiLCJ3b3JrX2lkIjoib3JnLnBseXJhLnRlcm1pbmFsIn0sInNpZ25hdHVyZXMiOlt7ImtleV9pZCI6IjlmMDA5NWFiZjg4MTBkZDBjZjg1N2VkMGU0MjQ4ODQ2ZGUyYWQwNzZmZmFhNjYxYjM2YzljNzdhYWM4ZWU5YzMiLCJwdWJsaWNfa2V5X2hleCI6ImMzZTkyZDhkZDNkZWM4NTliODdlOTY4MjIyYjI4OWJhNzg5M2NjOGM4NWZjOTE2MjI2YjZiNjI5NjFiOTU5ZDciLCJzaWduYXR1cmVfaGV4IjoiOTc5M2U0NzVmNmRmMjM1NDE0YjE3OTdlNjc3YzJjMjM0N2NmYWRkYmQzY2MyNWI0Y2FhMDg4NDAzNTRjMWQ0M2UwYTY5Y2Q1YjcyZGNjODI2MjI3ZWZkYzQ3NDkxNDNjY2Y1ZWJlMDIyMzNmOGJmZDliODE4NDEyMzZhYmFkMGIifV19XQ== FVPROV1-END
+// FVPROV1 84570 W3siYm9keSI6eyJhY3Rvcl9rZXlfaWQiOiI5ZjAwOTVhYmY4ODEwZGQwY2Y4NTdlZDBlNDI0ODg0NmRlMmFkMDc2ZmZhYTY2MWIzNmM5Yzc3YWFjOGVlOWMzIiwiYWxnb3JpdGhtIjoiRWQyNTUxOSIsImF1dGhvciI6IkoteC0gWiIsImNvbnRlbnRfc2hhMjU2IjoiMDc3NDU2MDk0MjhjNWVlYjhlODg5NmEyZGM2ZGIyMzdkMTVmMzg1NzAwN2M4NTNiYTA3NzAwZDM3ZDI0YzZkNyIsImNvcHlfaWQiOiJ2MC4xLjAtYmV0YS4yIiwiY3JlYXRlZF9hdCI6IjIwMjYtMTEtMTgiLCJlZGl0aW9uIjoiYmV0YSIsImlzc3Vlcl9wb2xpY3kiOm51bGwsImtpbmQiOiJjcmVhdGUiLCJtb2RlIjoic2VsZl9zaWduIiwicGFyZW50X3ZlcnNpb24iOm51bGwsInByZXZpb3VzX3JlY29yZF9zaGEyNTYiOm51bGwsInNjaGVtYSI6ImZpbGV2ZWlsLnByb3ZlbmFuY2Uuc2lnbmF0dXJlLnYyIiwic2VxdWVuY2UiOjAsInRyYW5zZmVyX3RvX2tleV9pZCI6bnVsbCwidmVyc2lvbiI6InYwLjEuMC1iZXRhLjIiLCJ3b3JrX2lkIjoib3JnLnBseXJhLnRlcm1pbmFsIn0sInNpZ25hdHVyZXMiOlt7ImtleV9pZCI6IjlmMDA5NWFiZjg4MTBkZDBjZjg1N2VkMGU0MjQ4ODQ2ZGUyYWQwNzZmZmFhNjYxYjM2YzljNzdhYWM4ZWU5YzMiLCJwdWJsaWNfa2V5X2hleCI6ImMzZTkyZDhkZDNkZWM4NTliODdlOTY4MjIyYjI4OWJhNzg5M2NjOGM4NWZjOTE2MjI2YjZiNjI5NjFiOTU5ZDciLCJzaWduYXR1cmVfaGV4IjoiODM4YjFkZmY5YzgzNDI2ZTFkM2E1NzU2YjdhOTFkNDk3MWViMDkyMTI2YTZlMzI2MmFlZjc1YzgwZDU1ZjcyM2RmOTRlYWE3NWIzYmI0NTE5NWIwYmZhZjgyMmRkNjhiZWVlOTRjZmQyZjM1ZWEyYjUwMGFhZGFlMjAxYTBmMDcifV19XQ== FVPROV1-END

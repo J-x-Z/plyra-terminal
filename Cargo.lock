@@ -1144,7 +1144,7 @@ dependencies = [
 
 [[package]]
 name = "glass-terminal-android"
-version = "0.1.0-beta.1"
+version = "0.1.0-beta.2"
 dependencies = [
  "anyhow",
  "flate2",
@@ -1163,7 +1163,7 @@ dependencies = [
 
 [[package]]
 name = "glass-terminal-desktop"
-version = "0.1.0-beta.1"
+version = "0.1.0-beta.2"
 dependencies = [
  "anyhow",
  "arboard",
@@ -1845,7 +1845,7 @@ checksum = "47e1ffaa40ddd1f3ed91f717a33c8c0ee23fff369e3aa8772b9605cc1d22f4c3"
 
 [[package]]
 name = "mcp-client"
-version = "0.1.0-beta.1"
+version = "0.1.0-beta.2"
 dependencies = [
  "anyhow",
  "axum",
@@ -2646,7 +2646,7 @@ checksum = "e8cf8e6a8aa66ce33f63993ffc4ea4271eb5b0530a9002db8455ea6050c77bfa"
 
 [[package]]
 name = "privilege-broker"
-version = "0.1.0-beta.1"
+version = "0.1.0-beta.2"
 dependencies = [
  "anyhow",
  "libc",
@@ -2659,7 +2659,7 @@ dependencies = [
 
 [[package]]
 name = "privilege-policy"
-version = "0.1.0-beta.1"
+version = "0.1.0-beta.2"
 dependencies = [
  "anyhow",
  "libc",
@@ -3304,7 +3304,7 @@ dependencies = [
 
 [[package]]
 name = "session-manager"
-version = "0.1.0-beta.1"
+version = "0.1.0-beta.2"
 dependencies = [
  "anyhow",
  "base64 0.22.1",
@@ -3658,7 +3658,7 @@ dependencies = [
 
 [[package]]
 name = "system-api"
-version = "0.1.0-beta.1"
+version = "0.1.0-beta.2"
 dependencies = [
  "anyhow",
  "core-foundation-sys",
@@ -3707,7 +3707,7 @@ dependencies = [
 
 [[package]]
 name = "terminal-core"
-version = "0.1.0-beta.1"
+version = "0.1.0-beta.2"
 dependencies = [
  "anyhow",
  "serde",
@@ -3718,7 +3718,7 @@ dependencies = [
 
 [[package]]
 name = "terminal-render"
-version = "0.1.0-beta.1"
+version = "0.1.0-beta.2"
 dependencies = [
  "anyhow",
  "bytemuck",

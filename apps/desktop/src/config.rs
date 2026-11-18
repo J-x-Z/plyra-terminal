@@ -96,7 +96,11 @@ pub struct QuitProtection {
 impl Default for QuitProtection {
     fn default() -> Self {
         Self {
-            mode: QuitMode::Confirm,
+            mode: if cfg!(target_os = "macos") {
+                QuitMode::HoldOrDoublePress
+            } else {
+                QuitMode::Confirm
+            },
             hold_duration_ms: 1200,
             double_press_interval_ms: 800,
         }
@@ -1107,6 +1111,11 @@ mod tests {
     fn quit_protection_defaults_and_validates_configured_hold_duration() {
         let old = Settings::parse(b"{}").unwrap();
         assert_eq!(old.quit_protection, QuitProtection::default());
+        #[cfg(target_os = "macos")]
+        assert_eq!(old.quit_protection.mode, QuitMode::HoldOrDoublePress);
+        let confirmation =
+            Settings::parse(br#"{"quit_protection":{"mode":"Confirm"}}"#).unwrap();
+        assert_eq!(confirmation.quit_protection.mode, QuitMode::Confirm);
         let hold =
             Settings::parse(br#"{"quit_protection":{"mode":"Hold","hold_duration_ms":1800}}"#)
                 .unwrap();
@@ -1256,4 +1265,4 @@ mod tests {
     }
 }
 
-// FVPROV1 44070 W3siYm9keSI6eyJhY3Rvcl9rZXlfaWQiOiI5ZjAwOTVhYmY4ODEwZGQwY2Y4NTdlZDBlNDI0ODg0NmRlMmFkMDc2ZmZhYTY2MWIzNmM5Yzc3YWFjOGVlOWMzIiwiYWxnb3JpdGhtIjoiRWQyNTUxOSIsImF1dGhvciI6IkoteC0gWiIsImNvbnRlbnRfc2hhMjU2IjoiZmJmMjQ1Zjg1MmRiMjQzZjJkYTIyNTY1NGY5N2RmMzQ3YTM3MDBlMGFjMDE0MGQ3YmQzYjQxZDM1NDlkNjhkNyIsImNvcHlfaWQiOiJ2MC4xLjAtYmV0YS4xIiwiY3JlYXRlZF9hdCI6IjIwMjYtMTEtMTgiLCJlZGl0aW9uIjoiYmV0YSIsImlzc3Vlcl9wb2xpY3kiOm51bGwsImtpbmQiOiJjcmVhdGUiLCJtb2RlIjoic2VsZl9zaWduIiwicGFyZW50X3ZlcnNpb24iOm51bGwsInByZXZpb3VzX3JlY29yZF9zaGEyNTYiOm51bGwsInNjaGVtYSI6ImZpbGV2ZWlsLnByb3ZlbmFuY2Uuc2lnbmF0dXJlLnYyIiwic2VxdWVuY2UiOjAsInRyYW5zZmVyX3RvX2tleV9pZCI6bnVsbCwidmVyc2lvbiI6InYwLjEuMC1iZXRhLjEiLCJ3b3JrX2lkIjoib3JnLnBseXJhLnRlcm1pbmFsIn0sInNpZ25hdHVyZXMiOlt7ImtleV9pZCI6IjlmMDA5NWFiZjg4MTBkZDBjZjg1N2VkMGU0MjQ4ODQ2ZGUyYWQwNzZmZmFhNjYxYjM2YzljNzdhYWM4ZWU5YzMiLCJwdWJsaWNfa2V5X2hleCI6ImMzZTkyZDhkZDNkZWM4NTliODdlOTY4MjIyYjI4OWJhNzg5M2NjOGM4NWZjOTE2MjI2YjZiNjI5NjFiOTU5ZDciLCJzaWduYXR1cmVfaGV4IjoiNjgwYmRjYjhmOTU1MzRiNTlhZDY2M2RmYmVlZWFhNTU0ZjYzZDNjMzllNzI2MWRlNmRiM2ZkNzFmNTQ2OGFhNzI1ZjA0MzNmYjRjNjJkZDhkOTU3ZjIxYWY0MzQ2YzEwZDZmNzU3N2FkMjA4NjgyNDQyNWQyNTE2N2EwNTM2MGYifV19XQ== FVPROV1-END
+// FVPROV1 44492 W3siYm9keSI6eyJhY3Rvcl9rZXlfaWQiOiI5ZjAwOTVhYmY4ODEwZGQwY2Y4NTdlZDBlNDI0ODg0NmRlMmFkMDc2ZmZhYTY2MWIzNmM5Yzc3YWFjOGVlOWMzIiwiYWxnb3JpdGhtIjoiRWQyNTUxOSIsImF1dGhvciI6IkoteC0gWiIsImNvbnRlbnRfc2hhMjU2IjoiNjRlMjAzZDkxMGNkMDY0NDY3MDM4YzJkYmVjNDkwYWQwZTY0N2MyYmRiYTY3ZDdiYTk1ZGI5YjhmM2Q0ZmNlYiIsImNvcHlfaWQiOiJ2MC4xLjAtYmV0YS4yIiwiY3JlYXRlZF9hdCI6IjIwMjYtMTEtMTgiLCJlZGl0aW9uIjoiYmV0YSIsImlzc3Vlcl9wb2xpY3kiOm51bGwsImtpbmQiOiJjcmVhdGUiLCJtb2RlIjoic2VsZl9zaWduIiwicGFyZW50X3ZlcnNpb24iOm51bGwsInByZXZpb3VzX3JlY29yZF9zaGEyNTYiOm51bGwsInNjaGVtYSI6ImZpbGV2ZWlsLnByb3ZlbmFuY2Uuc2lnbmF0dXJlLnYyIiwic2VxdWVuY2UiOjAsInRyYW5zZmVyX3RvX2tleV9pZCI6bnVsbCwidmVyc2lvbiI6InYwLjEuMC1iZXRhLjIiLCJ3b3JrX2lkIjoib3JnLnBseXJhLnRlcm1pbmFsIn0sInNpZ25hdHVyZXMiOlt7ImtleV9pZCI6IjlmMDA5NWFiZjg4MTBkZDBjZjg1N2VkMGU0MjQ4ODQ2ZGUyYWQwNzZmZmFhNjYxYjM2YzljNzdhYWM4ZWU5YzMiLCJwdWJsaWNfa2V5X2hleCI6ImMzZTkyZDhkZDNkZWM4NTliODdlOTY4MjIyYjI4OWJhNzg5M2NjOGM4NWZjOTE2MjI2YjZiNjI5NjFiOTU5ZDciLCJzaWduYXR1cmVfaGV4IjoiNDMwZWVjYTRlMzA5NjBkYWFiODQ2ZGZmNjQ5MTY4YTU5NjFjMzc2ZjE1N2EwNmIwNTEyZGE5ODlmODI2NzczNWIzYmY1MDNkOGE4MjY4ZWFmN2IyYTk5YWQ2OTQ2OTg2ZmEzYTkwYzZjYTJmYWExZjg4MmI1OTgyNjBmM2YxMDYifV19XQ== FVPROV1-END

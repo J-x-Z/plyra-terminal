@@ -1,6 +1,6 @@
 {
   "schema": "plyra.source-inventory.v1",
-  "release": "v0.1.0-beta.1",
+  "release": "v0.1.0-beta.2",
   "author": "J-x- Z",
   "work_id": "org.plyra.terminal",
   "asserted_created_at": "2026-11-18",
@@ -10,7 +10,7 @@
   },
   "fileveil_sha256": "2c4fe7505bb069e33742c041084ee0d5e837c47f722e5e5be30afd68acf2560b",
   "marked_count": 141,
-  "file_count": 351,
+  "file_count": 352,
   "inventory_path_excluded": "provenance/source-inventory.json",
   "files": [
     {
@@ -25,6 +25,13 @@
       }
     },
     {
+      "path": ".github/workflows/build.yml",
+      "original_sha256": "2e166126541812dc285345ef62ddffe7ee1f7f2a00442deca94d2a2c9a2b09f6",
+      "distribution_sha256": "2e166126541812dc285345ef62ddffe7ee1f7f2a00442deca94d2a2c9a2b09f6",
+      "bytes": 6077,
+      "embedded": null
+    },
+    {
       "path": ".gitignore",
       "original_sha256": "d28c7e855b7a87a8aff4b530296bfddcb4ab56bf1af9e3285581cd45eb768974",
       "distribution_sha256": "d28c7e855b7a87a8aff4b530296bfddcb4ab56bf1af9e3285581cd45eb768974",
@@ -33,20 +40,20 @@
     },
     {
       "path": "Cargo.lock",
-      "original_sha256": "6d84b6cf1abc74b24d56eb63f8e8a86c5fd3a5c7ad8b8455222bd8e4fd54c740",
-      "distribution_sha256": "6d84b6cf1abc74b24d56eb63f8e8a86c5fd3a5c7ad8b8455222bd8e4fd54c740",
+      "original_sha256": "1c5a96fa8f2c7f1fc73326fa3c7a093f7282698d7d4b1b3c3868b49d6dbdcc42",
+      "distribution_sha256": "1c5a96fa8f2c7f1fc73326fa3c7a093f7282698d7d4b1b3c3868b49d6dbdcc42",
       "bytes": 129040,
       "embedded": null
     },
     {
       "path": "Cargo.toml",
-      "original_sha256": "81c94d667a56f52f1397ec9e86d416c9584452f5b04abce6cd068119ef89353c",
-      "distribution_sha256": "3f8b56e96b7e8ae0d6ae48ceff72e966d32ff44c1a444db2b71a92894e99dafc",
+      "original_sha256": "a7b681b89cc6e32b07aed8081d52cacd0bce478b56016eee2f98bc45f89c47be",
+      "distribution_sha256": "ded1015142c6d649da45c3ac72f05adf3d5fd6fd69fb070ea3e6a05e91eea869",
       "bytes": 1915,
       "embedded": {
         "carrier_suffix": ".toml",
         "source_comment": "#",
-        "verified_restored_sha256": "81c94d667a56f52f1397ec9e86d416c9584452f5b04abce6cd068119ef89353c"
+        "verified_restored_sha256": "a7b681b89cc6e32b07aed8081d52cacd0bce478b56016eee2f98bc45f89c47be"
       }
     },
     {
@@ -58,15 +65,15 @@
     },
     {
       "path": "README.md",
-      "original_sha256": "464991d433b9304957d4ac3187a1acf2adbc220c4a18da989b1a1144a2c97665",
-      "distribution_sha256": "464991d433b9304957d4ac3187a1acf2adbc220c4a18da989b1a1144a2c97665",
-      "bytes": 4252,
+      "original_sha256": "2cb7e1313cf153f1fed16c5e3efb4cff655741d313029663859d9cdaa0c89a90",
+      "distribution_sha256": "2cb7e1313cf153f1fed16c5e3efb4cff655741d313029663859d9cdaa0c89a90",
+      "bytes": 4449,
       "embedded": null
     },
     {
       "path": "apps/android/AndroidManifest.xml",
-      "original_sha256": "fc0001a0aaf0a5b950f1e602a4cd2aeb4568e554a9deaf226097a96c723e5d7f",
-      "distribution_sha256": "fc0001a0aaf0a5b950f1e602a4cd2aeb4568e554a9deaf226097a96c723e5d7f",
+      "original_sha256": "de8c14cfc8062279b3ba9699973d47bcedca0a06be0333be2db796ea771c9977",
+      "distribution_sha256": "de8c14cfc8062279b3ba9699973d47bcedca0a06be0333be2db796ea771c9977",
       "bytes": 1702,
       "embedded": null
     },
@@ -334,13 +341,13 @@
     },
     {
       "path": "apps/desktop/src/config.rs",
-      "original_sha256": "fbf245f852db243f2da225654f97df347a3700e0ac0140d7bd3b41d3549d68d7",
-      "distribution_sha256": "ac1fed1db6457d83a5bb14e16d7e65cf9db23d6083f428257585ad00e13fbd43",
-      "bytes": 45249,
+      "original_sha256": "64e203d910cd064467038c2dbec490ad0e647c2bdba67d7ba95db9b8f3d4fceb",
+      "distribution_sha256": "3cdede0a954be48017b790b21053090a96e0e84cc2a6f2b8434266d4c4fc8a24",
+      "bytes": 45671,
       "embedded": {
         "carrier_suffix": ".rs",
         "source_comment": "//",
-        "verified_restored_sha256": "fbf245f852db243f2da225654f97df347a3700e0ac0140d7bd3b41d3549d68d7"
+        "verified_restored_sha256": "64e203d910cd064467038c2dbec490ad0e647c2bdba67d7ba95db9b8f3d4fceb"
       }
     },
     {
@@ -367,24 +374,24 @@
     },
     {
       "path": "apps/desktop/src/lib.rs",
-      "original_sha256": "ae02b6c296401f60c5da4c110f020d2557ae8c9a6341b0fee9525acfa076d949",
-      "distribution_sha256": "1655720c527cc7ef181459810e5425cd7ae66de492f2dc9119a9cc14706e0213",
-      "bytes": 145017,
+      "original_sha256": "49edbba1fec11eb8cfc7df30bdf6448f3a3de73464f740c631455008eaf4a3fd",
+      "distribution_sha256": "1e04d81ba13d49d3c3162d3d54db8371597264f97841e178d206d4582f6537f5",
+      "bytes": 145716,
       "embedded": {
         "carrier_suffix": ".rs",
         "source_comment": "//",
-        "verified_restored_sha256": "ae02b6c296401f60c5da4c110f020d2557ae8c9a6341b0fee9525acfa076d949"
+        "verified_restored_sha256": "49edbba1fec11eb8cfc7df30bdf6448f3a3de73464f740c631455008eaf4a3fd"
       }
     },
     {
       "path": "apps/desktop/src/macos_menu.rs",
-      "original_sha256": "29996b7dcca21984846642b7f4fe48cdbc2e129a5652bbb932ecbe08a1d2e838",
-      "distribution_sha256": "9648907dc8881fd7362320b2860b78a39dd19c4f9eb276d05ab9a331dbee348c",
-      "bytes": 37275,
+      "original_sha256": "7cb192abd164b3700d4c3acc7e2a4a3f2e19888eb93904cb2cdaccd7f12df178",
+      "distribution_sha256": "a62e32251301d1cdaa5be00adecd1b5ab804bc2b583b0d472751f89c324d3e4e",
+      "bytes": 41202,
       "embedded": {
         "carrier_suffix": ".rs",
         "source_comment": "//",
-        "verified_restored_sha256": "29996b7dcca21984846642b7f4fe48cdbc2e129a5652bbb932ecbe08a1d2e838"
+        "verified_restored_sha256": "7cb192abd164b3700d4c3acc7e2a4a3f2e19888eb93904cb2cdaccd7f12df178"
       }
     },
     {
@@ -455,13 +462,13 @@
     },
     {
       "path": "apps/desktop/src/ui.rs",
-      "original_sha256": "46e1285c4b1f4a5f2807a9b47d9b99fa673683f1cacabc612b93ffe7793d3adb",
-      "distribution_sha256": "14fad77cd7f290e3baeba3a1f1830d42a7c47107515ea8fed6245dd75edd591c",
-      "bytes": 85401,
+      "original_sha256": "07745609428c5eeb8e8896a2dc6db237d15f3857007c853ba07700d37d24c6d7",
+      "distribution_sha256": "70c7f4a9503251200ad463323c3dc57ff919e83c3411daa34b34d16527b8107e",
+      "bytes": 85749,
       "embedded": {
         "carrier_suffix": ".rs",
         "source_comment": "//",
-        "verified_restored_sha256": "46e1285c4b1f4a5f2807a9b47d9b99fa673683f1cacabc612b93ffe7793d3adb"
+        "verified_restored_sha256": "07745609428c5eeb8e8896a2dc6db237d15f3857007c853ba07700d37d24c6d7"
       }
     },
     {
@@ -580,8 +587,8 @@
     },
     {
       "path": "assets/terminal/GLASS_THIRD_PARTY_NOTICES.txt",
-      "original_sha256": "30aac96496248722f3e0feb5c6da6f65c0ebd5423762146712ffbb7923608055",
-      "distribution_sha256": "30aac96496248722f3e0feb5c6da6f65c0ebd5423762146712ffbb7923608055",
+      "original_sha256": "789e7ac0bc054a71411047c5c674963beb202547d0c912fc97aad78e7134beeb",
+      "distribution_sha256": "789e7ac0bc054a71411047c5c674963beb202547d0c912fc97aad78e7134beeb",
       "bytes": 6254433,
       "embedded": null
     },
@@ -1651,13 +1658,13 @@
     },
     {
       "path": "crates/terminal-render/src/native_glass.rs",
-      "original_sha256": "e3dca446ab214912c03114ce54fb2f58c5fb7a78943b39fae7c8cce8e7cd478d",
-      "distribution_sha256": "cf68a5c2ac416bd461e663e15eb4f82e5cffb76f25e676da26cd206baeb0d2c0",
-      "bytes": 19926,
+      "original_sha256": "a7fbcbbef4c8ac834da52b98e84a80b4d67dce54509f4cf68e0495e3cef23b54",
+      "distribution_sha256": "6d954f2b12ef02ea0909f4e574653365df30df695e3c45e8afc40813435ec490",
+      "bytes": 22807,
       "embedded": {
         "carrier_suffix": ".rs",
         "source_comment": "//",
-        "verified_restored_sha256": "e3dca446ab214912c03114ce54fb2f58c5fb7a78943b39fae7c8cce8e7cd478d"
+        "verified_restored_sha256": "a7fbcbbef4c8ac834da52b98e84a80b4d67dce54509f4cf68e0495e3cef23b54"
       }
     },
     {
@@ -1742,16 +1749,16 @@
     },
     {
       "path": "docs/DEPENDENCY_LICENSES.md",
-      "original_sha256": "808ab7a86877eba5f1095e222d19ab1f4f2842ece301ca3a9b189dda263df770",
-      "distribution_sha256": "808ab7a86877eba5f1095e222d19ab1f4f2842ece301ca3a9b189dda263df770",
+      "original_sha256": "3a334b036ce24067fc47ddeb37af66a1dab964e9fa846872ec61a83958c9046d",
+      "distribution_sha256": "3a334b036ce24067fc47ddeb37af66a1dab964e9fa846872ec61a83958c9046d",
       "bytes": 79759,
       "embedded": null
     },
     {
       "path": "docs/RELEASE_VERIFICATION.md",
-      "original_sha256": "09931c7a8ff20629c54cdbed4bd792fdcfafaa8d93989635a7fdbf04b548c412",
-      "distribution_sha256": "09931c7a8ff20629c54cdbed4bd792fdcfafaa8d93989635a7fdbf04b548c412",
-      "bytes": 1208,
+      "original_sha256": "ade60f2f3a967b628905d2ab02a3983693090f48e59b8b517c477c9764ed91a4",
+      "distribution_sha256": "ade60f2f3a967b628905d2ab02a3983693090f48e59b8b517c477c9764ed91a4",
+      "bytes": 1376,
       "embedded": null
     },
     {
@@ -1763,8 +1770,8 @@
     },
     {
       "path": "packaging/linux/README.md",
-      "original_sha256": "023367d8943cf83c028fb2a8119e97a62c097fe5ffa6b184bcc35a0125fb3b61",
-      "distribution_sha256": "023367d8943cf83c028fb2a8119e97a62c097fe5ffa6b184bcc35a0125fb3b61",
+      "original_sha256": "31bf7f5cf569f3221e2183e18aba18b258a11e9368148e866ae20f7e8ff3e1d4",
+      "distribution_sha256": "31bf7f5cf569f3221e2183e18aba18b258a11e9368148e866ae20f7e8ff3e1d4",
       "bytes": 3051,
       "embedded": null
     },
